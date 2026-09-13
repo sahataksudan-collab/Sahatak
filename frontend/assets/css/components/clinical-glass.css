@@ -449,6 +449,45 @@
     outline-offset: 2px;
 }
 
+/* --------------------------------------------------------------------------
+   8. Hardened glass guarantees — the doctor-page treatment is not optional.
+      Several pages carry legacy card CSS (inline <style> blocks, Bootstrap's
+      .shadow-sm !important, component "print/compact" box-shadow:none rules)
+      that was winning the cascade against .cg-glass and silently downgrading
+      cards to the old pre-glass look. clinical-glass.css is linked LAST on
+      every page, so equal-importance + equal-or-higher specificity resolves
+      in our favor. The doubled class keeps specificity above single-class
+      page rules without ever targeting a non-cg class (safety contract).
+      Background/backdrop/border/shadow only — text, spacing, layout untouched.
+   -------------------------------------------------------------------------- */
+.cg-page .cg-glass.cg-glass {
+    background: var(--cg-glass) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+    backdrop-filter: blur(14px) saturate(160%) !important;
+    border: 1px solid var(--cg-glass-border) !important;
+    box-shadow: var(--cg-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Text-dense variant keeps its higher-opacity surface (declared after the
+   base rule, same importance → wins the background tie). */
+.cg-page .cg-glass-strong.cg-glass-strong {
+    background: var(--cg-glass-strong) !important;
+}
+
+/* Category tints re-asserted so the hardening above cannot flatten them. */
+.cg-page .cg-tint-teal.cg-tint-teal {
+    background: linear-gradient(150deg, rgba(240, 253, 250, 0.93) 0%, rgba(255, 255, 255, 0.84) 55%) !important;
+}
+.cg-page .cg-tint-violet.cg-tint-violet {
+    background: linear-gradient(150deg, rgba(245, 243, 255, 0.93) 0%, rgba(255, 255, 255, 0.84) 55%) !important;
+}
+.cg-page .cg-tint-emerald.cg-tint-emerald {
+    background: linear-gradient(150deg, rgba(236, 253, 245, 0.93) 0%, rgba(255, 255, 255, 0.84) 55%) !important;
+}
+.cg-page .cg-tint-coral.cg-tint-coral {
+    background: linear-gradient(150deg, rgba(255, 247, 237, 0.93) 0%, rgba(255, 255, 255, 0.84) 55%) !important;
+}
+
 /* Reduced-motion respect */
 @media (prefers-reduced-motion: reduce) {
     .cg-glass, .cg-glass-lift:hover, .cg-glass-lift:focus-visible,

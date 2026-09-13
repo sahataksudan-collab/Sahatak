@@ -149,7 +149,7 @@
                         <i class="bi bi-pencil-square text-primary me-2"></i>
                         <span id="modal-title"></span>
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="medical-history-form">
@@ -163,7 +163,7 @@
                                 
                                 <div class="mb-3">
                                     <label for="blood-type" class="form-label" id="blood-type-label"></label>
-                                    <select class="form-select" id="blood-type">
+                                    <select class="form-select" id="blood-type" title="Blood type" aria-labelledby="blood-type-label">
                                         <option value="" id="select-blood-type"></option>
                                         <option value="A+">A+</option>
                                         <option value="A-">A-</option>
@@ -179,11 +179,11 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <label for="height" class="form-label" id="height-label"></label>
-                                        <input type="number" class="form-control" id="height" min="50" max="250">
+                                        <input type="number" class="form-control" id="height" min="50" max="250" title="Height" placeholder="Enter height" aria-labelledby="height-label">
                                     </div>
                                     <div class="col-6">
                                         <label for="weight" class="form-label" id="weight-label"></label>
-                                        <input type="number" class="form-control" id="weight" min="20" max="300">
+                                        <input type="number" class="form-control" id="weight" min="20" max="300" title="Weight" placeholder="Enter weight" aria-labelledby="weight-label">
                                     </div>
                                 </div>
                             </div>
@@ -197,7 +197,7 @@
 
                                 <div class="mb-3">
                                     <label for="smoking-status" class="form-label" id="smoking-label"></label>
-                                    <select class="form-select" id="smoking-status">
+                                    <select class="form-select" id="smoking-status" title="Smoking status">
                                         <option value="" id="select-smoking"></option>
                                         <option value="never" id="never-smoked"></option>
                                         <option value="former" id="former-smoker"></option>
@@ -207,7 +207,7 @@
 
                                 <div class="mb-3">
                                     <label for="exercise-frequency" class="form-label" id="exercise-label"></label>
-                                    <select class="form-select" id="exercise-frequency">
+                                    <select class="form-select" id="exercise-frequency" title="Exercise frequency" aria-labelledby="exercise-label">
                                         <option value="" id="select-exercise"></option>
                                         <option value="rare" id="rare-exercise"></option>
                                         <option value="weekly" id="weekly-exercise"></option>
@@ -217,7 +217,7 @@
 
                                 <div class="mb-3">
                                     <label for="alcohol-consumption" class="form-label" id="alcohol-label"></label>
-                                    <select class="form-select" id="alcohol-consumption">
+                                    <select class="form-select" id="alcohol-consumption" title="Alcohol consumption" aria-labelledby="alcohol-label">
                                         <option value="" id="select-alcohol"></option>
                                         <option value="none" id="no-drink"></option>
                                         <option value="occasional" id="sometimes"></option>
@@ -236,7 +236,7 @@
 
                                 <div class="mb-3">
                                     <label for="allergies" class="form-label" id="allergies-label"></label>
-                                    <textarea class="form-control" id="allergies" rows="2"></textarea>
+                                    <textarea class="form-control" id="allergies" rows="2" title="Allergies" placeholder="Enter known allergies" aria-label="Allergies"></textarea>
                                 </div>
 
                                 <div class="mb-3">
@@ -301,13 +301,13 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="timeline-details-title"></h5>
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Close"></button>
                 </div>
                 <div class="modal-body" id="timeline-details-body">
                     <!-- Details will be populated by JavaScript -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-details-btn"></button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-details-btn" title="Close details">Close</button>
                 </div>
             </div>
         </div>

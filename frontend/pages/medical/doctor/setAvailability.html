@@ -191,11 +191,11 @@
                                                 <span id="calendar-title">Monthly Calendar</span>
                                             </h5>
                                             <div class="calendar-controls">
-                                                <button class="btn btn-outline-medical btn-sm me-2" onclick="previousMonth()">
+                                                <button class="btn btn-outline-medical btn-sm me-2" onclick="previousMonth()" aria-label="Previous month" title="Previous month">
                                                     <i class="bi bi-chevron-right"></i>
                                                 </button>
                                                 <span id="current-month" class="fw-bold mx-3">January 2025</span>
-                                                <button class="btn btn-outline-medical btn-sm" onclick="nextMonth()">
+                                                <button class="btn btn-outline-medical btn-sm" onclick="nextMonth()" aria-label="Next month" title="Next month">
                                                     <i class="bi bi-chevron-left"></i>
                                                 </button>
                                             </div>
@@ -383,7 +383,7 @@
                         <i class="bi bi-x-circle me-2"></i>
                         <span id="modal-block-title">Block Specific Time</span>
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close" aria-label="Close"></button>
                 </div>
                 <form id="block-time-form">
                     <div class="modal-body">
@@ -428,7 +428,7 @@
                         <i class="bi bi-pencil me-2"></i>
                         <span id="modal-edit-title">Edit Blocked Time</span>
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div id="edit-blocked-content">

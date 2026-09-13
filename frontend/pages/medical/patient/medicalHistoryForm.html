@@ -105,8 +105,8 @@
                                         <input type="number" class="form-control" name="weight" id="weight" placeholder="e.g., 75">
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label class="form-label" id="label-blood-type">Blood Type</label>
-                                        <select class="form-select" name="blood_type" id="blood_type">
+                                        <label class="form-label" id="label-blood-type" for="blood_type">Blood Type</label>
+                                        <select class="form-select" name="blood_type" id="blood_type" title="Blood Type">
                                             <option value="" id="option-select-blood">Select blood type</option>
                                             <option value="A+">A+</option>
                                             <option value="A-">A-</option>
@@ -195,7 +195,7 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label" id="label-alcohol">Alcohol Consumption</label>
-                                        <select class="form-select" name="alcohol_consumption" id="alcohol_consumption">
+                                        <select class="form-select" name="alcohol_consumption" id="alcohol_consumption" aria-labelledby="label-alcohol">
                                             <option value="none" id="option-none">None</option>
                                             <option value="occasional" id="option-occasional">Occasional</option>
                                             <option value="moderate" id="option-moderate">Moderate</option>
@@ -204,7 +204,7 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label class="form-label" id="label-exercise">Exercise Frequency</label>
-                                        <select class="form-select" name="exercise_frequency" id="exercise_frequency">
+                                        <select class="form-select" name="exercise_frequency" id="exercise_frequency" aria-labelledby="label-exercise">
                                             <option value="none" id="option-no-exercise">None</option>
                                             <option value="rare" id="option-rare-exercise">Rarely</option>
                                             <option value="weekly" id="option-weekly">Weekly</option>

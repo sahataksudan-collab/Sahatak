@@ -148,8 +148,8 @@
                                     color: rgba(6,42,67,0.66) !important;
                                 }
                                 </style>
-                <div class="row" id="services-grid" role="list">
-                    <div class="col-sm-6 col-lg-4 mb-4" role="listitem" data-service="video-consultation">
+                <div class="row" id="services-grid">
+                    <div class="col-sm-6 col-lg-4 mb-4" data-service="video-consultation">
                         <div class="card h-100 shadow-sm cg-glass cg-glass-strong">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
@@ -194,7 +194,7 @@
                             }
                             </style>
 
-                    <div class="col-sm-6 col-lg-4 mb-4" role="listitem" data-service="appointments">
+                    <div class="col-sm-6 col-lg-4 mb-4" data-service="appointments">
                         <div class="card h-100 shadow-sm cg-glass cg-glass-strong">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
@@ -208,7 +208,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-lg-4 mb-4" role="listitem" data-service="prescriptions">
+                    <div class="col-sm-6 col-lg-4 mb-4" data-service="prescriptions">
                         <div class="card h-100 shadow-sm cg-glass cg-glass-strong">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
@@ -222,7 +222,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-lg-4 mb-4" role="listitem" data-service="lab-tests">
+                    <div class="col-sm-6 col-lg-4 mb-4" data-service="lab-tests">
                         <div class="card h-100 shadow-sm cg-glass cg-glass-strong">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
@@ -235,7 +235,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-4 mb-4" role="listitem" data-service="chronic-care">
+                    <div class="col-sm-6 col-lg-4 mb-4" data-service="chronic-care">
                         <div class="card h-100 shadow-sm cg-glass cg-glass-strong">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
@@ -249,7 +249,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-lg-4 mb-4" role="listitem" data-service="nutrition">
+                    <div class="col-sm-6 col-lg-4 mb-4" data-service="nutrition">
                         <div class="card h-100 shadow-sm cg-glass cg-glass-strong">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
@@ -263,7 +263,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-lg-4 mb-4" role="listitem" data-service="maternal-child">
+                    <div class="col-sm-6 col-lg-4 mb-4" data-service="maternal-child">
                         <div class="card h-100 shadow-sm cg-glass cg-glass-strong">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
@@ -277,7 +277,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-lg-4 mb-4" role="listitem" data-service="referral">
+                    <div class="col-sm-6 col-lg-4 mb-4" data-service="referral">
                         <div class="card h-100 shadow-sm cg-glass cg-glass-strong">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
@@ -291,7 +291,7 @@
                         </div>
                     </div> 
 
-                    <div class="col-sm-6 col-lg-4 mb-4" role="listitem" data-service="maternal-child">
+                    <div class="col-sm-6 col-lg-4 mb-4" data-service="maternal-child">
                         <div class="card h-100 shadow-sm cg-glass cg-glass-strong">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
@@ -508,15 +508,6 @@
                             };
                             return fallbacks[timeType] || '';
                         }
-                            // Fallback to English
-                            const fallbacks = {
-                                'just_now': 'Just now',
-                                'minutes_ago': `${count} minutes ago`,
-                                'hours_ago': `${count} hours ago`,
-                                'days_ago': `${count} days ago`
-                            };
-                            return fallbacks[timeType] || '';
-                        
 
                     (function() {
                         const input = document.getElementById('service-search');

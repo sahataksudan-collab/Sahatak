@@ -264,7 +264,9 @@ body[data-protect="doctor"] {
     border: 1px solid var(--cg-glass-border);
     border-left: 4px solid #1d4ed8;
     border-radius: var(--cg-radius);
-    box-shadow: var(--cg-shadow);
+    /* Canonical 3-layer shadow + inset white highlight — exact parity with
+       the doctor dashboard cards (the inset layer was missing here). */
+    box-shadow: var(--cg-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .patient-overview-card .card-header {

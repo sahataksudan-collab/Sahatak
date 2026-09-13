@@ -2,15 +2,15 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نظام صحتك - قيد الصيانة | Sahatak - Under Maintenance</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Clinical Glass visual layer (visual only, loaded last to override).
-         Opt-in here is glass-card only: the purple gradient canvas is kept,
-         so the .cg-page variable scope is NOT used — the needed cg-* custom
-         properties are declared locally on .maintenance-container below. -->
-    <link rel="stylesheet" href="../assets/css/components/clinical-glass.css">
+         Full parity with doctor.html/ehr.html: body carries .cg-page, so the
+         canonical mesh-gradient canvas + all cg-* custom properties come from
+         the shared scope. No local overrides remain. -->
+    <link rel="stylesheet" href="../../assets/css/components/clinical-glass.css">
     <style>
         :root {
             --medical-primary: #2563eb;
@@ -27,37 +27,15 @@
         }
 
         .maintenance-container {
-            background: white;
-            border-radius: 20px;
+            background: var(--cg-glass-strong);
+            border: 1px solid var(--cg-glass-border);
+            border-radius: var(--cg-radius);
             padding: 3rem 2rem;
             max-width: 600px;
             width: 90%;
             margin: 1rem;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             animation: fadeIn 0.5s ease-in;
-        }
-
-        /* Clinical Glass opt-in (glass card only, gradient canvas kept).
-           Local declaration of the cg-* variables that .cg-page would
-           normally provide, since this page opts out of the mesh canvas.
-           Values mirror clinical-glass.css exactly. */
-        .maintenance-container.cg-glass {
-            --cg-glass: rgba(255, 255, 255, 0.93);
-            --cg-glass-strong: rgba(255, 255, 255, 0.93);
-            --cg-glass-border: rgba(255, 255, 255, 0.65);
-            --cg-radius: 20px;
-            --cg-shadow:
-                0 1px 2px rgba(15, 23, 42, 0.04),
-                0 8px 20px rgba(15, 23, 42, 0.06),
-                0 24px 48px rgba(15, 23, 42, 0.05),
-                0 20px 60px rgba(0, 0, 0, 0.18);
-            --cg-shadow-hover:
-                0 2px 4px rgba(13, 148, 136, 0.08),
-                0 12px 28px rgba(37, 99, 235, 0.12),
-                0 28px 56px rgba(15, 23, 42, 0.10),
-                0 20px 60px rgba(0, 0, 0, 0.18);
-            --cg-focus: rgba(37, 99, 235, 0.40);
         }
 
         @keyframes fadeIn {
@@ -300,7 +278,7 @@
         }
     </style>
 </head>
-<body>
+<body class="cg-page">
     <div class="maintenance-container cg-glass">
         <div class="maintenance-icon">
             <i class="bi bi-tools"></i>

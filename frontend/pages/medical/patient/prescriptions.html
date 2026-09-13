@@ -110,14 +110,15 @@
             <div class="row align-items-center">
                 <div class="col-md-6 mb-3 mb-md-0">
                     <div class="position-relative">
-                        <input type="text" class="form-control" id="search-prescriptions" placeholder="">
+                        <label for="search-prescriptions" class="visually-hidden">Search prescriptions</label>
+                        <input type="text" class="form-control" id="search-prescriptions" aria-label="Search prescriptions">
                         <i class="bi bi-search search-icon"></i>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-6">
-                            <select class="form-select" id="status-filter">
+                            <select class="form-select" id="status-filter" aria-label="Filter prescriptions by status">
                                 <option value="" id="filter-all-status">All Status</option>
                                 <option value="active" id="filter-active">Active</option>
                                 <option value="completed" id="filter-completed">Completed</option>
@@ -126,7 +127,7 @@
                             </select>
                         </div>
                         <div class="col-6">
-                            <select class="form-select" id="sort-prescriptions">
+                            <select class="form-select" id="sort-prescriptions" aria-label="Sort prescriptions">
                                 <option value="newest" id="sort-newest">Newest First</option>
                                 <option value="oldest" id="sort-oldest">Oldest First</option>
                                 <option value="medication" id="sort-medication">By Medication</option>
@@ -167,7 +168,7 @@
                         <i class="bi bi-prescription2 text-primary me-2"></i>
                         <span id="modal-new-prescription"></span>
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" title="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="prescription-form" class="prescription-form">
@@ -175,13 +176,13 @@
                         <div class="row mb-4" id="patient-selection-section">
                             <div class="col-md-6">
                                 <label for="patient-select" class="form-label" id="patient-label"></label>
-                                <select class="form-select" id="patient-select" required>
+                                <select class="form-select" id="patient-select" required aria-label="Patient" title="Patient">
                                     <option value="" id="select-patient"></option>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <label for="appointment-select" class="form-label" id="appointment-label"></label>
-                                <select class="form-select" id="appointment-select" required>
+                                <select class="form-select" id="appointment-select" required aria-label="Appointment" title="Appointment">
                                     <option value="" id="select-appointment"></option>
                                 </select>
                                 <small class="text-muted">All appointments shown (past, present, future)</small>
@@ -192,66 +193,66 @@
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <label for="medication-name" class="form-label" id="medication-name-label"></label>
-                                <input type="text" class="form-control" id="medication-name" required placeholder="">
+                                <input type="text" class="form-control" id="medication-name" required aria-label="Medication name" title="Medication name">
                             </div>
                             <div class="col-md-6">
                                 <label for="dosage" class="form-label" id="dosage-label"></label>
-                                <input type="text" class="form-control" id="dosage" required placeholder="">
+                                <input type="text" class="form-control" id="dosage" required title="Dosage">
                             </div>
                         </div>
 
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <label for="frequency" class="form-label" id="frequency-label"></label>
-                                <input type="text" class="form-control" id="frequency" required placeholder="">
+                                <input type="text" class="form-control" id="frequency" required title="Frequency" aria-label="Frequency">
                             </div>
                             <div class="col-md-6">
                                 <label for="duration" class="form-label" id="duration-label"></label>
-                                <input type="text" class="form-control" id="duration" required placeholder="">
+                                <input type="text" class="form-control" id="duration" required aria-label="Duration" title="Duration">
                             </div>
                         </div>
 
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <label for="quantity" class="form-label" id="quantity-label"></label>
-                                <input type="text" class="form-control" id="quantity" placeholder="">
+                                <input type="text" class="form-control" id="quantity" aria-label="Quantity" title="Quantity">
                             </div>
                             <div class="col-md-6">
-                                <label for="refills-allowed" class="form-label" id="refills-label"></label>
-                                <input type="number" class="form-control" id="refills-allowed" min="0" max="10" value="0">
+                                <label for="refills-allowed" class="form-label" id="refills-label">Refills allowed</label>
+                                <input type="number" class="form-control" id="refills-allowed" min="0" max="10" value="0" title="Refills allowed" placeholder="0" aria-label="Refills allowed">
                             </div>
                         </div>
 
                         <!-- Dates -->
                         <div class="row mb-4">
                             <div class="col-md-6">
-                                <label for="start-date" class="form-label" id="start-date-label"></label>
-                                <input type="date" class="form-control" id="start-date">
+                                <label for="start-date" class="form-label" id="start-date-label">Start date</label>
+                                <input type="date" class="form-control" id="start-date" aria-label="Start date" title="Start date" placeholder="Start date">
                             </div>
                             <div class="col-md-6">
-                                <label for="end-date" class="form-label" id="end-date-label"></label>
-                                <input type="date" class="form-control" id="end-date">
+                                <label for="end-date" class="form-label" id="end-date-label">End date</label>
+                                <input type="date" class="form-control" id="end-date" aria-label="End date" title="End date" placeholder="End date">
                             </div>
                         </div>
 
                         <!-- Instructions and Notes -->
                         <div class="mb-4">
-                            <label for="instructions" class="form-label" id="instructions-label"></label>
-                            <textarea class="form-control" id="instructions" rows="3" placeholder=""></textarea>
+                            <label for="instructions" class="form-label" id="instructions-label">Instructions</label>
+                            <textarea class="form-control" id="instructions" rows="3" title="Instructions" placeholder="Enter instructions"></textarea>
                         </div>
 
                         <div class="mb-4">
-                            <label for="notes" class="form-label" id="notes-label"></label>
-                            <textarea class="form-control" id="notes" rows="2" placeholder=""></textarea>
+                            <label for="notes" class="form-label" id="notes-label">Notes</label>
+                            <textarea class="form-control" id="notes" rows="2" title="Notes" placeholder="Enter notes"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" title="Cancel">
                         <i class="bi bi-x me-1"></i>
                         <span id="modal-cancel"></span>
                     </button>
-                    <button type="button" class="btn btn-primary" id="save-prescription-btn">
+                    <button type="button" class="btn btn-primary" id="save-prescription-btn" title="Save prescription">
                         <i class="bi bi-check-lg me-1"></i>
                         <span id="modal-save"></span>
                     </button>
@@ -268,21 +269,21 @@
                     <h5 class="modal-title" id="prescription-details-title">
                         <span id="details-modal-title"></span>
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close"></button>
                 </div>
                 <div class="modal-body" id="prescription-details-body">
                     <!-- Details will be populated by JavaScript -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning d-none" id="edit-prescription-btn">
+                    <button type="button" class="btn btn-warning d-none" id="edit-prescription-btn" title="Edit prescription">
                         <i class="bi bi-pencil me-1"></i>
                         <span id="edit-btn-text"></span>
                     </button>
-                    <button type="button" class="btn btn-success d-none" id="mark-completed-btn">
+                    <button type="button" class="btn btn-success d-none" id="mark-completed-btn" title="Mark prescription as completed">
                         <i class="bi bi-check-circle me-1"></i>
                         <span id="mark-complete-btn"></span>
                     </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-details-btn"></button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close-details-btn" title="Close prescription details"></button>
                 </div>
             </div>
         </div>
@@ -297,21 +298,21 @@
                         <i class="bi bi-arrow-repeat text-primary me-2"></i>
                         <span id="status-modal-title"></span>
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p id="confirm-complete-text"></p>
                     <div class="mb-3">
                         <label for="completion-notes" class="form-label" id="completion-notes-label"></label>
-                        <textarea class="form-control" id="completion-notes" rows="3" placeholder=""></textarea>
+                        <textarea class="form-control" id="completion-notes" rows="3" title="Completion notes" placeholder="Enter completion notes"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="confirmStatusChange()">
+                    <button type="button" class="btn btn-success" onclick="confirmStatusChange()" title="Confirm status change">
                         <i class="bi bi-check me-1"></i>
                         <span id="confirm-complete-btn-text"></span>
                     </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="status-cancel-btn"></button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="status-cancel-btn" title="Cancel status change"></button>
                 </div>
             </div>
         </div>

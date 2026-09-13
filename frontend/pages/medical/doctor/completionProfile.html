@@ -40,6 +40,10 @@
                                 <h5 class="mb-1" id="user-name">Loading...</h5>
                                 <small class="text-muted">
                                     <span class="badge bg-warning" id="status-badge">Profile Incomplete</span>
+                                    <!-- verification-status badge restored: the inline
+                                         auth script writes to this id when no doctor
+                                         data is available (parity with comm-hub). -->
+                                    <span class="badge bg-warning text-dark" id="verification-status">Unverified</span>
                                 </small>
                             </div>
                             <!-- Vertical Action Buttons -->
