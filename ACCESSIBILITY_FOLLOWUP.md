@@ -75,3 +75,17 @@ No `btn-outline-warning` occurrences exist in Batch 6 pages.
   `email-verification.js` script tag (`</script>1`) that renders a stray "1"
   in the page. Flagged; not fixed in the visual-only batch.
 - New occurrences for Item A1 logged above from support/services/reset pages.
+
+## Item R1 — Stray `1` rendered in verify-email.html (TRACKED, open — rendering bug, not WCAG)
+
+**Status:** Open — logged only. Do NOT fix during the Clinical Glass redesign
+batches; this is a rendering bug, not an accessibility/contrast item.
+**Location:** `frontend/pages/verify-email.html:101` — a stray `1` immediately
+after the `email-verification.js` script tag (`</script>1`) which renders a
+literal "1" at the end of the page body.
+**Nature:** Pre-existing typo/debris in the markup, unrelated to the Clinical
+Glass rollout (present before Batch 6; only the stylesheet link/`cg-glass`
+class were added there).
+**Fix pattern (when scheduled):** delete the trailing `1` on line 101 —
+one-character change, no other file affected.
+

@@ -1751,7 +1751,7 @@ def update_system_settings():
                 validation_errors.append(f"{key} must be one of: {rule['choices']}")
                 continue
 
-            updated_settings.append((key, value, rule['type'].__name__))
+            updated_settings.append((key, value, {'bool': 'boolean', 'int': 'integer', 'str': 'string', 'float': 'json'}.get(rule['type'].__name__, 'string')))
 
         if validation_errors:
             return APIResponse.error(

@@ -2247,15 +2247,18 @@ Colors:
     color: var(--admin-text-primary) !important;
 }
 
-/* Warning alert styling in settings: make text orange and readable */
+/* Warning alert styling in settings: keep amber accent, dark WCAG-safe text.
+   The settings section renders on white Clinical Glass (dashboard-card
+   cg-glass cg-glass-strong), so amber #f59e0b text (2.1:1) fails AA;
+   #92400e passes at 6.4:1 against the 10%-amber-tinted glass background. */
 .tab-content .alert-warning {
-    color: var(--admin-accent) !important; /* amber */
+    color: #92400e !important; /* amber-800, 6.4:1 on 10%-amber glass — WCAG AA */
     background: rgba(var(--admin-accent-rgb), 0.1) !important;
     border-color: rgba(var(--admin-accent-rgb), 0.4) !important;
 }
 
 .tab-content .alert-warning i {
-    color: var(--admin-accent) !important;
+    color: #b45309 !important;
 }
 
 /* ============================================================================
@@ -2398,7 +2401,7 @@ Colors:
 
 .tab-content .alert-warning {
     background: rgba(245, 158, 11, 0.1) !important;
-    color: var(--admin-warning) !important;
+    color: #92400e !important; /* amber-800 — WCAG AA on the 10%-amber glass surface */
     border-color: var(--admin-warning) !important;
     font-weight: 500 !important;
 }

@@ -395,6 +395,45 @@ const AdminDashboard = {
                 this.handleSearch(e.target.value);
             });
         }
+
+        // Maintenance mode toggle — persist immediately via the backend
+        const maintenanceToggle = document.getElementById('maintenance_mode');
+        if (maintenanceToggle) {
+            maintenanceToggle.addEventListener('change', async (e) => {
+                const enabling = e.target.checked;
+                const confirmMsg = enabling
+                    ? 'Enable maintenance mode? Visitors will be shown the maintenance page until it is turned off.'
+                    : 'Disable maintenance mode and restore normal access for visitors?';
+                if (!confirm(confirmMsg)) {
+                    e.target.checked = !enabling;
+                    return;
+                }
+                e.target.disabled = true;
+                try {
+                    const response = await AdminAuth.apiRequest('/admin/settings', {
+                        method: 'PUT',
+                        body: JSON.stringify({ maintenance_mode: enabling })
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        this.showNotification(
+                            enabling ? 'Maintenance mode ENABLED - visitors will see the maintenance page' : 'Maintenance mode disabled - normal access restored',
+                            'success'
+                        );
+                    } else {
+                        console.error('Maintenance toggle failed:', data);
+                        e.target.checked = !enabling;
+                        this.showNotification(data.message || 'Failed to update maintenance mode', 'error');
+                    }
+                } catch (error) {
+                    console.error('Maintenance toggle error:', error);
+                    e.target.checked = !enabling;
+                    this.showNotification('Failed to update maintenance mode: ' + error.message, 'error');
+                } finally {
+                    e.target.disabled = false;
+                }
+            });
+        }
     },
 
     // Intercept clicks on backend admin download links and fetch with Authorization header
