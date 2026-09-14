@@ -398,7 +398,23 @@
     return true;
   }
 
+  /**
+   * Re-render the toggle group with the CURRENT language (labels are read at
+   * render time via LanguageManager). Called by the dashboard's language
+   * switcher so switching AR/EN updates the group in place instead of only
+   * on the next page load. Idempotent: mount() clears the container and
+   * rebuilds from readCache(), so no preference state is lost.
+   * @param {HTMLElement|string} container - element or element id.
+   * @returns {boolean} true if re-rendered.
+   */
+  function refresh(container) {
+    if (typeof document === 'undefined') return false;
+    var el = typeof container === 'string' ? document.getElementById(container) : container;
+    return mount(el);
+  }
+
   return {
+
     STRINGS: STRINGS,
     STORAGE_KEY: STORAGE_KEY,
     DEFAULT_CALM_UI_PREFS: DEFAULT_CALM_UI_PREFS,
@@ -419,6 +435,7 @@
     save: save,
     sync: sync,
     mount: mount,
+    refresh: refresh,
   };
 });
 

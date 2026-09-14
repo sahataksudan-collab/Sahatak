@@ -124,11 +124,17 @@ keys.forEach(k => {
 });
 check('EN/AR calm_mode key parity', Object.keys(en.calm_mode).sort(), Object.keys(ar.calm_mode).sort());
 
+// ── language-switch re-render (web item #8): refresh() ──
+// refresh(container) re-mounts the toggle group with the current language;
+// with no DOM it must be a safe no-op returning false.
+check('refresh: exported and a safe no-op without document', C.refresh('calm-mode-container'), false);
+check('refresh: null container → false', C.refresh(null), false);
+
 // ── module surface ──
 check('exports', Object.keys(C).sort(),
   ['CLASS_FOR_KEY', 'DEFAULT_CALM_UI_PREFS', 'STORAGE_KEY', 'STRINGS', 'SUB_TOGGLE_KEYS',
    'SUPPRESSED_FOR_KEY', 'apply', 'classesFor', 'extractFromPreferences', 'mergeIntoNotificationPreferences',
-   'mergePrefs', 'mount', 'normalizeCalmUi', 'readCache', 'reducedMotion', 'save', 'subTogglesEnabled',
+   'mergePrefs', 'mount', 'normalizeCalmUi', 'readCache', 'reducedMotion', 'refresh', 'save', 'subTogglesEnabled',
    'suppressedFor', 'sync', 'writeCache'].sort());
 
 console.log(`\ncalm-mode smoke test: ${passed} passed, ${failed} failed`);

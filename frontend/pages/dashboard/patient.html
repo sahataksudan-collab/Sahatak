@@ -734,6 +734,11 @@
             if (window.SahatakCareSummary) {
                 SahatakCareSummary.refresh('care-summary', window.__patientAppointmentsCache || null);
             }
+            // Calm Mode toggle group: labels are read at render time via
+            // LanguageManager — re-mount so AR/EN switch updates it in place.
+            if (window.SahatakCalmMode) {
+                SahatakCalmMode.refresh('calm-mode-container');
+            }
 
             // Update the language button text
             const langBtn = document.getElementById('current-lang');
