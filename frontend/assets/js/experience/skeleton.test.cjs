@@ -130,7 +130,7 @@ check('EN/AR skeleton key parity', Object.keys(en.skeleton).sort(), Object.keys(
 
 // ── module surface ──
 check('exports', Object.keys(S).sort(),
-  ['STRINGS', 'blocksFor', 'classifyError', 'clear', 'reducedMotion', 'render', 'renderError'].sort());
+  ['STRINGS', 'blocksFor', 'calmSimplified', 'classifyError', 'clear', 'reducedMotion', 'render', 'renderError'].sort());
 
 console.log(`\nskeleton smoke test: ${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

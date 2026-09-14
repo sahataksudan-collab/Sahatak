@@ -93,8 +93,8 @@ check('suppressedFor: reduce_animations → shimmer + hover transforms + journey
 check('suppressedFor: reduce_notifications → unread badge dots only',
   C.suppressedFor({ reduce_notifications: true }),
   [{ key: 'reduce_notifications', suppressed: C.SUPPRESSED_FOR_KEY.reduce_notifications }]);
-check('suppressedFor: simplified_layout includes mesh blobs + decorative-marked elements',
-  C.suppressedFor({ simplified_layout: true })[0].suppressed.length, 2);
+check('suppressedFor: simplified_layout includes mesh blobs + decorative-marked elements + skeleton reduced variant',
+  C.suppressedFor({ simplified_layout: true })[0].suppressed.length, 3);
 const combo = C.suppressedFor({ reduce_clutter: true, simplified_layout: true });
 check('suppressedFor: combo order follows SUB_TOGGLE_KEYS',
   combo.map(e => e.key), ['reduce_clutter', 'simplified_layout']);

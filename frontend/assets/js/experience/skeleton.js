@@ -61,6 +61,30 @@
   }
 
   /**
+   * True when Calm Mode's simplified_layout sub-toggle is on. READ-ONLY:
+   * the skeleton never owns or duplicates Calm Mode's state — it reads
+   * window.SahatakCalmMode's cache (the same source calm-mode.apply()
+   * mirrors onto the cg-calm-simplified body class), falling back to the
+   * body class the CSS contract already uses. False in Node / when the
+   * module is absent, so the default (full) variant stays testable.
+   * @returns {boolean}
+   */
+  function calmSimplified() {
+    if (typeof window === 'undefined') return false;
+    var cm = window.SahatakCalmMode;
+    if (cm && typeof cm.readCache === 'function') {
+      try {
+        var cached = cm.readCache();
+        if (cached) return Boolean(cached.simplified_layout);
+      } catch (e) { /* fall through to the body-class hook */ }
+    }
+    try {
+      return Boolean(document.body && document.body.classList &&
+        document.body.classList.contains('cg-calm-simplified'));
+    } catch (e) { return false; }
+  }
+
+  /**
    * Classify a thrown ApiHelper error into the SAME three kinds the Care
    * Summary established (401/403 → unauthorized; no status + navigator.onLine
    * false → offline; everything else → failure). Kept in lockstep with
@@ -84,21 +108,29 @@
    * Widths on lines are percentages of the region (like mobile's 85%/60%).
    *
    * @param {('card'|'line'|'list'|'grid'|'records'|'care_summary')} contentType
-   * @param {{count?: number}} [opts]
+   * @param {{count?: number, simplified?: boolean}} [opts]
+   *        `simplified` is set by render() from Calm Mode's simplified_layout
+   *        sub-toggle (read-only via calmSimplified()); when true each card
+   *        skeleton renders its REDUCED variant — fewer decorative blocks per
+   *        card — while keeping the same shape (nothing shifts on arrival).
    * @returns {Array<Object>} block specs in visual order.
    */
   function blocksFor(contentType, opts) {
+    var simplified = Boolean(opts && opts.simplified);
     switch (contentType) {
       // One dashboard/appointment card: avatar + two text lines (mirrors the
-      // mobile SkeletonCard: 56px avatar, 85% + 60% lines).
-      case 'card':
-        return [
-          { variant: 'card', blocks: [
-            { variant: 'avatar', width: '3rem', height: '3rem', radius: '16px' },
-            { variant: 'line', width: '85%', height: '0.75rem', radius: '7px' },
-            { variant: 'line', width: '60%', height: '0.75rem', radius: '7px' },
-          ] },
+      // mobile SkeletonCard: 56px avatar, 85% + 60% lines). Simplified (Calm
+      // Mode) → avatar + ONE line (fewer decorative blocks, same footprint).
+      case 'card': {
+        var card = [
+          { variant: 'avatar', width: '3rem', height: '3rem', radius: '16px' },
+          { variant: 'line', width: '85%', height: '0.75rem', radius: '7px' },
         ];
+        if (!simplified) {
+          card.push({ variant: 'line', width: '60%', height: '0.75rem', radius: '7px' });
+        }
+        return [{ variant: 'card', blocks: card }];
+      }
       // A single text line.
       case 'line':
         return [{ variant: 'line', width: '100%', height: '0.85rem', radius: '7px' }];
@@ -131,15 +163,19 @@
       // fixed order — Consultation Info → Doctor Info → Clinical Info →
       // Prescription → Next Steps → Follow-Up (6 sections, mirroring
       // care-summary.js's render() IA order). Each approximates the collapsed
-      // section card: header line + one body line.
+      // section card: header line + one body line. Simplified (Calm Mode) →
+      // header line only per section (fewer decorative blocks, same order).
       case 'care_summary': {
         var sections = [];
         var sn = opts && opts.count ? opts.count : 6;
         for (var si = 0; si < sn; si++) {
-          sections.push({ variant: 'card', blocks: [
+          var sec = [
             { variant: 'line', width: '45%', height: '0.8rem', radius: '7px' },
-            { variant: 'line', width: si % 2 ? '60%' : '85%', height: '0.75rem', radius: '7px' },
-          ] });
+          ];
+          if (!simplified) {
+            sec.push({ variant: 'line', width: si % 2 ? '60%' : '85%', height: '0.75rem', radius: '7px' });
+          }
+          sections.push({ variant: 'card', blocks: sec });
         }
         return sections;
       }
@@ -201,7 +237,9 @@
    * for the whole region (never one per block).
    * @param {HTMLElement} container
    * @param {string} contentType - see blocksFor().
-   * @param {{count?: number, label?: string}} [opts]
+   * @param {{count?: number, label?: string, simplified?: boolean}} [opts]
+   *        `opts.simplified` overrides; otherwise Calm Mode's simplified_layout
+   *        sub-toggle decides (read-only — see calmSimplified()).
    * @returns {boolean} true if the skeleton was rendered.
    */
   function render(container, contentType, opts) {
@@ -214,7 +252,11 @@
     region.setAttribute('aria-live', 'polite');
     region.setAttribute('aria-label', (opts && opts.label) || translate('loading'));
 
-    blocksFor(contentType, opts).forEach(function (spec) {
+    var specOpts = opts || {};
+    if (typeof specOpts.simplified !== 'boolean') {
+      specOpts.simplified = calmSimplified();
+    }
+    blocksFor(contentType, specOpts).forEach(function (spec) {
       var block = buildBlock(spec);
       block.setAttribute('aria-hidden', 'true');
       region.appendChild(block);
@@ -273,6 +315,7 @@
   return {
     STRINGS: STRINGS,
     reducedMotion: reducedMotion,
+    calmSimplified: calmSimplified,
     classifyError: classifyError,
     blocksFor: blocksFor,
     render: render,

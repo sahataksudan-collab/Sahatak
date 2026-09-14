@@ -63,6 +63,25 @@
     return completed.length ? completed[0] : null;
   }
 
+  /**
+   * THE single journey derivation per page load (integration contract):
+   * journey-tracker, follow-up.js and care-summary.js all read the journey
+   * through this memoized helper — the derivation runs once per distinct
+   * focus appointment (per appointments payload reference), and every module
+   * sees the SAME journey object. No module re-derives journey state.
+   * @param {Array|Object|null} appointments
+   * @returns {{cancelled: boolean, stages: Array<{id: string, state: string}>}}
+   */
+  var journeyCache = null;
+  function journeyFor(appointments) {
+    if (typeof window.SahatakJourney === 'undefined') return null;
+    var apt = Array.isArray(appointments) ? pickFocusAppointment(appointments) : (appointments || null);
+    if (journeyCache && journeyCache.apt === apt) return journeyCache.journey;
+    var journey = window.SahatakJourney.deriveJourneyFromAppointment(apt);
+    journeyCache = { apt: apt, journey: journey };
+    return journey;
+  }
+
   function el(tag, className, text) {
     var node = document.createElement(tag);
     if (className) node.className = className;
@@ -81,7 +100,7 @@
     if (!container || typeof window.SahatakJourney === 'undefined') return false;
 
     var apt = Array.isArray(appointments) ? pickFocusAppointment(appointments) : (appointments || null);
-    var journey = window.SahatakJourney.deriveJourneyFromAppointment(apt);
+    var journey = journeyFor(appointments); // single shared derivation — see journeyFor()
     var lang = currentLang();
 
     container.innerHTML = '';
@@ -174,5 +193,6 @@
     render: render,
     refresh: refresh,
     pickFocusAppointment: pickFocusAppointment,
+    journeyFor: journeyFor,
   };
 })();

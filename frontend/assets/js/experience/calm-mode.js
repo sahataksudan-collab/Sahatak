@@ -104,6 +104,7 @@
     simplified_layout: [
       'purely decorative elements marked data-calm="decorative"',
       'decorative mesh gradient blobs (.cg-page::before)',
+      'skeleton loading blocks reduced to the fewer-decorative-blocks variant (skeleton.js reads this toggle read-only via SahatakCalmMode.readCache / the cg-calm-simplified class — skeleton state is never owned here)',
     ],
   };
 

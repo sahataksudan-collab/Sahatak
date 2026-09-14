@@ -311,10 +311,20 @@
     if (!container || typeof window.SahatakJourney === 'undefined') return false;
 
     var user = (window.AuthGuard && AuthGuard.getCurrentUser && AuthGuard.getCurrentUser()) || null;
-    var apt = Array.isArray(appointments) && window.SahatakJourneyTracker
-      ? window.SahatakJourneyTracker.pickFocusAppointment(appointments)
-      : (appointments || null);
-    var journey = window.SahatakJourney.deriveJourneyFromAppointment(apt);
+    // Journey state comes from the ONE shared derivation (journey-tracker's
+    // memoized journeyFor) — never re-derived here (header contract). Falls
+    // back to a direct derive only if the tracker module is absent.
+    var apt, journey;
+    if (Array.isArray(appointments) && window.SahatakJourneyTracker &&
+        window.SahatakJourneyTracker.journeyFor) {
+      journey = window.SahatakJourneyTracker.journeyFor(appointments);
+      apt = window.SahatakJourneyTracker.pickFocusAppointment(appointments);
+    } else {
+      apt = Array.isArray(appointments) && window.SahatakJourneyTracker
+        ? window.SahatakJourneyTracker.pickFocusAppointment(appointments)
+        : (appointments || null);
+      journey = window.SahatakJourney.deriveJourneyFromAppointment(apt);
+    }
     var lang = currentLang();
 
     container.innerHTML = '';
