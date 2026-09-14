@@ -33,7 +33,7 @@ def handle_preflight():
         origin = request.headers.get('Origin')
         # Allow specific origins that need credentials
         allowed_origins = [
-            'https://hello-50.github.io',
+            'https://sahataksudan-collab.github.io',
             'https://hmb104.github.io',
             'http://localhost:3000',
             'http://localhost:8000',
@@ -43,7 +43,7 @@ def handle_preflight():
         if origin in allowed_origins:
             response.headers['Access-Control-Allow-Origin'] = origin
         else:
-            response.headers['Access-Control-Allow-Origin'] = 'https://hello-50.github.io'
+            response.headers['Access-Control-Allow-Origin'] = 'https://sahataksudan-collab.github.io'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With'
         response.headers['Access-Control-Allow-Credentials'] = 'true'
