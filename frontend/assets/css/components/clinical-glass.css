@@ -1046,3 +1046,126 @@
     }
 }
 
+/* --------------------------------------------------------------------------
+   11. Calm Mode (assets/js/experience/calm-mode.js — window.SahatakCalmMode)
+   Web port of sahatak-mobile's calmUi: ONE master toggle + FOUR sub-toggles
+   (reduce animations / reduce clutter / reduce non-essential notifications /
+   simplified layout), stored in notification_preferences.ui via the existing
+   patient-preferences endpoint. SAFETY CONTRACT:
+     - Only DECORATIVE / secondary elements are suppressed (mesh blobs,
+       shimmer, hover transforms, non-essential unread badge dots, elements
+       explicitly marked data-calm="decorative").
+     - NEVER hides or delays medical information, appointment status,
+       critical notifications, security warnings, or primary navigation.
+   Classes are applied by calm-mode.js to <body> AND each .cg-page token root;
+   selectors below are written to work either way.
+   -------------------------------------------------------------------------- */
+
+/* reduce_animations: same suppression shape as the established
+   prefers-reduced-motion contract — decorative shimmer + hover motion only. */
+body.cg-calm-anim .cg-page::after,
+.cg-page.cg-calm-anim::after,
+body.cg-calm-anim .cg-skeleton-block::after,
+body.cg-calm-anim .cg-skeleton-card .cg-skeleton-avatar::after {
+    display: none !important;
+}
+
+body.cg-calm-anim .cg-glass,
+body.cg-calm-anim .cg-glass-lift,
+body.cg-calm-anim .cg-glass-lift:hover,
+body.cg-calm-anim .cg-glass-lift:focus-visible,
+body.cg-calm-anim .cg-icon-badge,
+body.cg-calm-anim .cg-icon-badge:hover {
+    transition: none !important;
+    transform: none !important;
+    box-shadow: var(--cg-shadow);
+}
+
+body.cg-calm-anim .cg-journey-fill {
+    transition: none;
+}
+
+/* reduce_clutter: decorative mesh gradient blobs only (page canvas washes
+   remain readable; content untouched). */
+body.cg-calm-clutter .cg-page::before,
+.cg-page.cg-calm-clutter::before {
+    display: none !important;
+}
+
+/* reduce_notifications: NON-ESSENTIAL unread badge dots only. Opt-in hooks:
+   the generic .notification-badge header dot and any element explicitly
+   marked data-calm="notif-badge". Notification LISTS, statuses, and content
+   are never hidden. */
+body.cg-calm-notif .notification-badge,
+body.cg-calm-notif [data-calm="notif-badge"] {
+    display: none !important;
+}
+
+/* simplified_layout: purely decorative elements marked data-calm="decorative"
+   (promos/illustrations only) + the mesh blobs; everything else stays. */
+body.cg-calm-simplified .cg-page::before,
+.cg-page.cg-calm-simplified::before {
+    display: none !important;
+}
+
+body.cg-calm-simplified [data-calm="decorative"] {
+    display: none !important;
+}
+
+/* Settings-area toggle group (rendered by calm-mode.js mount()) — matches the
+   existing settings-group form-switch look, cg- prefixed only. */
+.cg-calm-group {
+    margin: 0.75rem 0;
+}
+
+.cg-calm-heading {
+    font-weight: 700;
+    color: var(--cg-text-strong);
+    margin-bottom: 0.5rem;
+}
+
+.cg-calm-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+}
+
+.cg-calm-switch {
+    flex: none;
+    width: auto;
+}
+
+.cg-calm-label {
+    color: var(--cg-text);
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.cg-calm-hint {
+    display: block;
+    color: var(--cg-text-soft);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.cg-calm-row .cg-calm-switch:disabled + .cg-calm-label {
+    opacity: 0.5;
+}
+
+.cg-calm-note {
+    color: var(--cg-text-soft);
+    font-size: 0.8rem;
+    margin-top: 0.6rem;
+    margin-bottom: 0;
+}
+
+/* Same reduced-motion contract as the rest of the shared layer. */
+@media (prefers-reduced-motion: reduce) {
+    .cg-calm-switch,
+    .cg-calm-label {
+        transition: none;
+    }
+}
+
+

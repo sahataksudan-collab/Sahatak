@@ -438,6 +438,11 @@
                                         </div>
                                     </div>
 
+                                    <!-- Calm Mode: master toggle + 4 sub-toggles (window.SahatakCalmMode),
+                                         stored in notification_preferences.ui via the existing
+                                         patient-preferences endpoint — same as sahatak-mobile. -->
+                                    <div class="mb-3" id="calm-mode-container"></div>
+
                                     <div class="settings-group mt-4">
                                         <h6 class="settings-group-title">
                                             <i class="bi bi-shield-lock me-2"></i><span id="security-settings">Security</span>
@@ -562,6 +567,8 @@
     <script src="../../assets/js/experience/care-summary.js"></script>
     <!-- Smart Skeletons: ONE shared loading-state system (shape-matched cg-skeleton blocks) -->
     <script src="../../assets/js/experience/skeleton.js"></script>
+    <!-- Calm Mode: master toggle + 4 sub-toggles (window.SahatakCalmMode) -->
+    <script src="../../assets/js/experience/calm-mode.js"></script>
     
     <!-- Dashboard Data Handler -->
     <script src="../../assets/js/components/dashboard.js"></script>
@@ -1559,6 +1566,17 @@
             // Apply current language to the dashboard
             const currentLang = LanguageManager.getLanguage() || 'ar';
             DashboardTranslations.updatePatientDashboard(currentLang);
+            
+            // Calm Mode: apply cached prefs instantly, sync from backend (server wins),
+            // and mount the toggle group in the Preferences & Notifications settings area.
+            if (window.SahatakCalmMode) {
+                try {
+                    window.SahatakCalmMode.sync();
+                    window.SahatakCalmMode.mount(document.getElementById('calm-mode-container'));
+                } catch (e) {
+                    console.warn('[CalmMode] init failed:', e);
+                }
+            }
             
             // Initialize video consultation dashboard with retry
             let retryCount = 0;

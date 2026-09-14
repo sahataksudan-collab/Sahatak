@@ -1951,5 +1951,15 @@
         "offline_title": "You appear to be offline",
         "offline_sub": "This section will load once you are back online. Please try again.",
         "retry": "Try Again"
+    },
+    "calm_mode": {
+        "title": "Calm Mode",
+        "master_hint": "A quieter, simpler app experience.",
+        "reduce_animations": "Reduce animations",
+        "reduce_clutter": "Reduce clutter",
+        "reduce_notifications": "Reduce non-essential notifications",
+        "simplified_layout": "Simplified layout",
+        "note": "Calm Mode never hides medical information, appointment status, or urgent notifications.",
+        "save_failed": "Could not save Calm Mode preferences."
     }
 }
