@@ -167,6 +167,12 @@ const AppointmentBooking = {
     // Load doctors list
     async loadDoctors() {
         try {
+            // Smart Skeleton: shape-matched card list while doctors load
+            // (cleared on every outcome below — never left up indefinitely).
+            const doctorsContainer = document.getElementById('doctors-list');
+            if (doctorsContainer && window.SahatakSkeleton) {
+                window.SahatakSkeleton.render(doctorsContainer, 'list', { count: 4 });
+            }
             const specialty = document.getElementById('specialty-filter').value;
             const params = specialty ? `?specialty=${specialty}` : '';
             
@@ -175,6 +181,9 @@ const AppointmentBooking = {
             if (response.success) {
                 this.doctors = response.data.doctors || response.doctors || [];
                 this.renderDoctors(this.doctors);
+                if (window.SahatakSkeleton && doctorsContainer) {
+                    window.SahatakSkeleton.clear(doctorsContainer);
+                }
                 // One-Tap Follow-Up: preselect the deep-linked doctor once the
                 // list is on screen.
                 if (this.pendingDoctorId != null) {
@@ -198,13 +207,19 @@ const AppointmentBooking = {
             // Also update the doctors list to show error state instead of loading
             const container = document.getElementById('doctors-list');
             if (container) {
-                container.innerHTML = `
-                    <div class="col-12 text-center py-5">
-                        <i class="bi bi-exclamation-triangle display-4 text-danger mb-3"></i>
-                        <p class="text-danger">Error loading doctors</p>
-                        <button class="btn btn-primary" onclick="AppointmentBooking.loadDoctors()">Try Again</button>
-                    </div>
-                `;
+                // Friendly error + retry via the shared skeleton module — never
+                // an indefinite skeleton.
+                if (window.SahatakSkeleton) {
+                    window.SahatakSkeleton.renderError(container, error, () => this.loadDoctors());
+                } else {
+                    container.innerHTML = `
+                        <div class="col-12 text-center py-5">
+                            <i class="bi bi-exclamation-triangle display-4 text-danger mb-3"></i>
+                            <p class="text-danger">Error loading doctors</p>
+                            <button class="btn btn-primary" onclick="AppointmentBooking.loadDoctors()">Try Again</button>
+                        </div>
+                    `;
+                }
             }
         }
     },
@@ -302,18 +317,31 @@ const AppointmentBooking = {
         if (!date) return;
 
         try {
+            // Smart Skeleton: pill-cell grid while slots load.
+            const slotsContainer = document.getElementById('time-slots');
+            if (slotsContainer && window.SahatakSkeleton) {
+                window.SahatakSkeleton.render(slotsContainer, 'grid', { count: 8 });
+            }
             const response = await ApiHelper.makeRequest(
                 `/appointments/doctors/${this.selectedDoctor.id}/availability?date=${date}`
             );
             
             if (response.success) {
                 this.renderTimeSlots(response.data.available_slots || []);
+                if (window.SahatakSkeleton && slotsContainer) {
+                    window.SahatakSkeleton.clear(slotsContainer);
+                }
             } else {
                 this.showError('فشل في تحميل الأوقات المتاحة');
             }
         } catch (error) {
             console.error('Error loading time slots:', error);
             this.showError('خطأ في تحميل الأوقات المتاحة');
+            // Friendly error + retry — never an indefinite skeleton.
+            const slotsContainer = document.getElementById('time-slots');
+            if (slotsContainer && window.SahatakSkeleton) {
+                window.SahatakSkeleton.renderError(slotsContainer, error, () => this.loadTimeSlots());
+            }
         }
     },
 

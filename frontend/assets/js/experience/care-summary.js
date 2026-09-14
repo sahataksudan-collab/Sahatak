@@ -339,16 +339,24 @@
       return true;
     }
 
-    // ── 8. loading (static blocks — shimmer belongs to the Smart Skeletons step) ──
-    bodyWrap.appendChild(el('p', 'cg-care-loading', t('loading')));
-    var sk = el('div', 'cg-care-skeleton');
-    for (var i = 0; i < 4; i++) sk.appendChild(el('div', 'cg-care-skeleton-block'));
-    bodyWrap.appendChild(sk);
+    // ── 8. loading — Smart Skeleton (shared window.SahatakSkeleton), shape-
+    //    matched to the IA order rendered below (Consultation Info → Doctor
+    //    Info → Clinical Info → Prescription → Next Steps → Follow-Up).
+    //    Shimmer/reduced-motion/a11y contract lives in the skeleton module;
+    //    failure paths (9/10/11) render friendly error + retry — never an
+    //    indefinite skeleton. Fallback keeps the old static label only if the
+    //    shared module failed to load.
+    if (window.SahatakSkeleton) {
+      window.SahatakSkeleton.render(bodyWrap, 'care_summary', { label: t('loading') });
+    } else {
+      bodyWrap.appendChild(el('p', 'cg-care-loading', t('loading')));
+    }
 
     function attempt() { render(container, appointments); }
 
     loadSummaryData(user.id, apt).then(function (data) {
       if (!container.isConnected) return;
+      if (window.SahatakSkeleton) window.SahatakSkeleton.clear(container);
       container.innerHTML = '';
       container.className = 'cg-care-summary';
       container.appendChild(head);
@@ -483,6 +491,7 @@
       wrap.appendChild(fu.card);
     }).catch(function (err) {
       if (!container.isConnected) return;
+      if (window.SahatakSkeleton) window.SahatakSkeleton.clear(container);
       var kind = classifyError(err);
       container.innerHTML = '';
       container.className = 'cg-care-summary';

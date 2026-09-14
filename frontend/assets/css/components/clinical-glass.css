@@ -888,18 +888,9 @@
     color: var(--cg-text-soft);
 }
 
-/* Static loading blocks (Smart Skeletons step will replace/refine these). */
-.cg-care-skeleton {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.cg-care-skeleton-block {
-    block-size: 2.75rem;
-    border-radius: var(--cg-radius-sm);
-    background: rgba(226, 232, 240, 0.65);
-}
+/* Loading blocks now come from the SHARED cg-skeleton system (bottom of this
+   file) rendered by assets/js/experience/skeleton.js — shape-matched to the
+   Care Summary IA order. The old static placeholder is gone. */
 
 .cg-care-retry-btn {
     margin-block-start: 0.75rem;
@@ -936,6 +927,122 @@
 @media (prefers-reduced-motion: reduce) {
     .cg-journey-action-btn {
         transition: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   10. Smart Skeletons (cg-skeleton) — the ONE shared loading-state system.
+   Rendered by assets/js/experience/skeleton.js (window.SahatakSkeleton),
+   consolidating the two legacy duplicates (.skeleton in comm-hub.css and
+   .loading-skeleton in dashboard.css — both had no consumers; removed there).
+
+   Contract:
+   - cg-skeleton tokens ride on .cg-page's custom properties like every cg-
+     section; a neutral slate tint works on any glass surface.
+   - Fixed dimensions are set inline per block by skeleton.js (shape-matched
+     to each surface) so real content never shifts layout on arrival.
+   - Shimmer ONLY under prefers-reduced-motion: no-preference; reduced motion
+     gets a static tint (same contract as the journey progress-fill above and
+     the cg-care reduced-motion block).
+   - Blocks are pointer-events: none and aria-hidden (skeleton.js); the
+     container carries aria-busy + ONE polite status region.
+   -------------------------------------------------------------------------- */
+.cg-skeleton-region {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+/* Grid shapes (availability slots) wrap instead of stacking. */
+.cg-skeleton-region:has(.cg-skeleton-cell) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.cg-skeleton-block {
+    position: relative;
+    overflow: hidden;
+    inline-size: 100%;
+    background: rgba(226, 232, 240, 0.65);
+    border-radius: var(--cg-radius-sm);
+    pointer-events: none;
+}
+
+.cg-skeleton-line {
+    block-size: 0.85rem;
+    border-radius: 7px;
+}
+
+.cg-skeleton-avatar {
+    inline-size: 3rem;
+    block-size: 3rem;
+    border-radius: 16px;
+    flex: none;
+}
+
+.cg-skeleton-cell {
+    inline-size: 6.5rem;
+    block-size: 2.25rem;
+    border-radius: 999px;
+    flex: none;
+}
+
+/* Card-shaped block approximating the final card's footprint (glass card
+   surface like .cg-glass, avatar + body lines inside). */
+.cg-skeleton-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    background: var(--cg-glass);
+    border: 1px solid var(--cg-glass-border);
+    border-radius: var(--cg-radius-sm);
+    box-shadow: var(--cg-shadow);
+    pointer-events: none;
+}
+
+.cg-skeleton-card .cg-skeleton-avatar {
+    background: rgba(226, 232, 240, 0.9);
+    position: relative;
+    overflow: hidden;
+}
+
+.cg-skeleton-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .cg-skeleton-block::after,
+    .cg-skeleton-card .cg-skeleton-avatar::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.55),
+            transparent
+        );
+        animation: cg-skeleton-shimmer 1.4s infinite;
+    }
+}
+
+@keyframes cg-skeleton-shimmer {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* Reduced motion: static tint, no shimmer at all. */
+@media (prefers-reduced-motion: reduce) {
+    .cg-skeleton-block,
+    .cg-skeleton-card .cg-skeleton-avatar {
+        background: rgba(226, 232, 240, 0.9);
     }
 }
 

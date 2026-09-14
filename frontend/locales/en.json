@@ -1943,5 +1943,13 @@
         "info_2": "Prevent double-booking by marking busy times from external calendars",
         "info_3": "Choose sync direction: one-way or bidirectional",
         "info_4": "Set conflict resolution preferences"
+    },
+    "skeleton": {
+        "loading": "Loading…",
+        "error_title": "Something went wrong",
+        "error_sub": "We could not load this section right now. Please try again.",
+        "offline_title": "You appear to be offline",
+        "offline_sub": "This section will load once you are back online. Please try again.",
+        "retry": "Try Again"
     }
 }

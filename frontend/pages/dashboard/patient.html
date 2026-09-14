@@ -560,6 +560,8 @@
     <script src="../../assets/js/experience/follow-up.js"></script>
     <!-- Care Summary: post-consultation "Understand" stage section (no new API surface) -->
     <script src="../../assets/js/experience/care-summary.js"></script>
+    <!-- Smart Skeletons: ONE shared loading-state system (shape-matched cg-skeleton blocks) -->
+    <script src="../../assets/js/experience/skeleton.js"></script>
     
     <!-- Dashboard Data Handler -->
     <script src="../../assets/js/components/dashboard.js"></script>
@@ -1205,6 +1207,7 @@
         async function loadMedicalRecords() {
             const container = document.getElementById('medical-records-container');
             if (!container) return;
+            if (window.SahatakSkeleton) window.SahatakSkeleton.render(container, 'records', { count: 3 });
             
             try {
                 const currentLang = LanguageManager.getLanguage() || 'en';
@@ -1233,6 +1236,7 @@
                         if (data.lab_results) recordCount += data.lab_results.length;
                         
                         if (recordCount > 0) {
+                            if (window.SahatakSkeleton) window.SahatakSkeleton.clear(container);
                             container.innerHTML = `
                                 <h5 class="mb-3">
                                     <i class="bi bi-file-medical me-2"></i>
@@ -1272,6 +1276,7 @@
                 }
             } catch (error) {
                 const fallbackLang = LanguageManager.getLanguage() || 'en';
+                if (window.SahatakSkeleton) window.SahatakSkeleton.clear(container);
                 container.innerHTML = `
                     <h5 class="mb-3">
                         <i class="bi bi-file-medical me-2"></i>
@@ -1305,6 +1310,12 @@
         // Load dashboard statistics from API
         async function loadDashboardStats() {
             try {
+                // Smart Skeleton: shape-matched card list while appointments load
+                // (cleared on every outcome below — never left up indefinitely).
+                const skelAppointments = document.getElementById('appointments-container');
+                if (skelAppointments && window.SahatakSkeleton) {
+                    window.SahatakSkeleton.render(skelAppointments, 'list', { count: 3 });
+                }
                 // Load appointments to count scheduled ones
                 const appointmentsResponse = await ApiHelper.makeRequest('/appointments/');
                 
@@ -1343,6 +1354,7 @@
                     // Update appointments list with matching color scheme from doctor.html
                     const appointmentsContainer = document.getElementById('appointments-container');
                     if (appointmentsContainer) {
+                        if (window.SahatakSkeleton) window.SahatakSkeleton.clear(appointmentsContainer);
                         if (upcomingAppointments.length > 0) {
                             appointmentsContainer.innerHTML = `
                                 <h5 class="mb-3">
@@ -1424,6 +1436,7 @@
                                 </div>
                             `;
                         } else {
+                            if (window.SahatakSkeleton) window.SahatakSkeleton.clear(appointmentsContainer);
                             appointmentsContainer.innerHTML = `
                                 <h5 class="mb-3">
                                     <i class="bi bi-calendar-day me-2"></i>
@@ -1446,6 +1459,12 @@
             } catch (error) {
                 console.error('Error loading dashboard stats:', error);
                 document.getElementById('stat-appointments-count').textContent = '-';
+                // Friendly error + retry in the appointments region — never an
+                // indefinite skeleton.
+                const errAppointments = document.getElementById('appointments-container');
+                if (errAppointments && window.SahatakSkeleton) {
+                    window.SahatakSkeleton.renderError(errAppointments, error, loadDashboardStats);
+                }
             }
             
             try {

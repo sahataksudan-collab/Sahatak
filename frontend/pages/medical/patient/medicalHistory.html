@@ -395,6 +395,8 @@
     <script src="../../../assets/js/components/auth-guard.js"></script>
     <script src="../../../assets/js/components/dashboard-translations.js"></script>
     <script src="../../../assets/js/components/medical-records.js"></script>
+    <!-- Smart Skeletons: shared loading-state system (records list) -->
+    <script src="../../../assets/js/experience/skeleton.js"></script>
     
     <script>
         // All translations are handled by dashboard-translations.js
@@ -511,6 +513,12 @@
         // Load medical history
         async function loadMedicalHistory() {
             try {
+                // Smart Skeleton: shape-matched stat lines while history loads
+                // (cleared on every outcome below — never left up indefinitely).
+                const skelSummary = document.getElementById('history-summary');
+                if (skelSummary && window.SahatakSkeleton) {
+                    window.SahatakSkeleton.render(skelSummary, 'records', { count: 3 });
+                }
                 // Get current user to determine patient ID
                 const user = await getCurrentUser();
                 let patientId = null;
@@ -544,6 +552,7 @@
                     historyUpdates = historyResponse.data.recent_updates || [];
                     
                     console.log('Data loaded successfully, starting rendering...');
+                    if (window.SahatakSkeleton && skelSummary) window.SahatakSkeleton.clear(skelSummary);
                     renderMedicalSummary();
                     await loadHistoryUpdates(patientId);
                     renderTimeline();
@@ -555,6 +564,12 @@
             } catch (error) {
                 console.error('Error loading medical history:', error);
                 showError('Error loading medical history: ' + error.message);
+                // Friendly error + retry in the summary region — never an
+                // indefinite skeleton.
+                const errSummary = document.getElementById('history-summary');
+                if (errSummary && window.SahatakSkeleton) {
+                    window.SahatakSkeleton.renderError(errSummary, error, loadMedicalHistory);
+                }
             }
         }
 
