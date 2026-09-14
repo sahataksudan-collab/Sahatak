@@ -78,7 +78,20 @@ const MedicalRecordsAPI = {
         }
     },
 
+    // Get patient diagnoses (medical reports) — EHR endpoint, newest first.
+    // NOTE: unlike the siblings above, this re-throws ApiError instead of
+    // swallowing it: the Care Summary UI must classify offline/401/failure
+    // (mirrors the mobile records API contract).
+    async getPatientDiagnoses(patientUserId) {
+        const response = await ApiHelper.makeRequest(`/ehr/diagnoses/patient/${patientUserId}`);
+        if (response.success) {
+            return { success: true, data: response.data.diagnoses || [] };
+        }
+        return { success: false, message: response.message };
+    },
+
     // Get medical history updates (audit trail)
+
     async getMedicalHistoryUpdates(patientId, page = 1, perPage = 10) {
         try {
             const params = new URLSearchParams({

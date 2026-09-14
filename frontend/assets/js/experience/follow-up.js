@@ -27,13 +27,17 @@
 
   var BOOKING_PAGE_URL = '../appointments/book-appointment.html';
   var APPOINTMENTS_PAGE_URL = '../appointments/appointment-list.html';
+  /** Care Summary section on the patient dashboard (rendered by SahatakCareSummary). */
+  var CARE_SUMMARY_ANCHOR = '#care-summary';
 
   /** Mirror of the mobile action labels — fallback if translations fail to load. */
   var ACTION_LABELS = {
     find_doctor: { en: 'Find a Doctor', ar: 'ابحث عن طبيب' },
     prepare: { en: 'Prepare for Consultation', ar: 'استعد للاستشارة' },
     book_follow_up: { en: 'Book Follow-Up', ar: 'احجز موعد متابعة' },
+    view_care_summary: { en: 'View Care Summary', ar: 'عرض ملخص الرعاية' },
   };
+
 
   function currentLang() {
     return (window.LanguageManager && LanguageManager.getLanguage && LanguageManager.getLanguage()) || 'en';
@@ -95,15 +99,20 @@
       return [{ id: 'prepare', kind: 'primary', href: APPOINTMENTS_PAGE_URL }];
     }
     if (current.id === 'UNDERSTAND' || current.id === 'FOLLOW_UP') {
+      // Mirrors mobile HomeScreen: "View Care Summary" is the primary action at
+      // this stage (the Care Summary section on this page), with the Book
+      // Follow-Up CTA as the secondary action when a focus appointment exists.
+      var actions = [{ id: 'view_care_summary', kind: 'primary', href: CARE_SUMMARY_ANCHOR }];
       if (focusAppointment) {
-        return [{
+        actions.push({
           id: 'book_follow_up',
-          kind: 'primary',
+          kind: 'secondary',
           href: bookingUrl(focusAppointment),
-        }];
+        });
       }
-      return [];
+      return actions;
     }
+
     // COMPLETE / BOOK / CONSULT — mobile shows no action for these either.
     // A fully completed journey (follow-up already booked) has no current
     // stage at all, so it also renders nothing — exactly like mobile.
@@ -168,6 +177,8 @@
   return {
     BOOKING_PAGE_URL: BOOKING_PAGE_URL,
     APPOINTMENTS_PAGE_URL: APPOINTMENTS_PAGE_URL,
+    CARE_SUMMARY_ANCHOR: CARE_SUMMARY_ANCHOR,
+
     bookingUrl: bookingUrl,
     stageActions: stageActions,
     render: render,

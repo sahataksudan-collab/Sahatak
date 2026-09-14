@@ -24,10 +24,54 @@
     "actions": {
       "find_doctor": "ابحث عن طبيب",
       "prepare": "استعد للاستشارة",
-      "book_follow_up": "احجز موعد متابعة"
+      "book_follow_up": "احجز موعد متابعة",
+      "view_care_summary": "عرض ملخص الرعاية"
     }
   },
-  
+
+  "care_summary": {
+    "title": "ملخص الرعاية",
+    "loading": "جارٍ تحميل ملخص الرعاية",
+    "view_details": "عرض التفاصيل",
+    "hide_details": "إخفاء التفاصيل",
+    "offline_title": "يبدو أنك غير متصل بالإنترنت",
+    "offline_sub": "سيتم تحميل ملخص الرعاية عند عودة الاتصال. لم يتم فقدان أي شيء.",
+    "failure_title": "حدث خطأ ما",
+    "failure_sub": "لم نتمكن من تحميل ملخص الرعاية الآن. حاول مرة أخرى.",
+    "unauthorized_title": "لا تملك صلاحية عرض هذا المحتوى",
+    "unauthorized_sub": "يرجى تسجيل الدخول بحسابك كمريض لعرض ملخص الرعاية.",
+    "retry": "إعادة المحاولة",
+    "cancelled": "تم إلغاء هذا الموعد.",
+    "notes_pending": "اكتملت استشارتك. لم يضف طبيبك الملاحظات بعد.",
+    "sec_consultation": "معلومات الاستشارة",
+    "sec_doctor": "معلومات الطبيب",
+    "sec_clinical": "المعلومات الطبية",
+    "sec_prescription": "الوصفة الطبية",
+    "sec_next_steps": "الخطوات التالية",
+    "sec_follow_up": "المتابعة",
+    "lbl_date": "التاريخ",
+    "lbl_reason": "سبب الزيارة",
+    "lbl_doctor": "الطبيب",
+    "lbl_diagnosis": "التشخيص",
+    "lbl_findings": "الفحوصات السريرية",
+    "lbl_treatment": "خطة العلاج",
+    "lbl_recorded": "تاريخ التسجيل",
+    "lbl_dosage": "الجرعة",
+    "lbl_frequency": "التكرار",
+    "lbl_duration": "المدة",
+    "lbl_instructions": "التعليمات",
+    "lbl_recommended_date": "التاريخ الموصى به",
+    "lbl_doctor_note": "ملاحظة الطبيب",
+    "not_provided": "غير محدد",
+    "rx_none": "لم تتم إضافة وصفة طبية لهذه الاستشارة.",
+    "rx_view_records": "عرض في السجل الطبي",
+    "next_steps_none": "لم يضف طبيبك أي خطوات تالية بعد.",
+    "fu_not_required": "لم يطلب طبيبك موعد متابعة لهذه الاستشارة.",
+    "fu_booked": "لديك موعد متابعة محجوز بالفعل مع هذا الطبيب.",
+    "items_count": "{n} عنصر",
+    "summary_none": "لا يوجد"
+  },
+
   "auth": {
     "prompt": "ابدأ رحلتك العلاجيه",
     "login": "تسجيل الدخول",

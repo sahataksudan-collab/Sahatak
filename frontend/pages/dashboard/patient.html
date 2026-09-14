@@ -558,6 +558,8 @@
     <script src="../../assets/js/experience/journey.js"></script>
     <script src="../../assets/js/experience/journey-tracker.js"></script>
     <script src="../../assets/js/experience/follow-up.js"></script>
+    <!-- Care Summary: post-consultation "Understand" stage section (no new API surface) -->
+    <script src="../../assets/js/experience/care-summary.js"></script>
     
     <!-- Dashboard Data Handler -->
     <script src="../../assets/js/components/dashboard.js"></script>
@@ -720,7 +722,10 @@
             if (window.SahatakFollowUp) {
                 SahatakFollowUp.refresh('journey-actions', window.__patientAppointmentsCache || null);
             }
-            
+            if (window.SahatakCareSummary) {
+                SahatakCareSummary.refresh('care-summary', window.__patientAppointmentsCache || null);
+            }
+
             // Update the language button text
             const langBtn = document.getElementById('current-lang');
             if (langBtn) {
@@ -1274,6 +1279,7 @@
                     </h5>
                     <div id="journey-tracker" class="mb-3"></div>
                     <div id="journey-actions" class="mb-3"></div>
+                    <div id="care-summary" class="mb-3"></div>
                     <div class="text-center mt-3">
                         <button class="btn btn-outline-primary btn-sm" onclick="bookAppointment()">
                             <i class="bi bi-plus-circle me-1"></i>
@@ -1289,6 +1295,9 @@
                 }
                 if (window.SahatakFollowUp) {
                     SahatakFollowUp.refresh('journey-actions', window.__patientAppointmentsCache || null);
+                }
+                if (window.SahatakCareSummary) {
+                    SahatakCareSummary.refresh('care-summary', window.__patientAppointmentsCache || null);
                 }
             }
         }
@@ -1310,6 +1319,9 @@
                     }
                     if (window.SahatakFollowUp) {
                         SahatakFollowUp.refresh('journey-actions', appointments);
+                    }
+                    if (window.SahatakCareSummary) {
+                        SahatakCareSummary.refresh('care-summary', appointments);
                     }
                     
                     // Get upcoming appointments for display (including today's appointments)

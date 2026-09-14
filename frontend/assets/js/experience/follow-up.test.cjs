@@ -66,18 +66,26 @@ check('CONSULT → no actions',
   F.stageActions(inProgress, completedApt), []);
 
 const noNotes = J.deriveJourney({ appointmentStatus: 'completed' });
-check('UNDERSTAND (no notes) → no CTA without focus appointment',
-  F.stageActions(noNotes, null), []);
-check('UNDERSTAND → Book Follow-Up CTA with doctor deep link (mobile shows it here too)',
+check('UNDERSTAND → View Care Summary primary (no CTA without focus appointment)',
+  F.stageActions(noNotes, null),
+  [{ id: 'view_care_summary', kind: 'primary', href: F.CARE_SUMMARY_ANCHOR }]);
+check('UNDERSTAND → View Care Summary + Book Follow-Up secondary with doctor deep link (mirrors mobile)',
   F.stageActions(noNotes, completedApt),
-  [{ id: 'book_follow_up', kind: 'primary', href: F.BOOKING_PAGE_URL + '?doctor=42&follow_up=1' }]);
+  [
+    { id: 'view_care_summary', kind: 'primary', href: F.CARE_SUMMARY_ANCHOR },
+    { id: 'book_follow_up', kind: 'secondary', href: F.BOOKING_PAGE_URL + '?doctor=42&follow_up=1' },
+  ]);
 
 const notesNoFollowUp = J.deriveJourney({
   appointmentStatus: 'completed', hasNotes: true, hasDiagnosis: true,
 });
-check('FOLLOW_UP → book_follow_up with doctor deep link',
+check('FOLLOW_UP → View Care Summary + book_follow_up secondary with doctor deep link',
   F.stageActions(notesNoFollowUp, completedApt),
-  [{ id: 'book_follow_up', kind: 'primary', href: F.BOOKING_PAGE_URL + '?doctor=42&follow_up=1' }]);
+  [
+    { id: 'view_care_summary', kind: 'primary', href: F.CARE_SUMMARY_ANCHOR },
+    { id: 'book_follow_up', kind: 'secondary', href: F.BOOKING_PAGE_URL + '?doctor=42&follow_up=1' },
+  ]);
+
 
 const fullyComplete = J.deriveJourney({
   appointmentStatus: 'completed', hasNotes: true, followUpBooked: true,

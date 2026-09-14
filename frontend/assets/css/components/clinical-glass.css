@@ -687,6 +687,246 @@
     filter: brightness(1.08);
 }
 
+/* Secondary journey action (e.g. Book Follow-Up next to View Care Summary).
+   Subtle blue tint from the shared cg- palette — no new color tokens. */
+.cg-journey-action-secondary {
+    background: rgba(37, 99, 235, 0.10);
+    color: var(--cg-blue);
+}
+
+.cg-journey-action-secondary:hover {
+    color: var(--cg-blue);
+    filter: brightness(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cg-journey-action-secondary {
+        transition: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   9c. Care Summary (.cg-care-summary) — rendered by window.SahatakCareSummary
+       under the journey tracker. Purely additive, cg- prefixed only. Mirrors
+       the mobile CareSummaryScreen IA: Consultation Info → Doctor Info →
+       Clinical Info → Prescription → Next Steps → Follow-Up, collapsed by
+       default. Logical properties so RTL inherits the site's dir handling.
+   -------------------------------------------------------------------------- */
+.cg-care-summary {
+    margin-block-start: 0.5rem;
+}
+
+.cg-care-title {
+    font-family: 'Manrope', 'Segoe UI', sans-serif;
+    font-weight: 800;
+    color: var(--cg-text-strong);
+    margin: 0 0 0.75rem;
+}
+
+.cg-care-section {
+    background: var(--cg-glass);
+    border: 1px solid var(--cg-glass-border);
+    border-radius: var(--cg-radius-sm);
+    box-shadow: var(--cg-shadow);
+    padding: 0.6rem 0.9rem;
+    margin-block-end: 0.6rem;
+}
+
+.cg-care-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    inline-size: 100%;
+    background: transparent;
+    border: 0;
+    padding: 0.35rem 0;
+    text-align: start;
+    cursor: pointer;
+}
+
+.cg-care-section-header:focus-visible {
+    outline: 2px solid var(--cg-blue);
+    outline-offset: 2px;
+}
+
+.cg-care-section-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-inline-size: 0;
+}
+
+.cg-care-section-title {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--cg-text-strong);
+}
+
+.cg-care-section-summary {
+    font-size: 0.75rem;
+    color: var(--cg-text-soft);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cg-care-section-toggle {
+    flex: none;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--cg-blue);
+}
+
+.cg-care-section-body {
+    border-block-start: 1px solid rgba(148, 163, 184, 0.35);
+    margin-block-start: 0.35rem;
+    padding-block: 0.6rem 0.2rem;
+}
+
+.cg-care-row {
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    padding-block: 0.15rem;
+}
+
+.cg-care-row-label {
+    flex: none;
+    min-inline-size: 7.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--cg-text-soft);
+}
+
+.cg-care-row-value {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--cg-text-strong);
+    overflow-wrap: anywhere;
+}
+
+.cg-care-body-text,
+.cg-care-empty {
+    margin: 0 0 0.35rem;
+    font-size: 0.82rem;
+    color: var(--cg-text-soft);
+    line-height: 1.45;
+}
+
+.cg-care-rx-item {
+    background: rgba(241, 245, 249, 0.75);
+    border-radius: var(--cg-radius-sm);
+    padding: 0.55rem 0.75rem;
+    margin-block-end: 0.45rem;
+}
+
+.cg-care-rx-name {
+    margin: 0 0 0.15rem;
+    font-size: 0.83rem;
+    font-weight: 800;
+    color: var(--cg-text-strong);
+}
+
+.cg-care-rx-line {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--cg-text-soft);
+}
+
+.cg-care-inline-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.10);
+    color: var(--cg-blue);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    margin-block: 0.35rem;
+}
+
+.cg-care-inline-btn:hover,
+.cg-care-inline-btn:focus-visible {
+    color: var(--cg-blue);
+    text-decoration: none;
+}
+
+.cg-care-followup-actions {
+    margin-block-start: 0.35rem;
+}
+
+/* Full-state panels: loading / notes pending / cancelled / offline /
+   failure / unauthorized. */
+.cg-care-state {
+    text-align: center;
+    padding: 1.25rem 1rem;
+    background: var(--cg-glass);
+    border: 1px solid var(--cg-glass-border);
+    border-radius: var(--cg-radius-sm);
+    box-shadow: var(--cg-shadow);
+}
+
+.cg-care-state-title {
+    margin: 0 0 0.35rem;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--cg-text-strong);
+}
+
+.cg-care-state-sub {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--cg-text-soft);
+    line-height: 1.45;
+}
+
+.cg-care-loading {
+    margin: 0 0 0.5rem;
+    font-size: 0.82rem;
+    color: var(--cg-text-soft);
+}
+
+/* Static loading blocks (Smart Skeletons step will replace/refine these). */
+.cg-care-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.cg-care-skeleton-block {
+    block-size: 2.75rem;
+    border-radius: var(--cg-radius-sm);
+    background: rgba(226, 232, 240, 0.65);
+}
+
+.cg-care-retry-btn {
+    margin-block-start: 0.75rem;
+    padding: 0.5rem 1.1rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--cg-blue);
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cg-care-retry-btn:focus-visible {
+    outline: 2px solid var(--cg-blue);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cg-care-section,
+    .cg-care-section-header,
+    .cg-care-retry-btn,
+    .cg-care-inline-btn {
+        transition: none;
+    }
+}
+
 .cg-journey-action-note {
     margin: 0;
     font-size: 0.8125rem;

@@ -24,10 +24,54 @@
     "actions": {
       "find_doctor": "Find a Doctor",
       "prepare": "Prepare for Consultation",
-      "book_follow_up": "Book Follow-Up"
+      "book_follow_up": "Book Follow-Up",
+      "view_care_summary": "View Care Summary"
     }
   },
-  
+
+  "care_summary": {
+    "title": "Care Summary",
+    "loading": "Loading your care summary",
+    "view_details": "View details",
+    "hide_details": "Hide details",
+    "offline_title": "You appear to be offline",
+    "offline_sub": "Your care summary will load once you are back online. Nothing was lost.",
+    "failure_title": "Something went wrong",
+    "failure_sub": "We could not load your care summary right now. Please try again.",
+    "unauthorized_title": "You are not authorized to view this",
+    "unauthorized_sub": "Please sign in with your patient account to view your care summary.",
+    "retry": "Try Again",
+    "cancelled": "This appointment was cancelled.",
+    "notes_pending": "Your consultation is complete. Your doctor hasn't added the notes yet.",
+    "sec_consultation": "Consultation Info",
+    "sec_doctor": "Doctor Info",
+    "sec_clinical": "Clinical Info",
+    "sec_prescription": "Prescription",
+    "sec_next_steps": "Next Steps",
+    "sec_follow_up": "Follow-Up",
+    "lbl_date": "Date",
+    "lbl_reason": "Reason for visit",
+    "lbl_doctor": "Doctor",
+    "lbl_diagnosis": "Diagnosis",
+    "lbl_findings": "Clinical findings",
+    "lbl_treatment": "Treatment plan",
+    "lbl_recorded": "Recorded on",
+    "lbl_dosage": "Dosage",
+    "lbl_frequency": "Frequency",
+    "lbl_duration": "Duration",
+    "lbl_instructions": "Instructions",
+    "lbl_recommended_date": "Recommended date",
+    "lbl_doctor_note": "Doctor's note",
+    "not_provided": "Not provided",
+    "rx_none": "No prescription was added for this consultation.",
+    "rx_view_records": "View in Medical Records",
+    "next_steps_none": "Your doctor has not added any next steps yet.",
+    "fu_not_required": "Your doctor did not request a follow-up for this consultation.",
+    "fu_booked": "A follow-up is already booked with this doctor.",
+    "items_count": "{n} item(s)",
+    "summary_none": "None"
+  },
+
   "auth": {
     "prompt": "Start Your Health Journey",
     "login": "Login",
