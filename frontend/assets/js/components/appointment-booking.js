@@ -15,6 +15,8 @@ const AppointmentBooking = {
         this.loadDoctors();
         this.setupEventListeners();
         this.setMinDate();
+        // One-Tap Follow-Up deep link: ?doctor=<id>&follow_up=1
+        this.applyFollowUpParams();
     },
 
     // Load specialties from API and populate dropdown
@@ -113,6 +115,55 @@ const AppointmentBooking = {
         dateInput.value = today;
     },
 
+    // One-Tap Follow-Up: when the page is opened with ?doctor=<id>&follow_up=1
+    // (deep link from the patient dashboard's journey actions), preselect that
+    // doctor and jump straight to slot selection. The patient is not asked to
+    // pick a doctor again. Runs after the doctors list renders; silently no-ops
+    // when the doctor is not in the list (patient just picks manually).
+    applyFollowUpParams() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const doctorParam = params.get('doctor');
+            const isFollowUp = params.get('follow_up') === '1';
+            if (!doctorParam) return;
+            this.pendingDoctorId = Number(doctorParam);
+            this.isFollowUpBooking = isFollowUp;
+            // Doctors may already be rendered (init order) — try immediately too.
+            this.preselectPendingDoctor();
+        } catch (error) {
+            console.error('Error applying follow-up params:', error);
+        }
+    },
+
+    // Preselect a doctor by id without relying on the global `event` object
+    // (selectDoctor is wired to inline onclick handlers only).
+    preselectPendingDoctor() {
+        const doctorId = this.pendingDoctorId;
+        if (doctorId == null || !this.doctors || !this.doctors.length) return;
+        const doctor = this.doctors.find(d => d.id === doctorId);
+        if (!doctor) return;
+        this.selectedDoctor = doctor;
+        document.querySelectorAll('.doctor-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+        // Mark the matching card as selected in the DOM.
+        document.querySelectorAll('.doctor-card').forEach(card => {
+            const onclick = card.getAttribute('onclick') || '';
+            if (onclick.indexOf(`selectDoctor(${doctorId})`) !== -1) {
+                card.classList.add('selected');
+            }
+        });
+        this.updateDoctorAvailability();
+        const nextBtn = document.getElementById('next-btn');
+        if (nextBtn) nextBtn.disabled = false;
+        this.pendingDoctorId = null;
+        // Skip straight to slot selection (step 2), mirroring mobile's
+        // One-Tap Follow-Up behavior.
+        this.currentStep = 2;
+        this.updateStepDisplay();
+        this.loadTimeSlots();
+    },
+
     // Load doctors list
     async loadDoctors() {
         try {
@@ -124,6 +175,11 @@ const AppointmentBooking = {
             if (response.success) {
                 this.doctors = response.data.doctors || response.doctors || [];
                 this.renderDoctors(this.doctors);
+                // One-Tap Follow-Up: preselect the deep-linked doctor once the
+                // list is on screen.
+                if (this.pendingDoctorId != null) {
+                    this.preselectPendingDoctor();
+                }
                 // Load doctor availability for calendar if doctor is selected
                 if (this.selectedDoctor) {
                     this.updateDoctorAvailability();

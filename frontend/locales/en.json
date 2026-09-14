@@ -6,6 +6,27 @@
     "title": "Welcome to Sahatak Telemedicine Platform",
     "description": "A secure and user-friendly platform to connect with doctors"
   },
+
+  "journey": {
+    "step_of": "Step {x} of {n}",
+    "get_started": "Get started",
+    "cancelled": "This appointment was cancelled.",
+    "stages": {
+      "DISCOVER": "Discover",
+      "BOOK": "Book",
+      "PREPARE": "Prepare",
+      "WAIT": "Wait",
+      "CONSULT": "Consult",
+      "COMPLETE": "Complete",
+      "UNDERSTAND": "Understand",
+      "FOLLOW_UP": "Follow Up"
+    },
+    "actions": {
+      "find_doctor": "Find a Doctor",
+      "prepare": "Prepare for Consultation",
+      "book_follow_up": "Book Follow-Up"
+    }
+  },
   
   "auth": {
     "prompt": "Start Your Health Journey",

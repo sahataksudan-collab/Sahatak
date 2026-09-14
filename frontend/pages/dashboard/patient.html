@@ -554,6 +554,10 @@
     
     <!-- Dashboard Translations -->
     <script src="../../assets/js/components/dashboard-translations.js"></script>
+    <!-- Patient Journey: deriveJourney logic + tracker UI (no new API calls) -->
+    <script src="../../assets/js/experience/journey.js"></script>
+    <script src="../../assets/js/experience/journey-tracker.js"></script>
+    <script src="../../assets/js/experience/follow-up.js"></script>
     
     <!-- Dashboard Data Handler -->
     <script src="../../assets/js/components/dashboard.js"></script>
@@ -706,6 +710,15 @@
             // Update dashboard translations (call after applyLanguage to ensure footer is properly updated)
             if (DashboardTranslations && DashboardTranslations.updatePatientDashboard) {
                 DashboardTranslations.updatePatientDashboard(newLang);
+            }
+
+            // Re-render the Journey Tracker so stage labels switch language
+            // (it reads translations via LanguageManager at render time).
+            if (window.SahatakJourneyTracker) {
+                SahatakJourneyTracker.refresh('journey-tracker', window.__patientAppointmentsCache || null);
+            }
+            if (window.SahatakFollowUp) {
+                SahatakFollowUp.refresh('journey-actions', window.__patientAppointmentsCache || null);
             }
             
             // Update the language button text
@@ -1259,7 +1272,8 @@
                         <i class="bi bi-file-medical me-2"></i>
                         <span>${fallbackLang === 'ar' ? 'السجل الطبي' : 'Medical Records'}</span>
                     </h5>
-                    <p class="text-center py-3" style="color: #666;">${fallbackLang === 'ar' ? 'ابدأ رحلتك الصحية بحجز أول موعد' : 'Start your health journey by booking your first appointment'}</p>
+                    <div id="journey-tracker" class="mb-3"></div>
+                    <div id="journey-actions" class="mb-3"></div>
                     <div class="text-center mt-3">
                         <button class="btn btn-outline-primary btn-sm" onclick="bookAppointment()">
                             <i class="bi bi-plus-circle me-1"></i>
@@ -1267,6 +1281,15 @@
                         </button>
                     </div>
                 `;
+                // Render the real journey stage indicator in place of the old
+                // generic "Start your health journey" text. Fed with whatever
+                // appointment data the dashboard already fetched (no new API call).
+                if (window.SahatakJourneyTracker) {
+                    SahatakJourneyTracker.refresh('journey-tracker', window.__patientAppointmentsCache || null);
+                }
+                if (window.SahatakFollowUp) {
+                    SahatakFollowUp.refresh('journey-actions', window.__patientAppointmentsCache || null);
+                }
             }
         }
 
@@ -1278,6 +1301,16 @@
                 
                 if (appointmentsResponse.success) {
                     const appointments = appointmentsResponse.data.appointments;
+
+                    // Cache for the Journey Tracker (it renders from data this
+                    // page already fetched — no extra API call).
+                    window.__patientAppointmentsCache = appointments;
+                    if (window.SahatakJourneyTracker) {
+                        SahatakJourneyTracker.refresh('journey-tracker', appointments);
+                    }
+                    if (window.SahatakFollowUp) {
+                        SahatakFollowUp.refresh('journey-actions', appointments);
+                    }
                     
                     // Get upcoming appointments for display (including today's appointments)
                     const now = new Date();

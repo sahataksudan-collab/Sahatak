@@ -501,3 +501,201 @@
         transform: none;
     }
 }
+
+/* --------------------------------------------------------------------------
+   9. Journey Tracker (.cg-journey) — renders window.SahatakJourneyTracker
+      output on the patient dashboard. Purely additive, cg- prefixed only.
+      Layout uses CSS logical properties (inline-start/inline-end) so the
+      site's dir="rtl" handling works with no manual flip. Two variants share
+      one DOM: a compact strip on narrow viewports (<=768px, matching the
+      site's existing breakpoint) and a horizontal step rail on desktop.
+   -------------------------------------------------------------------------- */
+.cg-journey {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    color: var(--cg-text);
+}
+
+.cg-journey-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-block-end: 0.5rem;
+}
+
+.cg-journey-step {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--cg-text-strong);
+}
+
+.cg-journey-stage {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--cg-blue);
+}
+
+.cg-journey-sep {
+    color: var(--cg-text-soft);
+}
+
+.cg-journey-track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.28);
+    overflow: hidden;
+    margin-block-end: 0.75rem;
+}
+
+.cg-journey-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--cg-blue), var(--cg-teal));
+    /* Static by default — motion only for users without a reduce-motion pref */
+    transition: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .cg-journey-fill {
+        transition: width 0.4s ease;
+    }
+}
+
+/* Steps — compact strip by default (narrow viewports) */
+.cg-journey-steps {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.9rem;
+    margin: 0;
+    padding: 0;
+}
+
+.cg-journey-step-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--cg-text-soft);
+    min-width: 0;
+}
+
+.cg-journey-dot {
+    inline-size: 10px;
+    block-size: 10px;
+    border-radius: 50%;
+    background: rgba(148, 163, 184, 0.55);
+    flex: none;
+}
+
+.cg-journey-completed .cg-journey-dot {
+    background: var(--cg-emerald);
+}
+
+.cg-journey-current .cg-journey-dot {
+    background: var(--cg-blue);
+    box-shadow: 0 0 0 3px var(--cg-focus);
+}
+
+.cg-journey-step-item.cg-journey-current {
+    color: var(--cg-text-strong);
+}
+
+/* Desktop rail: one row with connector lines between dots */
+@media (min-width: 769px) {
+    .cg-journey-steps {
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        gap: 0;
+    }
+
+    .cg-journey-step-item {
+        flex: 1 1 0;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        padding-inline: 0.25rem;
+    }
+
+    /* Connector line drawn from each dot to the next (logical inline axis) */
+    .cg-journey-step-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        inset-inline-start: calc(50% + 8px);
+        inset-inline-end: calc(-50% + 8px);
+        top: 5px;
+        height: 2px;
+        background: rgba(148, 163, 184, 0.35);
+    }
+
+    .cg-journey-step-item.cg-journey-completed:not(:last-child)::after {
+        background: var(--cg-emerald);
+    }
+}
+
+.cg-journey-cancelled {
+    text-align: center;
+    font-weight: 600;
+    padding-block: 0.5rem;
+    margin: 0;
+    color: #9a3412; /* cg-pill-coral ink — AA on light glass */
+}
+
+/* --------------------------------------------------------------------------
+   9b. Journey stage actions (.cg-journey-actions) — rendered by
+       window.SahatakFollowUp under the tracker. Purely additive, cg- prefixed.
+       Logical properties so RTL inherits the site's dir="rtl" handling.
+   -------------------------------------------------------------------------- */
+.cg-journey-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-block-start: 0.75rem;
+}
+
+.cg-journey-actions:empty {
+    display: none;
+}
+
+.cg-journey-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+    min-height: 2.25rem; /* fixed footprint — no layout shift on load */
+}
+
+.cg-journey-action-btn:focus-visible {
+    outline: 2px solid var(--cg-blue);
+    outline-offset: 2px;
+}
+
+.cg-journey-action-primary {
+    background: var(--cg-blue);
+    color: #ffffff;
+}
+
+.cg-journey-action-primary:hover {
+    color: #ffffff;
+    filter: brightness(1.08);
+}
+
+.cg-journey-action-note {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--cg-text-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cg-journey-action-btn {
+        transition: none;
+    }
+}
+

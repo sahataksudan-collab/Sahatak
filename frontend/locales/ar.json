@@ -6,6 +6,27 @@
     "title": "مرحب بيك في منصة صحتك للطب عن بُعد",
     "description": "منصة آمنة وسهلة الاستخدام للتواصل مع الأطباء"
   },
+
+  "journey": {
+    "step_of": "الخطوة {x} من {n}",
+    "get_started": "ابدأ الآن",
+    "cancelled": "تم إلغاء هذا الموعد.",
+    "stages": {
+      "DISCOVER": "استكشف",
+      "BOOK": "احجز",
+      "PREPARE": "استعد",
+      "WAIT": "انتظر",
+      "CONSULT": "الاستشارة",
+      "COMPLETE": "الإكمال",
+      "UNDERSTAND": "افهم",
+      "FOLLOW_UP": "المتابعة"
+    },
+    "actions": {
+      "find_doctor": "ابحث عن طبيب",
+      "prepare": "استعد للاستشارة",
+      "book_follow_up": "احجز موعد متابعة"
+    }
+  },
   
   "auth": {
     "prompt": "ابدأ رحلتك العلاجيه",
