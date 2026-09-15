@@ -34,13 +34,8 @@ else:
 
 # Override with environment variables if they exist
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', app.config['SECRET_KEY'])
-# DB URI: use the same builder as config.py so the password is URL-encoded
-# (component vars DB_USER/DB_PASSWORD/DB_HOST/DB_NAME preferred; falls back
-# to DATABASE_URL). Do not override with the raw DATABASE_URL, which breaks
-# when the password contains @ : / # ? % characters (MySQL error 1045).
-from config import build_database_uri
-app.config['SQLALCHEMY_DATABASE_URI'] = build_database_uri()
-app.config['FRONTEND_URL'] = os.getenv('FRONTEND_URL', 'https://hello-50.github.io/Sahatak')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', app.config['SQLALCHEMY_DATABASE_URI'])
+app.config['FRONTEND_URL'] = os.getenv('FRONTEND_URL', 'https://sahataksudan-collab.github.io/Sahatak')
 
 # Explicit session cookie configuration for cross-origin support
 app.config['SESSION_COOKIE_SECURE'] = False  # Allow HTTP for development/testing
@@ -92,9 +87,9 @@ CORS(app,
          'http://127.0.0.1:5500',
          'http://localhost:8000', 
          'http://127.0.0.1:8000',
-         'https://hello-50.github.io',
-         'https://hello-50.github.io/Sahatak',
-         'https://hello-50.github.io/Sahatak/frontend'
+         'https://sahataksudan-collab.github.io',
+         'https://sahataksudan-collab.io/Sahatak',
+         'https://sahataksudan-collab.github.io/Sahatak/frontend'
      ],
      allow_headers=['Content-Type', 'Authorization', 'Accept-Language', 'X-Requested-With', 'x-timestamp'],
      methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],

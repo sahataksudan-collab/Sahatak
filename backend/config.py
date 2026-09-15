@@ -48,7 +48,7 @@ class Config:
     # Official Sahatak support inbox where technical support messages are delivered
     SUPPORT_EMAIL = os.getenv('SUPPORT_EMAIL', 'sahatak.sudan@gmail.com')
     # Verified public GitHub Pages asset used by email clients to load the logo.
-    LOGO_URL = os.getenv('LOGO_URL', 'https://hello-50.github.io/Sahatak/frontend/assets/images/icons/apple-touch-icon.png')
+    LOGO_URL = os.getenv('LOGO_URL', 'https://sahataksudan-collab.github.io/Sahatak/frontend/assets/images/icons/apple-touch-icon.png')
     
     # JWT Configuration
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', SECRET_KEY)
@@ -152,7 +152,7 @@ class ProductionConfig(Config):
     SESSION_COOKIE_SAMESITE = None  # Allow cross-origin requests
     
     # CORS settings
-    CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'https://hello-50.github.io,https://hello-50.github.io/Sahatak').split(',')
+    CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'https://sahataksudan-collab.github.io,https://sahataksudan-collab.io/Sahatak').split(',')
 
 # Configuration dictionary
 config = {

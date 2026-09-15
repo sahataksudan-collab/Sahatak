@@ -10,7 +10,7 @@ def _logo_url() -> str:
     """Publicly-reachable logo URL for email headers (configurable via LOGO_URL)."""
     return current_app.config.get(
         'LOGO_URL',
-        os.getenv('LOGO_URL', 'https://hello-50.github.io/Sahatak/frontend/assets/images/icons/apple-touch-icon.png'),
+        os.getenv('LOGO_URL', 'https://sahataksudan-collab.github.io/Sahatak/frontend/assets/images/icons/apple-touch-icon.png'),
     )
 
 class EmailService:
@@ -340,7 +340,7 @@ class EmailService:
             template_name = f'email/{language}/email_confirmation.html'
             
             # Create verification URL
-            verification_url = f"{current_app.config.get('FRONTEND_URL', 'https://hello-50.github.io/Sahatak')}/frontend/pages/verify-email.html?token={user_data['verification_token']}"
+            verification_url = f"{current_app.config.get('FRONTEND_URL', 'https://sahataksudan-collab.github.io/Sahatak')}/frontend/pages/verify-email.html?token={user_data['verification_token']}"
             
             template_data = {
                 **user_data,
@@ -413,7 +413,7 @@ class EmailService:
             template_name = f'email/{language}/password_reset.html'
 
             # Create reset URL
-            reset_url = f"{current_app.config.get('FRONTEND_URL', 'https://hello-50.github.io/Sahatak')}/frontend/pages/reset-password.html?token={user_data['reset_token']}"
+            reset_url = f"{current_app.config.get('FRONTEND_URL', 'https://sahataksudan-collab.github.io/Sahatak')}/frontend/pages/reset-password.html?token={user_data['reset_token']}"
 
             template_data = {
                 **user_data,
