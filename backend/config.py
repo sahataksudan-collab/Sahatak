@@ -1,5 +1,31 @@
 import os
 from datetime import timedelta
+from urllib.parse import quote
+
+
+def build_database_uri():
+    """Build SQLALCHEMY_DATABASE_URI.
+
+    Preferred: component env vars (DB_USER, DB_PASSWORD, DB_HOST, DB_NAME).
+    The password is URL-encoded with quote(safe='') so special characters
+    (@ : / # ? % $) cannot corrupt the connection string -- this is the
+    root cause of MySQL error 1045 (Access denied) when the password is
+    embedded raw in DATABASE_URL.
+
+    Fallback: DATABASE_URL used as-is (must already be URL-encoded).
+    Last resort: local SQLite.
+    """
+    db_user = os.getenv('DB_USER')
+    db_password = os.getenv('DB_PASSWORD')
+    db_host = os.getenv('DB_HOST')
+    db_name = os.getenv('DB_NAME')
+    if db_user and db_password is not None and db_host and db_name:
+        return (
+            f"mysql+pymysql://{quote(db_user, safe='')}:{quote(db_password, safe='')}"
+            f"@{db_host}/{db_name}?charset=utf8mb4"
+        )
+    return os.getenv('DATABASE_URL', 'sqlite:///sahatak_dev.db')
+
 
 class Config:
     """Base configuration class"""
@@ -95,7 +121,7 @@ class DevelopmentConfig(Config):
     """Development configuration"""
     DEBUG = False
     # For development, use SQLite as fallback (no sensitive credentials)
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///sahatak_dev.db')
+    SQLALCHEMY_DATABASE_URI = build_database_uri()
     
 class TestingConfig(Config):
     """Testing configuration"""
@@ -108,8 +134,9 @@ class ProductionConfig(Config):
     DEBUG = False
     
     # MySQL Database configuration for PythonAnywhere
-    # Note: DATABASE_URL must be set in .env file for production
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    # DB_USER/DB_PASSWORD/DB_HOST/DB_NAME are preferred (password is
+    # URL-encoded safely). DATABASE_URL is used as-is if components absent.
+    SQLALCHEMY_DATABASE_URI = build_database_uri()
     
     # MySQL specific settings
     SQLALCHEMY_ENGINE_OPTIONS = {

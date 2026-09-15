@@ -34,7 +34,12 @@ else:
 
 # Override with environment variables if they exist
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', app.config['SECRET_KEY'])
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', app.config['SQLALCHEMY_DATABASE_URI'])
+# DB URI: use the same builder as config.py so the password is URL-encoded
+# (component vars DB_USER/DB_PASSWORD/DB_HOST/DB_NAME preferred; falls back
+# to DATABASE_URL). Do not override with the raw DATABASE_URL, which breaks
+# when the password contains @ : / # ? % characters (MySQL error 1045).
+from config import build_database_uri
+app.config['SQLALCHEMY_DATABASE_URI'] = build_database_uri()
 app.config['FRONTEND_URL'] = os.getenv('FRONTEND_URL', 'https://hello-50.github.io/Sahatak')
 
 # Explicit session cookie configuration for cross-origin support
