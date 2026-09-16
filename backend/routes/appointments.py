@@ -1113,10 +1113,20 @@ def join_video_session(appointment_id):
         if is_doctor and appointment.patient and appointment.patient.user:
             try:
                 from services.notification_service import notify_patient_doctor_joined
-                notify_patient_doctor_joined(
+                app_logger.info(
+                    f"Doctor-joined notification trigger fired for appointment {appointment_id} "
+                    f"(doctor {current_user.id}, patient {appointment.patient.user.id})"
+                )
+                notification_result = notify_patient_doctor_joined(
                     appointment=appointment,
                     doctor_user=current_user,
                     patient_user=appointment.patient.user,
+                )
+                app_logger.info(
+                    f"Doctor-joined notification result for appointment {appointment_id}: "
+                    f"email_sent={notification_result.get('email_sent', False)}, "
+                    f"notification_created={notification_result.get('notification_created', False)}, "
+                    f"duplicate={notification_result.get('duplicate', False)}"
                 )
             except Exception as notify_error:
                 app_logger.error(

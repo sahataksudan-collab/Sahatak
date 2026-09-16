@@ -94,16 +94,30 @@ with app.app_context():
     assert rows[0].status == 'pending'  # unread
     NOTIF_ID = rows[0].id
 
-# 2) Second doctor join (reconnect) -> still 1 notification, still 1 email
+# Simulate a transient SMTP failure after the marker row was created. A later
+# doctor reconnect must retry the email while reusing the same in-app row.
+with app.app_context():
+    row = NotificationQueue.query.get(NOTIF_ID)
+    row.template_data = {**row.template_data, 'email_sent': False}
+    db.session.commit()
+email_calls.clear()
+
+# 2) Second doctor join (reconnect) -> same notification, one retried email
 r = client.post(f"/api/appointments/{APPT_ID}/video/join")
 print('DOCTOR JOIN #2 (duplicate):', r.status_code)
 assert r.status_code == 200
-assert len(email_calls) == 1, f'email re-fired on duplicate join! ({len(email_calls)})'
+assert len(email_calls) == 1, f'failed email was not retried ({len(email_calls)})'
 with app.app_context():
     rows = NotificationQueue.query.filter_by(notification_type='in_app', template_name='doctor_joined_video').all()
     assert len(rows) == 1, 'duplicate notification created!'
 
-# 3) Patient join -> must NOT fire anything
+# 3) A successful retry is idempotent on subsequent reconnects.
+r = client.post(f"/api/appointments/{APPT_ID}/video/join")
+print('DOCTOR JOIN #3 (successful retry duplicate):', r.status_code)
+assert r.status_code == 200
+assert len(email_calls) == 1, f'email re-fired after successful retry! ({len(email_calls)})'
+
+# 4) Patient join -> must NOT fire anything
 r = client.post('/api/auth/login', json={'login_identifier': 'pat@test.local', 'password': 'TestPass123!'})
 print('PATIENT LOGIN:', r.status_code)
 assert r.status_code == 200
@@ -111,7 +125,7 @@ r = client.post(f"/api/appointments/{APPT_ID}/video/join")
 print('PATIENT JOIN:', r.status_code)
 assert len(email_calls) == 1, 'patient join fired the notification!'
 
-# 4) GET /api/notifications as patient -> bare array with correct item shape
+# 5) GET /api/notifications as patient -> bare array with correct item shape
 r = client.get('/api/notifications')
 print('GET /api/notifications:', r.status_code, r.get_json())
 assert r.status_code == 200
@@ -124,7 +138,7 @@ assert item['read'] is False
 assert item['actionScreen'] == 'video_consultation'
 assert item['titleAr'] and item['messageAr'], 'bilingual fields missing'
 
-# 5) Mark read -> status pending -> sent, GET reflects read=True
+# 6) Mark read -> status pending -> sent, GET reflects read=True
 r = client.put(f'/api/notifications/{NOTIF_ID}/read')
 print('PUT read:', r.status_code)
 assert r.status_code == 200
@@ -134,7 +148,7 @@ with app.app_context():
 r = client.get('/api/notifications')
 assert r.get_json()[0]['read'] is True
 
-# 6) Mark-all read endpoint responds 200
+# 7) Mark-all read endpoint responds 200
 r = client.put('/api/notifications/read-all')
 print('PUT read-all:', r.status_code)
 assert r.status_code == 200

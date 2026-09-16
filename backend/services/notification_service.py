@@ -176,10 +176,11 @@ def send_doctor_notification(doctor_data: Dict[str, Any], patient_data: Dict[str
 # "Doctor joined the video call" notification (email + in-app)
 # ============================================================================
 
-# Template-name key used both as the email template selector and as the
-# IDEMPOTENCY MARKER: exactly one 'in_app' NotificationQueue row per
-# (patient, appointment) pair with this template_name gates the whole
-# notification (email + in-app), so reconnects/refreshes never re-fire it.
+# Template-name key used as the in-app idempotency marker: exactly one
+# 'in_app' NotificationQueue row per (patient, appointment) pair. The row is
+# also used to remember whether the separate SMTP attempt succeeded, allowing
+# a later doctor reconnect to retry an earlier failed email without creating a
+# duplicate in-app notification.
 DOCTOR_JOINED_TEMPLATE = 'doctor_joined_video'
 
 
@@ -275,7 +276,7 @@ def notify_patient_doctor_joined(appointment, doctor_user, patient_user) -> Dict
 
         patient_user_id = patient_user.id
         existing = _find_doctor_joined_notification(patient_user_id, appointment.id)
-        if existing:
+        if existing and (existing.template_data or {}).get('email_sent') is True:
             app_logger.info(
                 f"Doctor-joined notification already sent for appointment "
                 f"{appointment.id} (notification {existing.id}) — skipping duplicate"
@@ -283,32 +284,41 @@ def notify_patient_doctor_joined(appointment, doctor_user, patient_user) -> Dict
             result['duplicate'] = True
             return result
 
+        if existing:
+            app_logger.warning(
+                f"Retrying doctor-joined email for appointment {appointment.id}: "
+                f"existing notification {existing.id} has no successful email marker"
+            )
+
         language = getattr(patient_user, 'language_preference', 'ar') or 'ar'
         content = _doctor_joined_email_payload(appointment, doctor_user, patient_user, language)
 
-        # 1) Create the marker row FIRST (commit) so concurrent/rapid duplicate
-        #    join signals have the smallest possible race window.
-        notification = NotificationQueue.create_notification(
-            recipient_type='user',
-            recipient_id=patient_user_id,
-            notification_type='in_app',
-            priority='high',
-            title=content['title_en'],
-            message=content['message_en'],
-            template_name=DOCTOR_JOINED_TEMPLATE,
-            template_data={
-                'appointment_id': appointment.id,
-                'kind': DOCTOR_JOINED_TEMPLATE,
-                'notif_type': 'appointment',
-                'action_screen': 'video_consultation',
-                'title_en': content['title_en'],
-                'title_ar': content['title_ar'],
-                'message_en': content['message_en'],
-                'message_ar': content['message_ar'],
-                'join_url': content['join_url'],
-            }
-        )
-        result['notification_created'] = True
+        if existing:
+            notification = existing
+        else:
+            # Create the marker row FIRST (commit) so concurrent/rapid
+            # duplicate join signals have the smallest possible race window.
+            notification = NotificationQueue.create_notification(
+                recipient_type='user',
+                recipient_id=patient_user_id,
+                notification_type='in_app',
+                priority='high',
+                title=content['title_en'],
+                message=content['message_en'],
+                template_name=DOCTOR_JOINED_TEMPLATE,
+                template_data={
+                    'appointment_id': appointment.id,
+                    'kind': DOCTOR_JOINED_TEMPLATE,
+                    'notif_type': 'appointment',
+                    'action_screen': 'video_consultation',
+                    'title_en': content['title_en'],
+                    'title_ar': content['title_ar'],
+                    'message_en': content['message_en'],
+                    'message_ar': content['message_ar'],
+                    'join_url': content['join_url'],
+                }
+            )
+            result['notification_created'] = True
 
         # 2) Then attempt the email (in-app notification must never depend on SMTP).
         email_sent = False
