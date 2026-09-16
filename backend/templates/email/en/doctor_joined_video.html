@@ -1,0 +1,48 @@
+{% extends "email/base.html" %}
+{% block title %}Doctor Joined the Video Consultation{% endblock %}
+{% block heading %}{{ doctor_name }} has joined the video consultation{% endblock %}
+{% block subtitle %}Your doctor is already in the consultation room and is waiting for you.{% endblock %}
+{% block content %}
+<!-- Consultation details card (Gmail/Outlook/Apple Mail safe: tables + inline CSS only) -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f0f9ff; border:1px solid #bae6fd; border-radius:10px; margin:0 0 16px 0;">
+    <tr>
+        <td style="padding:16px 18px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:13px; line-height:1.7; color:#111827;">
+                <tr>
+                    <td style="padding:4px 0; color:#64748b; width:34%;">Doctor</td>
+                    <td style="padding:4px 0; font-weight:bold;">{{ doctor_name }}{% if doctor_specialty %} <span style="font-weight:normal; color:#64748b;">— {{ doctor_specialty }}</span>{% endif %}</td>
+                </tr>
+                <tr>
+                    <td style="padding:4px 0; color:#64748b; border-top:1px solid #e0f2fe;">Patient</td>
+                    <td style="padding:4px 0; font-weight:bold; border-top:1px solid #e0f2fe;">{{ patient_name }}</td>
+                </tr>
+                <tr>
+                    <td style="padding:4px 0; color:#64748b; border-top:1px solid #e0f2fe;">Date</td>
+                    <td style="padding:4px 0; font-weight:bold; border-top:1px solid #e0f2fe;">{{ appointment_date_readable }} <span style="font-weight:normal; color:#94a3b8;">({{ appointment_date }})</span></td>
+                </tr>
+                <tr>
+                    <td style="padding:4px 0; color:#64748b; border-top:1px solid #e0f2fe;">Time</td>
+                    <td style="padding:4px 0; font-weight:bold; border-top:1px solid #e0f2fe;">{{ appointment_time_readable }} <span style="font-weight:normal; color:#94a3b8;">(UTC)</span></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<p style="margin:0 0 16px 0; font-size:13px; line-height:1.6; color:#374151;">
+    Your doctor has just joined the video consultation. The room is open now —
+    please join the call so your consultation can begin.
+</p>
+
+<p style="margin:0 0 16px 0;">
+    <a href="{{ join_url }}" style="display:inline-block; padding:12px 28px; background-color:#0284c7; color:#ffffff; border-radius:10px; font-weight:bold; font-size:14px; text-decoration:none;">
+        Join the video call now
+    </a>
+</p>
+
+<p style="margin:0; font-size:12px; color:#6b7280; border-left:3px solid #0ea5e9; padding-left:10px;">
+    Tip: If the button does not work, copy this link into your browser:<br>
+    <a href="{{ join_url }}" style="color:#0284c7; word-break:break-all;">{{ join_url }}</a>
+</p>
+{% endblock %}
+{% block footer_note %}This email is for information purposes only and does not replace urgent medical care.{% endblock %}
