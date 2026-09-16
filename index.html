@@ -23,14 +23,323 @@
     <link rel="stylesheet" href="frontend/assets/css/main.css">
     <!-- Authentication CSS -->
     <link rel="stylesheet" href="frontend/assets/css/components/auth.css">
+    <!-- Clinical Glass typography: Manrope (headings) + Inter (body), local fallbacks -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Clinical Glass visual layer (visual only, loaded last to override) -->
+    <link rel="stylesheet" href="frontend/assets/css/components/clinical-glass.css">
+    <style>
+        /* Page-local Clinical Glass wiring (mirrors maintenance.html precedent):
+           muted text lifted to the shared cg- soft ink so it stays ≥6.2:1 on
+           tinted glass. No new tokens; visual only. */
+        .cg-page .text-muted {
+            color: var(--cg-text-soft);
+        }
+        /* The old solid-blue theme painted the welcome header white
+           (main.css .welcome-title / .welcome-title .text-primary); lift it to
+           the shared cg- inks so it reads on the light glass canvas. */
+        .cg-page .welcome-title {
+            color: var(--cg-text-strong);
+        }
+        .cg-page .welcome-title .text-primary {
+            color: var(--cg-blue) !important;
+        }
+        .cg-page .welcome-description {
+            color: var(--cg-text-soft);
+        }
+
+        /* ======================================================================
+           Glassmorphism refinement — page-local, additive, visual only.
+           Reuses ONLY the shared Clinical Glass tokens (--cg-*) scoped on
+           .cg-page by clinical-glass.css. No markup/ids/classes changed;
+           everything below targets existing Bootstrap classes, scoped under
+           .cg-page so no other page is affected. Loaded after main.css, and
+           uses !important only where main.css itself uses !important.
+           ====================================================================== */
+
+        /* --- Glass form controls (login + all registration fields) --------- */
+        .cg-page .form-control,
+        .cg-page .form-select {
+            background-color: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            border-radius: var(--cg-radius-sm);
+            color: var(--cg-text);
+            font-family: "Inter", "Noto Sans Arabic", system-ui, sans-serif;
+            padding: 0.7rem 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease,
+                        box-shadow 0.2s ease;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+        }
+
+        .cg-page .form-control:hover,
+        .cg-page .form-select:hover {
+            border-color: rgba(37, 99, 235, 0.45);
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+
+        .cg-page .form-control:focus,
+        .cg-page .form-select:focus {
+            border-color: var(--cg-blue);
+            background-color: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 0 0 4px var(--cg-focus);
+            outline: none;
+        }
+
+        .cg-page .form-label {
+            color: var(--cg-text);
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .cg-page .form-text {
+            color: var(--cg-text-soft);
+        }
+
+        .cg-page .invalid-feedback {
+            color: #b91c1c;
+            font-weight: 500;
+        }
+
+        /* --- Buttons: soft gradient glass treatment ------------------------- */
+        /* Primary = filled blue→teal gradient, pill radius, gentle lift.
+           !important matches main.css's own !important button rules. */
+        .cg-page .btn.btn-primary,
+        .cg-page .btn.btn-outline-primary,
+        .cg-page button[type="submit"].btn-primary {
+            border-radius: 999px;
+            font-family: "Manrope", "Inter", "Noto Sans Arabic", sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            border: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease,
+                        background 0.2s ease, opacity 0.2s ease;
+        }
+
+        .cg-page .btn.btn-primary,
+        .cg-page button[type="submit"].btn-primary {
+            background: linear-gradient(135deg, #1d4ed8 0%, #0e7490 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 2px 6px rgba(29, 78, 216, 0.22),
+                        0 10px 24px rgba(29, 78, 216, 0.18);
+        }
+
+        .cg-page .btn.btn-primary:hover:not(:disabled),
+        .cg-page button[type="submit"].btn-primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, #1e56e0 0%, #0f7d9a 100%) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(29, 78, 216, 0.28),
+                        0 16px 34px rgba(15, 23, 42, 0.14);
+        }
+
+        .cg-page .btn.btn-outline-primary {
+            background: rgba(255, 255, 255, 0.60);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(29, 78, 216, 0.40);
+            color: var(--cg-blue) !important;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        }
+
+        .cg-page .btn.btn-outline-primary:hover:not(:disabled) {
+            background: rgba(219, 234, 254, 0.75);
+            border-color: rgba(29, 78, 216, 0.65);
+            color: #1e3fae !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.16),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .cg-page .btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .cg-page .btn:focus-visible {
+            outline: 3px solid var(--cg-focus);
+            outline-offset: 2px;
+        }
+
+        .cg-page .btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        /* Quiet text buttons (language switch, back navigation) */
+        .cg-page .btn-link {
+            color: var(--cg-text-soft);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .cg-page .btn-link:hover,
+        .cg-page .btn-link:focus-visible {
+            color: var(--cg-blue);
+            background: rgba(219, 234, 254, 0.5);
+        }
+
+        /* Small outline (language switcher) keeps its glass chip look */
+        .cg-page .btn-sm.btn-outline-secondary {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            color: var(--cg-text-soft);
+            border-radius: 999px;
+        }
+
+        .cg-page .btn-sm.btn-outline-secondary:hover {
+            background: rgba(226, 232, 240, 0.8);
+            border-color: rgba(29, 78, 216, 0.4);
+            color: var(--cg-blue);
+        }
+
+        /* Hairline divider inside glass cards (language switcher block) */
+        .cg-page .border-top {
+            border-color: rgba(148, 163, 184, 0.35) !important;
+        }
+
+        /* --- Alerts on glass ------------------------------------------------ */
+        .cg-page .alert-danger {
+            background: rgba(254, 226, 226, 0.92);
+            border: 1px solid rgba(185, 28, 28, 0.25);
+            color: #991b1b;
+            border-radius: var(--cg-radius-sm);
+        }
+
+        .cg-page .alert-success {
+            background: rgba(209, 250, 229, 0.92);
+            border: 1px solid rgba(4, 120, 87, 0.25);
+            color: #065f46;
+            border-radius: var(--cg-radius-sm);
+        }
+
+        /* --- Footer: glass slab matching the cards --------------------------- */
+        .cg-page .footer {
+            background: var(--cg-glass);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            backdrop-filter: blur(14px) saturate(160%);
+            border-top: 1px solid var(--cg-glass-border);
+            color: var(--cg-text);
+        }
+
+        .cg-page .footer h5,
+        .cg-page .footer h6 {
+            color: var(--cg-text-strong);
+        }
+
+        .cg-page .footer a {
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .cg-page .footer a:hover {
+            color: var(--cg-blue);
+            transform: translateY(-1px);
+        }
+
+        .cg-page .emergency-section {
+            background: rgba(254, 226, 226, 0.75);
+            border: 1px solid rgba(185, 28, 28, 0.20);
+            border-radius: var(--cg-radius-sm);
+        }
+        /* ======================================================================
+           ROOT-CAUSE FIX (Step 3):
+           main.css paints #language-selection (and the auth/section cards) with
+           ID-specificity rules:  #language-selection { background: opaque blue
+           gradient; position: fixed; z-index: 1000; color: white; }  and
+           "#...-form .card { background: rgba(255,255,255,0.95);
+           backdrop-filter: blur(10px); border-radius: 15px; }".
+           Specificity (1,1,0) beats .cg-glass (0,1,0) from clinical-glass.css
+           EVEN THOUGH clinical-glass.css loads last — so the near-opaque white
+           cards + opaque blue canvas hid the Clinical Glass mesh entirely.
+           Fix: re-declare at equal-or-higher specificity (ID under .cg-page)
+           using ONLY the shared --cg-* tokens. Visual only.
+           ====================================================================== */
+
+        /* Canvas: neutralise the opaque fixed blue gradient sections so the
+           .cg-page mesh (::before) shows through, exactly like the dashboards */
+        .cg-page #language-selection,
+        .cg-page #auth-selection,
+        .cg-page #user-type-selection,
+        .cg-page #login-form,
+        .cg-page #register-form,
+        .cg-page #patient-register-form,
+        .cg-page #doctor-register-form {
+            background: transparent;
+            color: var(--cg-text);
+            position: static;
+            z-index: auto;
+        }
+
+        /* Glass cards: same values as .cg-glass / .cg-glass-strong, re-declared
+           at ID specificity so main.css cannot win the cascade */
+        .cg-page #language-selection .card,
+        .cg-page #auth-selection .card,
+        .cg-page #user-type-selection .card,
+        .cg-page #login-form .card,
+        .cg-page #register-form .card,
+        .cg-page #patient-register-form .card,
+        .cg-page #doctor-register-form .card {
+            background: var(--cg-glass-strong);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            backdrop-filter: blur(14px) saturate(160%);
+            border: 1px solid var(--cg-glass-border);
+            border-radius: var(--cg-radius);
+            box-shadow: var(--cg-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            color: var(--cg-text);
+        }
+
+        /* Preserve the dashboard-style hover lift at the same specificity */
+        .cg-page #language-selection .card:hover,
+        .cg-page #auth-selection .card:hover,
+        .cg-page #user-type-selection .card:hover,
+        .cg-page #login-form .card:hover,
+        .cg-page #register-form .card:hover,
+        .cg-page #patient-register-form .card:hover,
+        .cg-page #doctor-register-form .card:hover {
+            border-color: rgba(13, 148, 136, 0.28);
+            box-shadow: var(--cg-shadow-hover), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        /* --- Reduced motion: respect the system contract --------------------- */
+
+        /* --- Reduced motion: respect the system contract --------------------- */
+        @media (prefers-reduced-motion: reduce) {
+            .cg-page .form-control,
+            .cg-page .form-select,
+            .cg-page .btn,
+            .cg-page .btn-primary,
+            .cg-page .btn-outline-primary,
+            .cg-page .btn-link,
+            .cg-page .footer a,
+            .cg-page .cg-glass {
+                transition: none !important;
+            }
+            .cg-page .btn-primary:hover:not(:disabled),
+            .cg-page .btn-outline-primary:hover:not(:disabled),
+            .cg-page .btn:active:not(:disabled),
+            .cg-page .footer a:hover {
+                transform: none;
+            }
+        }
+
+        /* --- Mobile-first fit (Bootstrap breakpoints) ------------------------ */
+        @media (max-width: 767.98px) {
+            .cg-page .card-body.p-5 {
+                padding: 1.75rem !important;
+            }
+            .cg-page .welcome-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="cg-page">
     <!-- Language Selection Section - This will be the first feature to implement -->
     <div id="language-selection" class="min-vh-100 d-flex align-items-center justify-content-center" role="main">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="card shadow-lg border-0">
+                    <div class="card cg-glass cg-glass-strong shadow-lg border-0">
                         <div class="card-body text-center p-5">
                             <h1 class="mb-4" role="banner">صحتك | Sahatak</h1>
                             <p class="lead mb-4" aria-describedby="language-instructions">Choose your preferred language / اختر اللغة المفضلة</p>
@@ -70,13 +379,13 @@
                             <i class="bi bi-heart-pulse me-2 text-primary"></i>
                             <span id="welcome-text">مرحباً بك في منصة صحتك للطب عن بُعد</span>
                         </h1>
-                        <p class="lead" id="welcome-description" style="color: var(--light-color);">
+                        <p class="lead welcome-description" id="welcome-description">
                             منصة آمنة وسهلة الاستخدام للتواصل مع الأطباء
                         </p>
                     </div>
                     
                     <!-- Auth Selection Card -->
-                    <div class="card shadow-lg border-0">
+                    <div class="card cg-glass cg-glass-strong shadow-lg border-0">
                         <div class="card-body text-center p-5">
                             <h3 class="mb-4" id="auth-prompt">ابدأ رحلتك الصحية</h3>
                             
@@ -111,7 +420,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="card shadow-lg border-0">
+                    <div class="card cg-glass cg-glass-strong shadow-lg border-0">
                         <div class="card-body text-center p-5">
                             <h2 class="mb-4" id="user-type-title">اختر نوع حسابك</h2>
                             <p class="lead mb-4" id="user-type-subtitle">اختر النوع المناسب لحسابك لنقدم لك التجربة الأمثل</p>
@@ -151,7 +460,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-5">
-                    <div class="card shadow-lg border-0">
+                    <div class="card cg-glass cg-glass-strong shadow-lg border-0">
                         <div class="card-body p-5">
                             <div class="text-center mb-4">
                                 <h2 id="login-title">تسجيل الدخول</h2>
@@ -202,7 +511,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="card shadow-lg border-0">
+                    <div class="card cg-glass cg-glass-strong shadow-lg border-0">
                         <div class="card-body p-5">
                             <div class="text-center mb-4">
                                 <h2 id="register-title">إنشاء حساب جديد</h2>
@@ -271,7 +580,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="card shadow-lg border-0">
+                    <div class="card cg-glass cg-glass-strong shadow-lg border-0">
                         <div class="card-body p-5">
                             <div class="text-center mb-4">
                                 <h2 id="patient-register-title">إنشاء حساب مريض</h2>
@@ -350,7 +659,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-7">
-                    <div class="card shadow-lg border-0">
+                    <div class="card cg-glass cg-glass-strong shadow-lg border-0">
                         <div class="card-body p-5">
                             <div class="text-center mb-4">
                                 <h2 id="doctor-register-title">إنشاء حساب طبيب</h2>
