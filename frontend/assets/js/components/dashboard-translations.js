@@ -1,4 +1,4 @@
-// Dashboard Translation Management
+﻿// Dashboard Translation Management
 const DashboardTranslations = {
     
     // Helper function to update element text
@@ -26,7 +26,7 @@ const DashboardTranslations = {
         this.updateElementText('logout-text', patient.logout);
         
         // Show the opposite language (the one you can switch TO)
-        const oppositeLanguage = lang === 'ar' ? 'English' : 'العربية';
+        const oppositeLanguage = lang === 'ar' ? 'English' : 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©';
         this.updateElementText('current-lang', oppositeLanguage);
         
         // Navigation
@@ -102,7 +102,7 @@ const DashboardTranslations = {
             this.updateProfileAndSettings(patient.profile, patient.settings);
             // Profile and settings updated
         } catch (profileError) {
-            console.error('❌ Patient profile and settings update failed:', profileError);
+            console.error('âŒ Patient profile and settings update failed:', profileError);
         }
         
         // Update footer using standalone function to ensure it works
@@ -111,7 +111,7 @@ const DashboardTranslations = {
             DashboardTranslations.updateFooter(t);
             // Footer update completed
         } catch (footerError) {
-            console.error('❌ Patient footer update failed:', footerError);
+            console.error('âŒ Patient footer update failed:', footerError);
         }
         
         // Refresh dynamic content that uses inline translations
@@ -129,19 +129,15 @@ const DashboardTranslations = {
     
     // Update doctor dashboard translations
     updateDoctorDashboard(lang) {
-        console.log('🩺 updateDoctorDashboard called with language:', lang);
         const t = LanguageManager.translations[lang];
         if (!t || !t.dashboard || !t.dashboard.doctor) {
-            console.error('❌ Doctor dashboard translations not found for:', lang);
+            console.error('âŒ Doctor dashboard translations not found for:', lang);
             return;
         }
-        console.log('✅ Doctor dashboard translations found, footer available:', !!t.footer);
         
         const doctor = t.dashboard.doctor;
-        console.log('🔍 Doctor object available:', !!doctor);
         
         try {
-            console.log('🔸 Starting header section updates');
             // Header section
         this.updateElementText('dashboard-title', doctor.title);
         this.updateElementText('dashboard-subtitle', doctor.subtitle);
@@ -150,7 +146,7 @@ const DashboardTranslations = {
         this.updateElementText('logout-text', doctor.logout);
         
         // Show the opposite language (the one you can switch TO)
-        const oppositeLanguage = lang === 'ar' ? 'English' : 'العربية';
+        const oppositeLanguage = lang === 'ar' ? 'English' : 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©';
         this.updateElementText('current-lang', oppositeLanguage);
         
         // Navigation
@@ -215,38 +211,27 @@ const DashboardTranslations = {
         this.updateElementText('view-all-messages', doctor.waiting.view_all);
         
         // Update verification status dynamically
-        console.log('🔸 About to update verification status');
         this.updateVerificationStatus(doctor.verification_status);
-        console.log('🔸 Verification status updated');
         
         // Profile and Settings (always update during language switch)
-        console.log('🔸 About to update profile and settings');
-        console.log('🔸 doctor.profile exists:', !!doctor.profile);
-        console.log('🔸 doctor.settings exists:', !!doctor.settings);
         try {
             this.updateProfileAndSettings(doctor.profile, doctor.settings);
-            console.log('🔸 Profile and settings updated');
         } catch (profileError) {
-            console.error('❌ Profile and settings update failed:', profileError);
+            console.error('âŒ Profile and settings update failed:', profileError);
         }
         
-        console.log('🚀 Reached footer update section');
-        console.log('🔍 DashboardTranslations.updateFooter exists:', typeof DashboardTranslations.updateFooter);
         
         // Update footer using standalone function to ensure it works
-        console.log('🔧 About to call DashboardTranslations.updateFooter with:', t.footer ? 'footer data available' : 'NO FOOTER DATA');
         try {
             DashboardTranslations.updateFooter(t);
-            console.log('✅ Doctor dashboard footer update completed');
         } catch (error) {
-            console.error('❌ Doctor dashboard footer update failed:', error);
+            console.error('âŒ Doctor dashboard footer update failed:', error);
         }
         
         } catch (error) {
-            console.error('❌ Doctor dashboard update failed at:', error.message, error);
+            console.error('âŒ Doctor dashboard update failed at:', error.message, error);
         }
         
-        console.log('🏁 Doctor dashboard update completed');
     },
     
     // Update verification status with translation
@@ -352,9 +337,7 @@ const DashboardTranslations = {
     
     // Update footer translations (shared between dashboards)
     updateFooter(t) {
-        console.log('🔍 Main updateFooter called with:', t.footer);
         if (!t.footer) {
-            console.log('❌ No footer data found');
             return;
         }
         
@@ -532,7 +515,7 @@ const DashboardTranslations = {
         this.updateElementText('gauge-response', admin.gauges?.response || 'Response Time');
 
         // Show the opposite language (the one you can switch TO)
-        const oppositeLanguage = lang === 'ar' ? 'English' : 'العربية';
+        const oppositeLanguage = lang === 'ar' ? 'English' : 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©';
         this.updateElementText('current-admin-language', oppositeLanguage);
 
         // Action buttons (using title attribute for tooltips)
@@ -547,7 +530,6 @@ const DashboardTranslations = {
         // Update footer
         this.updateFooter(t);
 
-        console.log(`Admin dashboard translations updated to: ${lang}`);
     },
     
     // Language switching for dashboards
@@ -570,7 +552,6 @@ const DashboardTranslations = {
             this.updateUserName();
         }
         
-        console.log(`Dashboard language switched to: ${lang}`);
     },
     
     // Update user name in dashboard header
@@ -582,9 +563,9 @@ const DashboardTranslations = {
             let displayName = userName;
             
             // Add Dr. prefix for doctors if not already present
-            if (userType === 'doctor' && !userName.toLowerCase().startsWith('dr.') && !userName.toLowerCase().startsWith('د.')) {
+            if (userType === 'doctor' && !userName.toLowerCase().startsWith('dr.') && !userName.toLowerCase().startsWith('Ø¯.')) {
                 const currentLang = LanguageManager.getLanguage() || 'ar';
-                const prefix = currentLang === 'ar' ? 'د. ' : 'Dr. ';
+                const prefix = currentLang === 'ar' ? 'Ø¯. ' : 'Dr. ';
                 displayName = prefix + userName;
             }
             
@@ -597,7 +578,6 @@ const DashboardTranslations = {
 
     // Initialize dashboard translations on page load
     async initializeDashboard(dashboardType) {
-        console.log(`Initializing ${dashboardType} dashboard translations...`);
         
         // Load translations first
         await LanguageManager.loadTranslations();
@@ -648,7 +628,6 @@ const DashboardTranslations = {
 
     // Initialize records pages on page load
     async initializeRecords() {
-        console.log('Initializing Records page translations...');
         
         // Load translations first
         await LanguageManager.loadTranslations();
@@ -665,7 +644,6 @@ const DashboardTranslations = {
         // Update user name from localStorage
         this.updateUserName();
         
-        console.log(`Records page initialized with language: ${savedLanguage}`);
     },
 
     // Update country dropdown options
@@ -734,10 +712,9 @@ DashboardTranslations.updateEHRDashboard = function(lang) {
     this.updateElementText('footer-medical-disclaimer', ehr.footer?.medical_disclaimer || t.footer?.disclaimer);
 
     // Language switch
-    const oppositeLanguage = lang === 'ar' ? 'English' : 'العربية';
+    const oppositeLanguage = lang === 'ar' ? 'English' : 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©';
     this.updateElementText('current-lang', oppositeLanguage);
 
-    console.log('EHR dashboard translations updated for:', lang);
 };
 
 function showLanguageSelector() {
@@ -773,7 +750,6 @@ function toggleLanguage() {
 
 // Add EHR language switching function
 DashboardTranslations.switchEHRLanguage = function(newLang) {
-    console.log('Switching EHR language to:', newLang);
     
     // Store new language
     LanguageManager.setLanguage(newLang);
@@ -786,29 +762,23 @@ DashboardTranslations.switchEHRLanguage = function(newLang) {
     document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
     
     // Update title
-    const title = LanguageManager.translations[newLang]?.ehr?.page_title || 'السجل الطبي الإلكتروني | صحتك';
+    const title = LanguageManager.translations[newLang]?.ehr?.page_title || 'Ø§Ù„Ø³Ø¬Ù„ Ø§Ù„Ø·Ø¨ÙŠ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ | ØµØ­ØªÙƒ';
     document.title = title;
 };
 
 // Update Records dashboard translations
 DashboardTranslations.updateRecordsDashboard = function(lang) {
-    console.log('updateRecordsDashboard called with language:', lang);
     const t = LanguageManager.translations[lang];
-    console.log('Translation object for', lang, ':', t);
-    console.log('Records section:', t?.records);
     
     if (!t || !t.records) {
         console.warn('Records translations not available for language:', lang);
-        console.log('Available translation keys:', t ? Object.keys(t) : 'No translations');
         return;
     }
 
     const records = t.records;
 
     // Main titles
-    console.log('Updating records-title with:', records.title);
     this.updateElementText('records-title', records.title);
-    console.log('Updating records-subtitle with:', records.subtitle);
     this.updateElementText('records-subtitle', records.subtitle);
     
     // Common navigation elements (same as patient dashboard)
@@ -974,23 +944,21 @@ DashboardTranslations.updateRecordsDashboard = function(lang) {
     this.updateElementText('status-cancel-btn', t.buttons?.cancel || 'Cancel');
 
     // Common navigation elements
-    this.updateElementText('nav-dashboard', t.dashboard?.patient?.nav?.home || 'لوحة التحكم');
-    this.updateElementText('nav-back', t.auth?.back || 'العودة');
-    this.updateElementText('btn-logout', t.dashboard?.patient?.buttons?.logout || 'تسجيل خروج');
+    this.updateElementText('nav-dashboard', t.dashboard?.patient?.nav?.home || 'Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­ÙƒÙ…');
+    this.updateElementText('nav-back', t.auth?.back || 'Ø§Ù„Ø¹ÙˆØ¯Ø©');
+    this.updateElementText('btn-logout', t.dashboard?.patient?.buttons?.logout || 'ØªØ³Ø¬ÙŠÙ„ Ø®Ø±ÙˆØ¬');
 
     // Language toggle - show the opposite language (the one you can switch TO)
-    const oppositeLanguage = lang === 'ar' ? 'English' : 'العربية';
+    const oppositeLanguage = lang === 'ar' ? 'English' : 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©';
     this.updateElementText('current-lang', oppositeLanguage);
 
     // Update footer
     this.updateFooter(t);
 
-    console.log('Records dashboard translations updated for:', lang);
 };
 
 // Update Availability dashboard translations
 DashboardTranslations.updateAvailabilityDashboard = function(lang) {
-    console.log('updateAvailabilityDashboard called with language:', lang);
     const t = LanguageManager.translations[lang];
     
     if (!t || !t.availability) {
@@ -1063,13 +1031,12 @@ DashboardTranslations.updateAvailabilityDashboard = function(lang) {
     this.updateElementText('loading-text-3', availability.loading);
 
     // Language toggle - show the opposite language (the one you can switch TO)
-    const oppositeLanguage = lang === 'ar' ? 'English' : 'العربية';
+    const oppositeLanguage = lang === 'ar' ? 'English' : 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©';
     this.updateElementText('current-lang', oppositeLanguage);
 
     // Update footer
     this.updateFooter(t);
 
-    console.log('Availability dashboard translations updated for:', lang);
 };
 
 // Update footer translations  
@@ -1077,7 +1044,7 @@ DashboardTranslations.updateFooter = function(t) {
     // updateFooter called with footer data
     if (t.footer) {
         // Footer data found and ready for update
-        this.updateElementText('footer-brand', t.footer.brand || 'Sahatak | صحتك');
+        this.updateElementText('footer-brand', t.footer.brand || 'Sahatak | ØµØ­ØªÙƒ');
         this.updateElementText('footer-links-title', t.footer.links_title || 'Quick Links');
         this.updateElementText('footer-about', t.footer.about || 'About Platform');
         this.updateElementText('footer-services', t.footer.services || 'Services');
@@ -1087,16 +1054,13 @@ DashboardTranslations.updateFooter = function(t) {
         this.updateElementText('footer-emergency-text', t.footer.emergency_text || 'For medical emergencies');
         this.updateElementText('footer-emergency-action', t.footer.emergency_action || 'Go to nearest ER hospital');
         this.updateElementText('footer-emergency-note', t.footer.emergency_note || 'For non-urgent consultations use the platform');
-        this.updateElementText('footer-copyright', t.footer.copyright || '© 2025 Sahatak. All rights reserved.');
+        this.updateElementText('footer-copyright', t.footer.copyright || 'Â© 2025 Sahatak. All rights reserved.');
         this.updateElementText('footer-medical-disclaimer', t.footer.medical_disclaimer || 'This platform does not replace visiting a doctor in emergency cases');
     }
 };
 
 // Add Records language switching function
 DashboardTranslations.switchRecordsLanguage = function(newLang) {
-    console.log('=== SWITCH RECORDS LANGUAGE ===');
-    console.log('Switching Records language to:', newLang);
-    console.log('Current translations object:', LanguageManager.translations);
     
     // Store new language
     LanguageManager.setLanguage(newLang);
@@ -1105,9 +1069,7 @@ DashboardTranslations.switchRecordsLanguage = function(newLang) {
     LanguageManager.applyLanguage(newLang);
     
     // Update Records interface
-    console.log('About to call updateRecordsDashboard with:', newLang);
     this.updateRecordsDashboard(newLang);
-    console.log('Finished calling updateRecordsDashboard');
     
     // Update HTML direction
     document.documentElement.lang = newLang;
@@ -1121,8 +1083,6 @@ DashboardTranslations.switchRecordsLanguage = function(newLang) {
 
 // Add Availability language switching function
 DashboardTranslations.switchAvailabilityLanguage = function(newLang) {
-    console.log('=== SWITCH AVAILABILITY LANGUAGE ===');
-    console.log('Switching Availability language to:', newLang);
     
     // Store new language
     LanguageManager.setLanguage(newLang);
@@ -1131,9 +1091,7 @@ DashboardTranslations.switchAvailabilityLanguage = function(newLang) {
     LanguageManager.applyLanguage(newLang);
     
     // Update Availability interface
-    console.log('About to call updateAvailabilityDashboard with:', newLang);
     this.updateAvailabilityDashboard(newLang);
-    console.log('Finished calling updateAvailabilityDashboard');
     
     // Update HTML direction
     document.documentElement.lang = newLang;
@@ -1161,7 +1119,7 @@ DashboardTranslations.updateMedicalHistoryForm = function(lang) {
     this.updateElementText('brand-name', t.app_name);
     
     // Show opposite language for language toggle
-    const oppositeLanguage = lang === 'ar' ? 'English' : 'العربية';
+    const oppositeLanguage = lang === 'ar' ? 'English' : 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©';
     this.updateElementText('current-lang', oppositeLanguage);
     
     // Navigation elements
@@ -1215,7 +1173,6 @@ DashboardTranslations.updateMedicalHistoryForm = function(lang) {
     this.updateElementText('btn-skip', form.buttons.skip);
     this.updateElementText('btn-save', form.buttons.save);
 
-    console.log('✅ Medical history form translations updated for language:', lang);
 };
 
 // Update doctor profile completion translations
@@ -1233,7 +1190,7 @@ DashboardTranslations.updateDoctorProfile = function(lang) {
     this.updateElementText('page-subtitle', profile.subtitle);
     
     // Show opposite language for language toggle
-    const oppositeLanguage = lang === 'ar' ? 'English' : 'العربية';
+    const oppositeLanguage = lang === 'ar' ? 'English' : 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©';
     this.updateElementText('current-lang', oppositeLanguage);
     
     // Navigation elements
@@ -1300,7 +1257,6 @@ DashboardTranslations.updateDoctorProfile = function(lang) {
     this.updateElementText('btn-next', profile.buttons.next);
     this.updateElementText('btn-submit', profile.buttons.submit);
 
-    console.log('✅ Doctor profile completion translations updated for language:', lang);
 };
 
 // Helper function to update input placeholder (add if not already present)

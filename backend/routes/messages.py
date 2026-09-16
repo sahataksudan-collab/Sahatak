@@ -170,9 +170,8 @@ def start_conversation():
             app_logger.info(f"Patient query result: {patient}")
             if not patient:
                 app_logger.error(f"Patient not found with profile ID: {recipient_id}")
-                # List all patients for debugging
-                all_patients = Patient.query.all()
-                app_logger.info(f"Available patient IDs: {[p.id for p in all_patients]}")
+                # Cheap diagnostic instead of loading the entire patients table
+                app_logger.info(f"Total patients in DB: {Patient.query.count()}")
                 return APIResponse.not_found(message='Patient not found')
             recipient = patient.user
             app_logger.info(f"Patient's user: {recipient}")
