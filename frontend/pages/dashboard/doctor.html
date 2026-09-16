@@ -1456,38 +1456,52 @@
 
         // Automatic video status monitoring for doctors
         let videoStatusMonitorInterval = null;
-        
+
+        // Only poll while a video appointment is actually active or imminent:
+        // - in_progress appointments are always polled
+        // - scheduled/confirmed appointments are polled only when they start
+        //   within the next hour (or started recently, with a grace window)
+        // Otherwise the 2s interval is a cheap DOM check that makes NO API calls.
+        const VIDEO_POLL_WINDOW_MS = 60 * 60 * 1000;     // upcoming within 1 hour
+        const VIDEO_POLL_GRACE_MS = 2 * 60 * 60 * 1000;  // already-started grace window
+
+        function getActiveVideoAppointmentCards() {
+            const now = Date.now();
+            return Array.from(document.querySelectorAll('.appointment-card[data-appointment-id]'))
+                .filter(card => {
+                    const status = card.dataset.appointmentStatus;
+                    if (status === 'in_progress') return true;
+                    if (!['scheduled', 'confirmed'].includes(status)) return false;
+                    const start = new Date(card.dataset.appointmentDate).getTime();
+                    if (isNaN(start)) return false;
+                    return start <= now + VIDEO_POLL_WINDOW_MS && start >= now - VIDEO_POLL_GRACE_MS;
+                });
+        }
+
         function startVideoStatusMonitoring() {
             // Clear any existing interval
             if (videoStatusMonitorInterval) {
                 clearInterval(videoStatusMonitorInterval);
             }
-            
-            // Check every 2 seconds for video appointment status updates (fast updates for real-time UX)
+
+            // Check every 2 seconds — but only for active/imminent video appointments (see gate above)
             videoStatusMonitorInterval = setInterval(async () => {
                 try {
-                    // Find any video appointments that might need status updates
-                    const videoCards = document.querySelectorAll('.appointment-card[data-appointment-id]');
-                    
-                    for (const card of videoCards) {
+                    const candidateCards = getActiveVideoAppointmentCards();
+                    if (candidateCards.length === 0) {
+                        // No active or imminent video appointment — skip this tick entirely
+                        return;
+                    }
+                    for (const card of candidateCards) {
                         const appointmentId = card.dataset.appointmentId;
-                        const appointmentStatus = card.dataset.appointmentStatus;
-                        
-                        // Only check scheduled, confirmed, or in_progress video appointments
-                        // Skip completed appointments to avoid UI update errors
-                        if (appointmentId && ['scheduled', 'confirmed', 'in_progress'].includes(appointmentStatus)) {
-                            if (typeof VideoConsultationDashboard !== 'undefined' && VideoConsultationDashboard.checkVideoSessionStatus) {
-                                await VideoConsultationDashboard.checkVideoSessionStatus(appointmentId, true);
-                            }
-                        } else if (appointmentStatus === 'completed') {
-                            // Skip completed appointments - they should not be monitored
-                            console.log(`⏭️ Skipping completed appointment ${appointmentId} from video monitoring`);
+                        if (typeof VideoConsultationDashboard !== 'undefined' && VideoConsultationDashboard.checkVideoSessionStatus) {
+                            await VideoConsultationDashboard.checkVideoSessionStatus(appointmentId, true);
                         }
                     }
                 } catch (error) {
                     console.error('Error in video status monitoring:', error);
                 }
-            }, 2000); // Check every 2 seconds for immediate status updates
+            }, 2000);
         }
         
         function stopVideoStatusMonitoring() {
@@ -1672,7 +1686,7 @@
                             };
                             
                             return `
-                                <div class="appointment-item appointment-card ${isVideoAppointment ? 'video-appointment' : ''} d-flex justify-content-between align-items-center p-3 mb-2 bg-light rounded" data-appointment-id="${apt.id}" data-appointment-status="${apt.status}">
+                                <div class="appointment-item appointment-card ${isVideoAppointment ? 'video-appointment' : ''} d-flex justify-content-between align-items-center p-3 mb-2 bg-light rounded" data-appointment-id="${apt.id}" data-appointment-status="${apt.status}" data-appointment-date="${apt.appointment_date}">
                                     <div class="flex-grow-1">
                                         <div style="color: black;"><strong>${apt.patient_name || 'Unknown Patient'}</strong></div>
                                         ${apt.patient_age ? `<span class="text-muted ms-2">Age ${apt.patient_age}</span>` : ''}
