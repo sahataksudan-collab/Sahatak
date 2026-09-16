@@ -1531,3 +1531,69 @@ body {
     }
 }
 
+/* ==========================================================================
+   Shared avatar styles (B1/B2) — profile photos + silhouette fallback
+   Used by SahatakAvatar (assets/js/components/avatar.js) across all avatar
+   containers: .user-avatar, .doctor-avatar, .patient-avatar, .chat-avatar,
+   .message-avatar. When no photo exists, the existing inline Bootstrap-icon
+   silhouette remains visible; when a photo exists it fills the circle.
+   ========================================================================== */
+.user-avatar,
+.doctor-avatar,
+.patient-avatar,
+.chat-avatar,
+.message-avatar {
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.avatar-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Click-to-edit affordance — ONLY applied to the user's own avatar via
+   SahatakAvatar.bindUpload(); other people's avatars stay non-interactive. */
+.avatar-editable {
+    cursor: pointer;
+}
+
+.avatar-editable:hover {
+    transform: scale(1.05);
+}
+
+.avatar-edit-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 40%;
+    height: 40%;
+    min-width: 18px;
+    min-height: 18px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--medical-blue, #2563eb);
+    color: #fff;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    font-size: 0.55em;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+}
+
+.avatar-editable:hover .avatar-edit-badge,
+.avatar-editable:focus-visible .avatar-edit-badge {
+    display: inline-flex;
+}
+
+.avatar-editable:focus-visible {
+    outline: 2px solid var(--medical-blue, #2563eb);
+    outline-offset: 2px;
+}
+

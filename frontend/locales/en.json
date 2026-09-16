@@ -1961,5 +1961,14 @@
         "simplified_layout": "Simplified layout",
         "note": "Calm Mode never hides medical information, appointment status, or urgent notifications.",
         "save_failed": "Could not save Calm Mode preferences."
+    },
+    "avatar": {
+        "change_photo": "Change profile photo",
+        "invalid_type": "Please choose an image file (PNG, JPG, WEBP, or GIF).",
+        "too_large": "Image is too large. Maximum size is 5MB.",
+        "uploading": "Uploading photo...",
+        "upload_success": "Profile photo updated successfully.",
+        "upload_failed": "Failed to upload photo. Please try again.",
+        "not_authenticated": "Please log in to change your photo."
     }
 }

@@ -1,12 +1,10 @@
 {
   "app_name": "صحتك",
   "language_selection": "اختر لغتك ",
-  
   "welcome": {
     "title": "مرحب بيك في منصة صحتك للطب عن بُعد",
     "description": "منصة آمنة وسهلة الاستخدام للتواصل مع الأطباء"
   },
-
   "journey": {
     "step_of": "الخطوة {x} من {n}",
     "get_started": "ابدأ الآن",
@@ -28,7 +26,6 @@
       "view_care_summary": "عرض ملخص الرعاية"
     }
   },
-
   "care_summary": {
     "title": "ملخص الرعاية",
     "loading": "جارٍ تحميل ملخص الرعاية",
@@ -71,7 +68,6 @@
     "items_count": "{n} عنصر",
     "summary_none": "لا يوجد"
   },
-
   "auth": {
     "prompt": "ابدأ رحلتك العلاجيه",
     "login": "تسجيل الدخول",
@@ -80,7 +76,6 @@
     "current_language": "العربية",
     "back": "العودة"
   },
-  
   "login": {
     "title": "تسجيل الدخول",
     "subtitle": "أدخل كل بياناتك للوصول إلى حسابك",
@@ -91,7 +86,6 @@
     "forgot_password": "نسيت كلمة المرور؟",
     "submit": "دخول"
   },
-  
   "user_type_selection": {
     "title": "اختر نوع حسابك",
     "subtitle": "اختر النوع المناسب لحسابك عشان نقدم لك التجربة الأمثل",
@@ -101,7 +95,6 @@
     "doctor_desc": "حابب  تقديم الاستشارات الطبية للمرضى",
     "back": "العودة"
   },
-
   "register": {
     "title": "سجل حساب جديد",
     "subtitle": "انضم إلى منصة صحتك اليوم",
@@ -114,18 +107,15 @@
     "doctor": "طبيب",
     "submit": "إنشاء الحساب"
   },
-
   "medical_history_form": {
     "title": "استمارة التاريخ الطبي",
     "subtitle": "مطلوبة لحجز المواعيد",
     "info": "يرجى ملء هذه الاستمارة بدقة لضمان حصولك على أفضل رعاية صحية. جميع المعلومات سرية ومحمية.",
-    
     "sections": {
       "basic_info": "المعلومات الأساسية",
-      "medical_history": "التاريخ الطبي", 
+      "medical_history": "التاريخ الطبي",
       "lifestyle": "نمط الحياة"
     },
-    
     "labels": {
       "height": "الطول (سم)",
       "weight": "الوزن (كجم)",
@@ -140,7 +130,6 @@
       "alcohol": "استهلاك الكحول",
       "exercise": "ممارسة الرياضة"
     },
-    
     "placeholders": {
       "height": "مثال: 170",
       "weight": "مثال: 75",
@@ -151,7 +140,6 @@
       "surgeries": "هل أجريت أي عمليات جراحية في الماضي؟",
       "family_history": "هل عندكم أمراض وراثية في العائلة؟"
     },
-    
     "options": {
       "select_blood": "اخت فصيلة الدم",
       "never_smoke": "لا أدخن",
@@ -162,36 +150,30 @@
       "weekly": "أسبوعياً",
       "daily": "يومياً"
     },
-    
     "buttons": {
       "skip": "تخطي الآن",
       "save": "حفظ ومتابعة الحجز"
     }
   },
-
   "doctor_profile": {
     "title": "أكمل ملفك الشخصي",
     "subtitle": "مطلوب للتحقق من الحساب",
-    
     "alerts": {
       "title": "إكمال الملف الشخصي مطلوب",
       "message": "يرجى إكمال جميع المعلومات المطلوبة لتقديم ملفك للتحقق."
     },
-    
     "steps": {
       "professional": "المعلومات المهنية",
       "contact": "تفاصيل الاتصال",
       "documents": "الوثائق",
       "review": "مراجعة وإرسال"
     },
-    
     "sections": {
       "professional": "المعلومات المهنية",
-      "contact": "معلومات الاتصال", 
+      "contact": "معلومات الاتصال",
       "documents": "رفع الوثائق",
       "review": "مراجعة وإرسال"
     },
-    
     "labels": {
       "education": "تفاصيل التعليم",
       "certifications": "الشهادات",
@@ -207,7 +189,6 @@
       "other_doc": "وثائق أخرى (اختيارية)",
       "confirm": "أؤكد أن جميع المعلومات المقدمة دقيقة وكاملة"
     },
-    
     "placeholders": {
       "education": "اذكر شهاداتك الطبية والجامعات وسنوات التخرج",
       "certifications": "مثال: معتمد من مجلس الطب الباطني",
@@ -218,7 +199,6 @@
       "emergency": "+249 xx xxx xxxx",
       "address": "أدخل عنوان عيادتك أو المستشفى"
     },
-    
     "hints": {
       "certifications": "اعزل الشهادات المتعددة بفواصل",
       "memberships": "اعزل العضويات المتعددة بفواصل",
@@ -226,16 +206,13 @@
       "areas": "مجالات خبرتك",
       "other": "شهادات إضافية أو وثائق ذات صلة"
     },
-    
     "document_info": "يرجى رفع نسخ واضحة من وثائقك. الصيغ المقبولة: PDF، JPG، PNG (حد أقصى 5 ميجابايت)",
     "review_message": "يرجى مراجعة معلوماتك قبل التقديم للتحقق.",
-    
     "buttons": {
       "previous": "السابق",
       "next": "التالي",
       "submit": "تقديم للتحقق"
     },
-    
     "status": {
       "incomplete": "الملف الشخصي غير مكتمل",
       "pending": "في انتظار التحقق",
@@ -243,7 +220,6 @@
       "rejected": "مرفوض"
     }
   },
-
   "email_verification": {
     "title": "تأكيد البريد الإلكتروني",
     "loading": "جاري تأكيد البريد الإلكتروني...",
@@ -264,7 +240,6 @@
     "verification_required": "يرجى تأكيد بريدك الإلكتروني قبل تسجيل الدخول",
     "check_email": "تحقق من بريدك الإلكتروني للحصول على رابط التأكيد"
   },
-
   "password_reset": {
     "forgot_title": "نسيت كلمة المرور؟",
     "forgot_subtitle": "أدخل عنوان بريدك الإلكتروني وسنرسل لك رابطاً لإعادة تعيين كلمة المرور",
@@ -300,7 +275,6 @@
     "failed_reset": "فشل في إعادة تعيين كلمة المرور",
     "token_expired": "انتهت صلاحية رابط إعادة التعيين. يرجى طلب إعادة تعيين كلمة مرور جديدة"
   },
-
   "appointments": {
     "book_title": "حجز موعد جديد",
     "book_subtitle": "اختر الطبيب والوقت المناسب لك",
@@ -374,213 +348,237 @@
     "consultation_cost": "تكلفة الاستشارة",
     "total_cost": "التكلفة الإجمالية"
   },
-
   "prescriptions": {
     "title": "الوصفات الطبية",
     "subtitle": "إدارة الوصفات الطبية والأدوية",
-    "my_prescriptions": "وصفاتي الطبية",
     "create_prescription": "إنشاء وصفة طبية",
-    "edit_prescription": "تعديل الوصفة الطبية",
-    "medication_name": "اسم الدواء",
-    "dosage": "الجرعة",
-    "frequency": "التكرار",
-    "duration": "المدة",
-    "quantity": "الكمية",
-    "instructions": "تعليمات الاستخدام",
-    "notes": "ملاحظات",
-    "refills_allowed": "عدد مرات التجديد المسموح",
-    "start_date": "تاريخ البدء",
-    "end_date": "تاريخ الانتهاء",
-    "status": "الحالة",
-    "active": "نشط",
-    "completed": "مكتمل",
-    "cancelled": "ملغى",
-    "expired": "منتهي الصلاحية",
-    "prescribed_by": "وصفه الطبيب",
-    "prescribed_for": "وُصف للمريض",
-    "prescribed_date": "تاريخ الوصف",
-    "view_details": "عرض التفاصيل",
-    "update_status": "تحديث الحالة",
-    "mark_completed": "تمييز كمكتمل",
-    "prescription_details": "تفاصيل الوصفة الطبية",
-    "loading": "جاري التحميل...",
-    "no_prescriptions": "لا توجد وصفات طبية",
-    "create_success": "تم إنشاء الوصفة الطبية بنجاح",
-    "update_success": "تم تحديث الوصفة الطبية بنجاح",
-    "error_loading": "خطأ في تحميل الوصفات الطبية",
-    "error_creating": "خطأ في إنشاء الوصفة الطبية",
-    "error_updating": "خطأ في تحديث الوصفة الطبية",
-    "all_prescriptions": "جميع الوصفات",
-    "active_prescriptions": "الوصفات النشطة",
-    "completed_prescriptions": "الوصفات المكتملة",
-    "stats_total": "إجمالي الوصفات",
-    "stats_active": "الوصفات النشطة",
-    "stats_completed": "الوصفات المكتملة",
-    "save": "حفظ",
-    "cancel": "إلغاء",
-    "close": "إغلاق"
+    "nav_dashboard": "لوحة التحكم",
+    "nav_back": "رجوع",
+    "btn_logout": "تسجيل الخروج",
+    "stats": {
+      "total_prescriptions": "إجمالي الوصفات",
+      "active_prescriptions": "الوصفات النشطة",
+      "completed_prescriptions": "الوصفات المكتملة",
+      "patients": "المرضى"
+    },
+    "search": {
+      "placeholder": "البحث بالدواء أو الطبيب أو المريض..."
+    },
+    "filters": {
+      "all_status": "جميع الحالات",
+      "active": "نشط",
+      "completed": "مكتمل",
+      "cancelled": "ملغى",
+      "expired": "منتهي الصلاحية",
+      "sort_newest": "الأحدث أولاً",
+      "sort_oldest": "الأقدم أولاً",
+      "sort_medication": "حسب الدواء",
+      "sort_status": "حسب الحالة"
+    },
+    "loading": {
+      "text": "جاري التحميل...",
+      "prescriptions_text": "جاري تحميل الوصفات الطبية..."
+    },
+    "empty_state": {
+      "title": "لا توجد وصفات طبية",
+      "subtitle": "لم يتم العثور على وصفات طبية بناءً على المعايير المحددة",
+      "create_btn": "إنشاء وصفة طبية"
+    },
+    "card": {
+      "duration": "المدة",
+      "instructions": "التعليمات",
+      "quantity": "الكمية",
+      "details_btn": "التفاصيل",
+      "complete_btn": "مكتمل",
+      "edit_btn": "تعديل",
+      "expiring_soon": "ينتهي قريباً"
+    },
+    "modal": {
+      "new_prescription": "وصفة طبية جديدة",
+      "edit_prescription": "تعديل الوصفة الطبية",
+      "patient_label": "المريض",
+      "select_patient": "اختر المريض",
+      "appointment_label": "الموعد",
+      "select_appointment": "اختر الموعد",
+      "medication_name_label": "اسم الدواء",
+      "medication_name_placeholder": "أدخل اسم الدواء",
+      "dosage_label": "الجرعة",
+      "dosage_placeholder": "مثال: 500 ملجم",
+      "frequency_label": "التكرار",
+      "frequency_placeholder": "مثال: مرتين يومياً",
+      "duration_label": "المدة",
+      "duration_placeholder": "مثال: 7 أيام",
+      "quantity_label": "الكمية",
+      "quantity_placeholder": "مثال: 21 حبة",
+      "refills_label": "عدد مرات التجديد المسموح",
+      "start_date_label": "تاريخ البدء",
+      "end_date_label": "تاريخ الانتهاء",
+      "instructions_label": "تعليمات الاستخدام",
+      "instructions_placeholder": "أدخل تعليمات الاستخدام",
+      "notes_label": "ملاحظات",
+      "notes_placeholder": "ملاحظات إضافية (اختياري)",
+      "cancel": "إلغاء",
+      "save": "حفظ الوصفة"
+    },
+    "details": {
+      "title": "تفاصيل الوصفة الطبية",
+      "medication_info": "معلومات الدواء",
+      "prescription_info": "معلومات الوصفة",
+      "medication_name": "اسم الدواء",
+      "dosage": "الجرعة",
+      "frequency": "التكرار",
+      "duration": "المدة",
+      "quantity": "الكمية",
+      "status": "الحالة",
+      "prescribed_date": "تاريخ الوصف",
+      "start_date": "تاريخ البدء",
+      "end_date": "تاريخ الانتهاء",
+      "refills_allowed": "التجديدات المسموحة",
+      "instructions_title": "تعليمات الاستخدام",
+      "notes_title": "ملاحظات الطبيب",
+      "doctor": "الطبيب المعالج",
+      "patient": "المريض",
+      "edit_btn": "تعديل",
+      "mark_complete_btn": "وضع علامة مكتمل",
+      "close_btn": "إغلاق"
+    },
+    "status_modal": {
+      "title": "تغيير الحالة",
+      "confirm_complete_text": "هل أنت متأكد من أنك تريد وضع علامة مكتمل على هذه الوصفة؟",
+      "completion_notes_label": "ملاحظات الإكمال (اختياري)",
+      "completion_notes_placeholder": "أضف أي ملاحظات حول الإكمال",
+      "confirm_btn": "تأكيد الإكمال",
+      "cancel_btn": "إلغاء"
+    },
+    "status": {
+      "active": "نشط",
+      "completed": "مكتمل",
+      "cancelled": "ملغى",
+      "expired": "منتهي الصلاحية"
+    },
+    "messages": {
+      "create_success": "تم إنشاء الوصفة الطبية بنجاح",
+      "update_success": "تم تحديث الوصفة الطبية بنجاح",
+      "status_update_success": "تم تحديث حالة الوصفة بنجاح",
+      "load_error": "خطأ في تحميل الوصفات الطبية",
+      "save_error": "خطأ في حفظ الوصفة الطبية",
+      "required_fields": "يرجى ملء جميع الحقول المطلوبة",
+      "details_error": "خطأ في تحميل تفاصيل الوصفة"
+    },
+    "pagination": {
+      "previous": "السابق",
+      "next": "التالي"
+    }
   },
-
   "medical_history": {
     "title": "التاريخ الطبي",
-    "subtitle": "سجل طبي إلكتروني شامل",
-    "complete_history": "إكمال التاريخ الطبي",
-    "update_history": "تحديث التاريخ الطبي",
-    "view_history": "عرض التاريخ الطبي",
-    "general_info": "المعلومات العامة",
-    "medical_conditions": "الحالات الطبية",
-    "lifestyle": "نمط الحياة",
-    "physical_metrics": "القياسات الجسدية",
-    
-    "medical_history": "التاريخ المرضي",
-    "allergies": "الحساسية",
-    "current_medications": "الأدوية الحالية",
-    "chronic_conditions": "الأمراض المزمنة",
-    "family_history": "التاريخ العائلي",
-    "surgical_history": "التاريخ الجراحي",
-    "blood_type": "فصيلة الدم",
-    "emergency_contact": "جهة الاتصال للطوارئ",
-    
-    "smoking_status": "حالة التدخين",
-    "never": "اًبداً لم أدخن",
-    "former": "مدخن سابق",
-    "current": "مدخن حالياً",
-    
-    "alcohol_consumption": "استهلاك الكحول",
-    "none": "لا أشرب",
-    "occasional": "أحياناً",
-    "moderate": "معتدل",
-    "heavy": "كثير",
-    
-    "exercise_frequency": "تكرار التمارين",
-    "rare": "نادراً",
-    "weekly": "أسبوعياً",
-    "daily": "يومياً",
-    
-    "height": "الطول (سم)",
-    "weight": "الوزن (كجم)",
-    
-    "completion_status": "حالة الإكمال",
-    "completed": "مكتمل",
-    "incomplete": "غير مكتمل",
-    "last_updated": "آخر تحديث",
-    "completion_percentage": "نسبة الإكمال",
-    
-    "history_updates": "سجل التحديثات",
-    "update_type": "نوع التحديث",
-    "initial_registration": "التسجيل الأولي",
-    "appointment_update": "تحديث الموعد",
-    "patient_self_update": "تحديث ذاتي من المريض",
-    "doctor_update": "تحديث من الطبيب",
-    
-    "prompts": {
-      "complete_before_appointment": "يرجى إكمال تاريخك الطبي قبل الموعد",
-      "review_after_3_months": "يرجى مراجعة وتحديث تاريخك الطبي - لقد مر أكثر من 3 أشهر منذ آخر تحديث",
-      "review_after_1_month": "يرجى مراجعة تاريخك الطبي لأي تغييرات منذ الزيارة الأخيرة"
-    },
-    
-    "messages": {
-      "completed_successfully": "تم إكمال التاريخ الطبي بنجاح",
-      "updated_successfully": "تم تحديث التاريخ الطبي بنجاح",
-      "error_loading": "خطأ في تحميل التاريخ الطبي",
-      "error_saving": "خطأ في حفظ التاريخ الطبي"
-    },
-    
-    "buttons": {
-      "complete": "إكمال",
-      "update": "تحديث",
-      "save": "حفظ",
-      "cancel": "إلغاء"
-    },
-    
-    "timeline": {
-      "title": "الخط الزمني للتاريخ الطبي",
-      "all": "الكل",
-      "appointments": "المواعيد",
-      "self_updates": "التحديثات الشخصية",
-      "loading": "جاري تحميل الخط الزمني...",
-      "no_updates": "لا يوجد تاريخ للتحديثات",
-      "no_updates_desc": "ستظهر هنا جميع التحديثات على التاريخ الطبي",
-      "no_updates_category": "لا توجد تحديثات في هذه الفئة",
-      "default_note": "تحديث التاريخ الطبي",
-      "updated_fields": "حقل",
-      "by_doctor": "بواسطة: د."
-    },
-    
+    "subtitle": "التاريخ الطبي الكامل والمعلومات الصحية",
+    "nav_dashboard": "لوحة التحكم",
+    "nav_back": "رجوع",
+    "btn_logout": "تسجيل الخروج",
     "summary": {
-      "title": "ملخص التاريخ الطبي",
-      "loading": "جاري تحميل التاريخ الطبي...",
-      "no_info": "لا توجد معلومات متاحة",
-      "completion_status": "حالة الإكمال:",
-      "last_update": "آخر تحديث:",
-      "never_updated": "لم يتم التحديث",
-      "blood_type_label": "فصيلة الدم",
-      "not_specified": "غير محدد",
+      "title": "ملخص التاريخ",
+      "completion_status": "حالة الاكتمال",
+      "complete": "مكتمل",
+      "incomplete": "غير مكتمل",
+      "last_update": "آخر تحديث",
+      "not_updated": "لم يتم التحديث",
+      "blood_type": "فصيلة الدم",
       "general_status": "الحالة العامة",
-      "good": "جيد",
-      "care_note": "للحصول على رعاية طبية شاملة، تأكد من اكتمال جميع المعلومات"
+      "good": "جيدة",
+      "not_specified": "غير محدد",
+      "info_text": "للحصول على رعاية طبية شاملة، تأكد من اكتمال جميع المعلومات"
     },
-    
-    "form": {
-      "basic_info": "المعلومات الأساسية",
-      "select_blood_type": "اختر فصيلة الدم",
+    "timeline": {
+      "title": "سجل التحديثات",
+      "filter_all": "جميع التحديثات",
+      "filter_appointments": "تحديثات المواعيد",
+      "filter_self": "التحديثات الشخصية",
+      "no_updates": "لا يوجد سجل تحديثات",
+      "no_updates_desc": "ستظهر جميع تحديثات التاريخ الطبي هنا",
+      "no_updates_category": "لا توجد تحديثات في هذه الفئة",
+      "initial_registration": "التسجيل الأولي",
+      "self_update": "تحديث شخصي",
+      "appointment_update": "تحديث خلال الموعد",
+      "doctor_update": "تحديث من الطبيب",
+      "update": "تحديث",
+      "fields_updated": "تم تحديث",
+      "fields": "حقول",
+      "by_doctor": "بواسطة د."
+    },
+    "edit_modal": {
+      "title": "تعديل التاريخ الطبي",
+      "save": "حفظ التغييرات",
+      "cancel": "إلغاء",
+      "blood_type_label": "فصيلة الدم",
       "height_label": "الطول (سم)",
       "weight_label": "الوزن (كجم)",
-      "lifestyle_section": "نمط الحياة",
-      "select_smoking": "اختر حالة التدخين",
-      "never_smoked": "لم أدخن مطلقاً",
-      "former_smoker": "مدخن سابق",
-      "current_smoker": "مدخن حالياً",
-      "select_exercise": "اختر تكرار التمارين",
-      "select_alcohol": "اختر حالة الكحول",
-      "no_drink": "لا أشرب",
-      "sometimes": "أحياناً",
-      "medical_conditions_section": "التاريخ المرضي",
-      "allergies_placeholder": "اكتب أي حساسية لديك من أدوية أو طعام...",
-      "medications_placeholder": "اكتب الأدوية التي تتناولها حالياً...",
-      "chronic_placeholder": "اكتب أي أمراض مزمنة لديك...",
-      "family_history_placeholder": "اكتب التاريخ المرضي للعائلة...",
-      "surgical_history_placeholder": "اكتب العمليات الجراحية السابقة...",
-      "general_history_placeholder": "اكتب أي معلومات طبية أخرى مهمة...",
-      "update_notes_label": "ملاحظات التحديث",
-      "update_notes_placeholder": "اكتب سبب تحديث التاريخ الطبي (اختياري)...",
-      "save_updates": "حفظ التحديثات"
+      "smoking_status_label": "حالة التدخين",
+      "smoking_never": "لم أدخن مطلقاً",
+      "smoking_former": "مدخن سابق",
+      "smoking_current": "مدخن حالياً",
+      "exercise_label": "تكرار التمارين",
+      "exercise_rare": "نادراً",
+      "exercise_weekly": "أسبوعياً",
+      "exercise_daily": "يومياً",
+      "alcohol_label": "استهلاك الكحول",
+      "alcohol_none": "لا أشرب",
+      "alcohol_occasional": "أحياناً",
+      "alcohol_moderate": "معتدل",
+      "alcohol_heavy": "كثير",
+      "allergies_label": "الحساسية",
+      "allergies_placeholder": "اذكر أي حساسية",
+      "medications_label": "الأدوية الحالية",
+      "medications_placeholder": "اذكر الأدوية الحالية",
+      "chronic_label": "الأمراض المزمنة",
+      "chronic_placeholder": "اذكر الأمراض المزمنة",
+      "family_label": "التاريخ العائلي",
+      "family_placeholder": "التاريخ الطبي العائلي المهم",
+      "surgical_label": "التاريخ الجراحي",
+      "surgical_placeholder": "العمليات الجراحية السابقة",
+      "medical_label": "التاريخ الطبي",
+      "medical_placeholder": "معلومات طبية إضافية"
     },
-    
-    "modal": {
-      "update_details": "تفاصيل التحديث",
-      "close": "إغلاق",
-      "date": "التاريخ:",
-      "time": "الوقت:",
-      "doctor": "الطبيب:",
-      "notes": "الملاحظات:",
-      "updated_fields": "الحقول المحدثة:",
+    "details_modal": {
+      "title": "تفاصيل التحديث",
+      "date": "التاريخ",
+      "time": "الوقت",
+      "doctor": "الطبيب",
+      "notes": "الملاحظات",
+      "updated_fields": "الحقول المحدثة",
+      "from": "من",
+      "to": "إلى",
       "no_details": "لا توجد تفاصيل متاحة",
-      "from": "من:",
-      "to": "إلى:"
+      "close": "إغلاق"
     },
-    
+    "messages": {
+      "update_success": "تم تحديث التاريخ الطبي بنجاح",
+      "update_failed": "فشل في تحديث التاريخ الطبي",
+      "save_error": "خطأ في حفظ التاريخ الطبي",
+      "load_error": "خطأ في تحميل التاريخ الطبي",
+      "access_error": "فشل في الوصول إلى التاريخ الطبي"
+    },
     "bmi": {
-      "not_specified": "غير محدد",
       "underweight": "نقص في الوزن",
       "normal": "وزن طبيعي",
       "overweight": "زيادة في الوزن",
       "obese": "سمنة"
     },
-    
-    "errors": {
-      "loading_failed": "فشل في تحميل التاريخ الطبي",
-      "access_failed": "فشل في الوصول للتاريخ الطبي",
-      "loading_error": "خطأ في تحميل التاريخ الطبي",
-      "update_failed": "فشل في تحديث التاريخ الطبي",
-      "save_error": "خطأ في حفظ التاريخ الطبي"
-    },
-    
-    "success": {
-      "updated_successfully": "تم تحديث التاريخ الطبي بنجاح"
+    "fields": {
+      "medical_history": "التاريخ الطبي",
+      "allergies": "الحساسية",
+      "current_medications": "الأدوية الحالية",
+      "chronic_conditions": "الأمراض المزمنة",
+      "family_history": "التاريخ العائلي",
+      "surgical_history": "التاريخ الجراحي",
+      "smoking_status": "حالة التدخين",
+      "alcohol_consumption": "استهلاك الكحول",
+      "exercise_frequency": "تكرار التمارين",
+      "height": "الطول",
+      "weight": "الوزن",
+      "blood_type": "فصيلة الدم"
     }
   },
-
   "patient_register": {
     "title": "تسجيل كمريض",
     "subtitle": "سجل في منصة صحتك كمريض",
@@ -606,7 +604,6 @@
     "submit": "إنشاء حساب المريض",
     "back": "العودة"
   },
-
   "doctor_register": {
     "title": "سجل كطبيب",
     "subtitle": "انضم الينا كطبيب في منصة صحتك ",
@@ -634,17 +631,15 @@
     "submit": "إنشاء كطبيب",
     "back": "العودة"
   },
-
   "countries": {
     "SD": "السودان",
-    "EG": "مصر", 
+    "EG": "مصر",
     "SA": "السعودية",
     "AE": "الإمارات",
     "IE": "أيرلندا",
     "US": "أمريكا",
     "GB": "بريطانيا"
   },
-
   "country_options": {
     "select_country": "اختر الدولة",
     "country_sudan": "🇸🇩 السودان (+249)",
@@ -655,7 +650,6 @@
     "country_usa": "🇺🇸 أمريكا (+1)",
     "country_uk": "🇬🇧 بريطانيا (+44)"
   },
-
   "validation": {
     "required": "هذا الحقل مطلوب",
     "email_invalid": "الرجاء إدخال بريد إلكتروني صحيح",
@@ -669,7 +663,6 @@
     "logout_progress": "جاري تسجيل الخروج...",
     "logout_success": "تم تسجيل الخروج بنجاح"
   },
-  
   "dashboard": {
     "patient": {
       "title": "لوحة تحكم المريض",
@@ -978,7 +971,6 @@
       }
     }
   },
-
   "user_settings": {
     "title": "إعدادات المستخدم",
     "subtitle": "إدارة تفضيلاتك وإعدادات حسابك",
@@ -1039,7 +1031,6 @@
       "invalid_current_password": "كلمة المرور الحالية غير صحيحة"
     }
   },
-
   "admin": {
     "dashboard": {
       "title": "لوحة التحكم الإدارية",
@@ -1047,7 +1038,7 @@
     },
     "navigation": {
       "dashboard": "لوحة التحكم",
-      "users": "إدارة المستخدمين", 
+      "users": "إدارة المستخدمين",
       "verification": "توثيق الأطباء",
       "appointments": "المواعيد",
       "settings": "إعدادات النظام",
@@ -1066,7 +1057,7 @@
     },
     "actions": {
       "profile": "الملف الشخصي",
-      "settings": "الإعدادات", 
+      "settings": "الإعدادات",
       "logout": "تسجيل الخروج"
     },
     "sections": {
@@ -1188,14 +1179,13 @@
       "response": "وقت الاستجابة"
     }
   },
-
   "records": {
     "title": "السجلات الطبية",
     "subtitle": "إدارة شاملة للتاريخ الطبي والوصفات الطبية",
     "dashboard_title": "لوحة تحكم السجلات الطبية",
     "stats": {
       "total_records": "إجمالي السجلات الطبية",
-      "active_prescriptions": "الوصفات النشطة", 
+      "active_prescriptions": "الوصفات النشطة",
       "recent_updates": "التحديثات الأخيرة",
       "days_since_update": "أيام منذ آخر تحديث",
       "history_completion": "إكمال التاريخ الطبي",
@@ -1204,7 +1194,7 @@
     "navigation": {
       "medical_history": "التاريخ الطبي",
       "medical_history_desc": "عرض وإدارة التاريخ الطبي الكامل والخط الزمني للتحديثات",
-      "prescriptions": "الوصفات الطبية", 
+      "prescriptions": "الوصفات الطبية",
       "prescriptions_desc": "إدارة الوصفات الطبية والأدوية الحالية والمكتملة",
       "view_complete_history": "عرض التاريخ الكامل",
       "update_data": "تحديث البيانات",
@@ -1213,7 +1203,7 @@
     },
     "buttons": {
       "view_complete_history": "عرض التاريخ الكامل",
-      "update_data": "تحديث البيانات", 
+      "update_data": "تحديث البيانات",
       "view_all_prescriptions": "عرض جميع الوصفات",
       "active_prescriptions": "الوصفات النشطة"
     },
@@ -1258,20 +1248,17 @@
     },
     "no_data": "لا توجد بيانات متاحة"
   },
-
   "availability": {
     "dashboard_title": "إدارة الأوقات المتاحة",
     "dashboard_subtitle": "حدد ساعات العمل والأوقات المتاحة",
     "page_breadcrumb": "لوحة التحكم / الأوقات المتاحة",
     "page_title": "إدارة الأوقات المتاحة",
     "page_subtitle": "حدد ساعات العمل والأوقات المتاحة",
-    
     "tabs": {
       "weekly": "الجدول الأسبوعي",
-      "calendar": "التقويم الشهري", 
+      "calendar": "التقويم الشهري",
       "blocked": "الأوقات المحجوبة"
     },
-    
     "weekly": {
       "title": "إعداد الجدول الأسبوعي",
       "loading": "جاري تحميل الجدول الأسبوعي...",
@@ -1282,7 +1269,6 @@
       "from_time": "من الساعة",
       "to_time": "إلى الساعة"
     },
-    
     "days": {
       "saturday": "السبت",
       "sunday": "الأحد",
@@ -1292,7 +1278,6 @@
       "thursday": "الخميس",
       "friday": "الجمعة"
     },
-    
     "days_short": {
       "sat": "السبت",
       "sun": "الأحد",
@@ -1302,23 +1287,20 @@
       "thu": "الخميس",
       "fri": "الجمعة"
     },
-    
     "calendar": {
       "title": "التقويم الشهري",
       "loading": "جاري تحميل التقويم..."
     },
-    
     "blocked": {
       "title": "الأوقات المحجوبة",
       "loading": "جاري تحميل الأوقات المحجوبة...",
       "block_new": "حجب وقت جديد"
     },
-    
     "modal": {
       "block_title": "حجب وقت محدد",
       "edit_title": "تعديل الوقت المحجوب",
       "date": "التاريخ",
-      "start_time": "وقت البداية", 
+      "start_time": "وقت البداية",
       "end_time": "وقت النهاية",
       "reason": "السبب (اختياري)",
       "placeholder_reason": "اكتب سبب حجب هذا الوقت...",
@@ -1327,7 +1309,6 @@
       "unblock": "إلغاء الحجب",
       "close": "إغلاق"
     },
-    
     "buttons": {
       "back": "العودة",
       "profile": "الملف الشخصي",
@@ -1338,10 +1319,8 @@
       "export": "تصدير",
       "block_new": "حجب وقت جديد"
     },
-    
     "loading": "جاري التحميل...",
     "user_name": "الدكتورة سارة أحمد",
-    
     "messages": {
       "load_schedule_error": "فشل في تحميل الجدول الأسبوعي",
       "save_schedule_error": "فشل في حفظ الجدول",
@@ -1358,7 +1337,6 @@
       "overlap_error": "الوقت يتداخل مع الجدول الموجود"
     }
   },
-
   "ehr": {
     "title": "السجل الصحي الإلكتروني",
     "subtitle": "إدارة السجلات الطبية للمرضى",
@@ -1424,7 +1402,6 @@
     "priority": "الأولوية",
     "routine": "روتيني",
     "urgent": "عاجل",
-    "emergency": "طارئ",
     "status": "الحالة",
     "scheduled": "مجدول",
     "confirmed": "مؤكد",
@@ -1442,7 +1419,6 @@
     "critical": "حرج",
     "diagnosis_status": "حالة التشخيص",
     "provisional": "مؤقت",
-    "confirmed": "مؤكد",
     "differential": "تفريقي",
     "rule_out": "استبعاد",
     "clinical_findings": "النتائج السريرية",
@@ -1462,11 +1438,9 @@
     "resolved_only": "المحلولة فقط",
     "blood_pressure": "ضغط الدم",
     "overview": "نظرة عامة",
-    "history": "التاريخ",
     "vitals": "العلامات الحيوية",
     "prescriptions": "الوصفات الطبية"
   },
-
   "video_consultation": {
     "title": "استشارة بالفيديو",
     "subtitle": "استشارة طبية آمنة",
@@ -1550,7 +1524,6 @@
       "persistent_problem": "إذا استمرت المشكلة، يرجى الاتصال بالدعم الفني"
     }
   },
-
   "messaging": {
     "title": "التواصل مع المرضى",
     "patient_title": "التحدث مع الطبيب",
@@ -1576,290 +1549,6 @@
       "back_to_dashboard": "العودة للوحة التحكم"
     }
   },
-
-  "medical_records": {
-    "title": "السجلات الطبية",
-    "subtitle": "التاريخ الطبي الشامل والمعلومات الصحية",
-    "nav_dashboard": "لوحة التحكم",
-    "nav_back": "رجوع",
-    "btn_logout": "تسجيل الخروج",
-    "stats": {
-      "history_completion": "اكتمال التاريخ",
-      "active_prescriptions": "الوصفات النشطة",
-      "recent_updates": "التحديثات الأخيرة",
-      "last_update": "آخر تحديث"
-    },
-    "medical_summary": {
-      "title": "الملخص الطبي",
-      "blood_type": "فصيلة الدم",
-      "height": "الطول",
-      "weight": "الوزن",
-      "bmi": "مؤشر كتلة الجسم",
-      "allergies": "الحساسية",
-      "no_allergies": "لا توجد حساسية معروفة",
-      "chronic_conditions": "الأمراض المزمنة",
-      "no_conditions": "لا توجد أمراض مزمنة",
-      "current_medications": "الأدوية الحالية",
-      "no_medications": "لا توجد أدوية حالية",
-      "view_full_history": "عرض التاريخ الكامل"
-    },
-    "prescription_summary": {
-      "title": "الوصفات النشطة",
-      "medication": "الدواء",
-      "dosage": "الجرعة",
-      "frequency": "التكرار",
-      "view_all": "عرض جميع الوصفات",
-      "no_active": "لا توجد وصفات نشطة"
-    },
-    "recent_activity": {
-      "title": "النشاط الأخير",
-      "loading": "جاري تحميل النشاط الأخير...",
-      "no_activity": "لا يوجد نشاط حديث",
-      "no_activity_desc": "سيظهر النشاط والتحديثات هنا",
-      "showing": "عرض",
-      "of": "من",
-      "activities": "نشاط",
-      "previous": "السابق",
-      "next": "التالي"
-    },
-    "empty_state": {
-      "no_data": "لا توجد بيانات تاريخ طبي متاحة"
-    }
-  },
-
-  "medical_history": {
-    "title": "التاريخ الطبي",
-    "subtitle": "التاريخ الطبي الكامل والمعلومات الصحية",
-    "nav_dashboard": "لوحة التحكم",
-    "nav_back": "رجوع",
-    "btn_logout": "تسجيل الخروج",
-    "summary": {
-      "title": "ملخص التاريخ",
-      "completion_status": "حالة الاكتمال",
-      "complete": "مكتمل",
-      "incomplete": "غير مكتمل",
-      "last_update": "آخر تحديث",
-      "not_updated": "لم يتم التحديث",
-      "blood_type": "فصيلة الدم",
-      "general_status": "الحالة العامة",
-      "good": "جيدة",
-      "not_specified": "غير محدد",
-      "info_text": "للحصول على رعاية طبية شاملة، تأكد من اكتمال جميع المعلومات"
-    },
-    "timeline": {
-      "title": "سجل التحديثات",
-      "filter_all": "جميع التحديثات",
-      "filter_appointments": "تحديثات المواعيد",
-      "filter_self": "التحديثات الشخصية",
-      "no_updates": "لا يوجد سجل تحديثات",
-      "no_updates_desc": "ستظهر جميع تحديثات التاريخ الطبي هنا",
-      "no_updates_category": "لا توجد تحديثات في هذه الفئة",
-      "initial_registration": "التسجيل الأولي",
-      "self_update": "تحديث شخصي",
-      "appointment_update": "تحديث خلال الموعد",
-      "doctor_update": "تحديث من الطبيب",
-      "update": "تحديث",
-      "fields_updated": "تم تحديث",
-      "fields": "حقول",
-      "by_doctor": "بواسطة د."
-    },
-    "edit_modal": {
-      "title": "تعديل التاريخ الطبي",
-      "save": "حفظ التغييرات",
-      "cancel": "إلغاء",
-      "blood_type_label": "فصيلة الدم",
-      "height_label": "الطول (سم)",
-      "weight_label": "الوزن (كجم)",
-      "smoking_status_label": "حالة التدخين",
-      "smoking_never": "لم أدخن مطلقاً",
-      "smoking_former": "مدخن سابق",
-      "smoking_current": "مدخن حالياً",
-      "exercise_label": "تكرار التمارين",
-      "exercise_rare": "نادراً",
-      "exercise_weekly": "أسبوعياً",
-      "exercise_daily": "يومياً",
-      "alcohol_label": "استهلاك الكحول",
-      "alcohol_none": "لا أشرب",
-      "alcohol_occasional": "أحياناً",
-      "alcohol_moderate": "معتدل",
-      "alcohol_heavy": "كثير",
-      "allergies_label": "الحساسية",
-      "allergies_placeholder": "اذكر أي حساسية",
-      "medications_label": "الأدوية الحالية",
-      "medications_placeholder": "اذكر الأدوية الحالية",
-      "chronic_label": "الأمراض المزمنة",
-      "chronic_placeholder": "اذكر الأمراض المزمنة",
-      "family_label": "التاريخ العائلي",
-      "family_placeholder": "التاريخ الطبي العائلي المهم",
-      "surgical_label": "التاريخ الجراحي",
-      "surgical_placeholder": "العمليات الجراحية السابقة",
-      "medical_label": "التاريخ الطبي",
-      "medical_placeholder": "معلومات طبية إضافية"
-    },
-    "details_modal": {
-      "title": "تفاصيل التحديث",
-      "date": "التاريخ",
-      "time": "الوقت",
-      "doctor": "الطبيب",
-      "notes": "الملاحظات",
-      "updated_fields": "الحقول المحدثة",
-      "from": "من",
-      "to": "إلى",
-      "no_details": "لا توجد تفاصيل متاحة",
-      "close": "إغلاق"
-    },
-    "messages": {
-      "update_success": "تم تحديث التاريخ الطبي بنجاح",
-      "update_failed": "فشل في تحديث التاريخ الطبي",
-      "save_error": "خطأ في حفظ التاريخ الطبي",
-      "load_error": "خطأ في تحميل التاريخ الطبي",
-      "access_error": "فشل في الوصول إلى التاريخ الطبي"
-    },
-    "bmi": {
-      "underweight": "نقص في الوزن",
-      "normal": "وزن طبيعي",
-      "overweight": "زيادة في الوزن",
-      "obese": "سمنة"
-    },
-    "fields": {
-      "medical_history": "التاريخ الطبي",
-      "allergies": "الحساسية",
-      "current_medications": "الأدوية الحالية",
-      "chronic_conditions": "الأمراض المزمنة",
-      "family_history": "التاريخ العائلي",
-      "surgical_history": "التاريخ الجراحي",
-      "smoking_status": "حالة التدخين",
-      "alcohol_consumption": "استهلاك الكحول",
-      "exercise_frequency": "تكرار التمارين",
-      "height": "الطول",
-      "weight": "الوزن",
-      "blood_type": "فصيلة الدم"
-    }
-  },
-
-  "prescriptions": {
-    "title": "الوصفات الطبية",
-    "subtitle": "إدارة الوصفات الطبية والأدوية",
-    "create_prescription": "إنشاء وصفة طبية",
-    "nav_dashboard": "لوحة التحكم",
-    "nav_back": "رجوع",
-    "btn_logout": "تسجيل الخروج",
-    "stats": {
-      "total_prescriptions": "إجمالي الوصفات",
-      "active_prescriptions": "الوصفات النشطة",
-      "completed_prescriptions": "الوصفات المكتملة",
-      "patients": "المرضى"
-    },
-    "search": {
-      "placeholder": "البحث بالدواء أو الطبيب أو المريض..."
-    },
-    "filters": {
-      "all_status": "جميع الحالات",
-      "active": "نشط",
-      "completed": "مكتمل",
-      "cancelled": "ملغى",
-      "expired": "منتهي الصلاحية",
-      "sort_newest": "الأحدث أولاً",
-      "sort_oldest": "الأقدم أولاً",
-      "sort_medication": "حسب الدواء",
-      "sort_status": "حسب الحالة"
-    },
-    "loading": {
-      "text": "جاري التحميل...",
-      "prescriptions_text": "جاري تحميل الوصفات الطبية..."
-    },
-    "empty_state": {
-      "title": "لا توجد وصفات طبية",
-      "subtitle": "لم يتم العثور على وصفات طبية بناءً على المعايير المحددة",
-      "create_btn": "إنشاء وصفة طبية"
-    },
-    "card": {
-      "duration": "المدة",
-      "instructions": "التعليمات",
-      "quantity": "الكمية",
-      "details_btn": "التفاصيل",
-      "complete_btn": "مكتمل",
-      "edit_btn": "تعديل",
-      "expiring_soon": "ينتهي قريباً"
-    },
-    "modal": {
-      "new_prescription": "وصفة طبية جديدة",
-      "edit_prescription": "تعديل الوصفة الطبية",
-      "patient_label": "المريض",
-      "select_patient": "اختر المريض",
-      "appointment_label": "الموعد",
-      "select_appointment": "اختر الموعد",
-      "medication_name_label": "اسم الدواء",
-      "medication_name_placeholder": "أدخل اسم الدواء",
-      "dosage_label": "الجرعة",
-      "dosage_placeholder": "مثال: 500 ملجم",
-      "frequency_label": "التكرار",
-      "frequency_placeholder": "مثال: مرتين يومياً",
-      "duration_label": "المدة",
-      "duration_placeholder": "مثال: 7 أيام",
-      "quantity_label": "الكمية",
-      "quantity_placeholder": "مثال: 21 حبة",
-      "refills_label": "عدد مرات التجديد المسموح",
-      "start_date_label": "تاريخ البدء",
-      "end_date_label": "تاريخ الانتهاء",
-      "instructions_label": "تعليمات الاستخدام",
-      "instructions_placeholder": "أدخل تعليمات الاستخدام",
-      "notes_label": "ملاحظات",
-      "notes_placeholder": "ملاحظات إضافية (اختياري)",
-      "cancel": "إلغاء",
-      "save": "حفظ الوصفة"
-    },
-    "details": {
-      "title": "تفاصيل الوصفة الطبية",
-      "medication_info": "معلومات الدواء",
-      "prescription_info": "معلومات الوصفة",
-      "medication_name": "اسم الدواء",
-      "dosage": "الجرعة",
-      "frequency": "التكرار",
-      "duration": "المدة",
-      "quantity": "الكمية",
-      "status": "الحالة",
-      "prescribed_date": "تاريخ الوصف",
-      "start_date": "تاريخ البدء",
-      "end_date": "تاريخ الانتهاء",
-      "refills_allowed": "التجديدات المسموحة",
-      "instructions_title": "تعليمات الاستخدام",
-      "notes_title": "ملاحظات الطبيب",
-      "doctor": "الطبيب المعالج",
-      "patient": "المريض",
-      "edit_btn": "تعديل",
-      "mark_complete_btn": "وضع علامة مكتمل",
-      "close_btn": "إغلاق"
-    },
-    "status_modal": {
-      "title": "تغيير الحالة",
-      "confirm_complete_text": "هل أنت متأكد من أنك تريد وضع علامة مكتمل على هذه الوصفة؟",
-      "completion_notes_label": "ملاحظات الإكمال (اختياري)",
-      "completion_notes_placeholder": "أضف أي ملاحظات حول الإكمال",
-      "confirm_btn": "تأكيد الإكمال",
-      "cancel_btn": "إلغاء"
-    },
-    "status": {
-      "active": "نشط",
-      "completed": "مكتمل",
-      "cancelled": "ملغى",
-      "expired": "منتهي الصلاحية"
-    },
-    "messages": {
-      "create_success": "تم إنشاء الوصفة الطبية بنجاح",
-      "update_success": "تم تحديث الوصفة الطبية بنجاح",
-      "status_update_success": "تم تحديث حالة الوصفة بنجاح",
-      "load_error": "خطأ في تحميل الوصفات الطبية",
-      "save_error": "خطأ في حفظ الوصفة الطبية",
-      "required_fields": "يرجى ملء جميع الحقول المطلوبة",
-      "details_error": "خطأ في تحميل تفاصيل الوصفة"
-    },
-    "pagination": {
-      "previous": "السابق",
-      "next": "التالي"
-    }
-  },
-
   "medical_records": {
     "edit-history": "تعديل التاريخ",
     "nav-dashboard": "لوحة التحكم",
@@ -1910,7 +1599,6 @@
     "save-btn-text": "حفظ التغييرات",
     "close-details-btn": "إغلاق"
   },
-
   "medical_dashboard": {
     "stat-history-completion": "اكتمال التاريخ الطبي",
     "stat-active-prescriptions": "الوصفات النشطة",
@@ -1933,7 +1621,6 @@
     "prev-text": "السابق",
     "next-text": "التالي"
   },
-
   "footer": {
     "brand": "صحتك",
     "description": "منصة طبية آمنة وموثوقة للتواصل مع الأطباء عن بُعد",
@@ -1949,7 +1636,6 @@
     "copyright": "© 2025 صحتك. جميع الحقوق محفوظة.",
     "medical_disclaimer": "هذه المنصة لا تغني عن زيارة الطبيب في الحالات الطارئة"
   },
-  
   "support": {
     "title": "الدعم الفني",
     "report_problem": {
@@ -1975,8 +1661,7 @@
       "contact_label": "جهة الاتصال (اختياري)",
       "contact_placeholder": "الهاتف أو البريد الإلكتروني للرد"
     }
-  }
-  ,
+  },
   "about_sahatak": {
     "title": "عن صحتك",
     "subtitle": "اعرف منصة صحتك",
@@ -2097,8 +1782,7 @@
       "title": "التعليق العام",
       "placeholder": "اكتب تعليقًا قصيرًا... سيظهر أدناه مع الملاحظات الأخرى."
     }
-  }
-  ,
+  },
   "sahatak_services": {
     "title": "خدمات صحتك",
     "subtitle": "قائمة شاملة بالخدمات الصحية وخدمات الدعم المتاحة عبر برنامج صحتك.",
@@ -2151,7 +1835,9 @@
     "search_placeholder": "ابحث عن الخدمات...",
     "contact_support": "تواصل مع الدعم"
   },
-  "lang_button": { "text": "English" },
+  "lang_button": {
+    "text": "English"
+  },
   "report_problem": {
     "title": "الإبلاغ عن مشكلة",
     "description": "أخبرنا عن أي مشكلات تواجهها أثناء استخدام التطبيق. سيتولى فريق الدعم مراجعتها والرد عليها.",
@@ -2168,21 +1854,21 @@
   "common": {
     "language_button": "English"
   },
-"about_page": {
-  "title": "عن صحتك",
-  "subtitle": "تعرف على صحتك",
-  "brief_title": "مرحباً بك في صحتك — الرعاية الصحية بشكل مبسط",
-  "brief": "صحتك مصممة للمرضى ومقدمي الرعاية والعائلات الذين يريدون الوصول السهل والموثوق به إلى الخدمات الصحية. سواء كنت تحتاج إلى موعد في نفس اليوم، استشارة عبر الفيديو من المنزل، المساعدة في إدارة حالة مزمنة، أو إجابة سريعة حول دواء — صحتك تجمع الأدوات والمتخصصين في مكان آمن واحد.",
-  "overview_title": "ما تقدمه صحتك",
-  "overview_subtitle": "وصف مختصر لمساعدتك في فهم كل خدمة ومتى تستخدمها",
-  "public_comment": {
-    "title": "تعليق عام",
-    "description": "شارك ملاحظة عامة سريعة — ستظهر أدناه مع الملاحظات الأخرى.",
-    "placeholder": "اكتب تعليقًا قصيرًا...",
-    "send_button": "إرسال"
-  }
-},
-"services": {
+  "about_page": {
+    "title": "عن صحتك",
+    "subtitle": "تعرف على صحتك",
+    "brief_title": "مرحباً بك في صحتك — الرعاية الصحية بشكل مبسط",
+    "brief": "صحتك مصممة للمرضى ومقدمي الرعاية والعائلات الذين يريدون الوصول السهل والموثوق به إلى الخدمات الصحية. سواء كنت تحتاج إلى موعد في نفس اليوم، استشارة عبر الفيديو من المنزل، المساعدة في إدارة حالة مزمنة، أو إجابة سريعة حول دواء — صحتك تجمع الأدوات والمتخصصين في مكان آمن واحد.",
+    "overview_title": "ما تقدمه صحتك",
+    "overview_subtitle": "وصف مختصر لمساعدتك في فهم كل خدمة ومتى تستخدمها",
+    "public_comment": {
+      "title": "تعليق عام",
+      "description": "شارك ملاحظة عامة سريعة — ستظهر أدناه مع الملاحظات الأخرى.",
+      "placeholder": "اكتب تعليقًا قصيرًا...",
+      "send_button": "إرسال"
+    }
+  },
+  "services": {
     "appointments": {
       "title": "حجز المواعيد عبر الإنترنت",
       "text": "ابحث عن المواعيد المتاحة مع الأطباء العامين والمتخصصين، اختر الزيارات الشخصية أو عبر الفيديو، واحصل على تأكيدات وتذكيرات حتى لا تفوت أي موعد.",
@@ -2260,8 +1946,8 @@
     }
   },
   "buttons": {
-  "new_appointment": "إضافة تعليقات",
-  "language": "تغيير اللغة"
+    "new_appointment": "إضافة تعليقات",
+    "language": "تغيير اللغة"
   },
   "comm_hub": {
     "title": "الدردشة مع الطبيب",
@@ -2311,5 +1997,14 @@
     "simplified_layout": "تصميم مبسّط",
     "note": "لا يخفي الوضع الهادئ أبداً المعلومات الطبية أو حالة المواعيد أو الإشعارات العاجلة.",
     "save_failed": "تعذر حفظ تفضيلات الوضع الهادئ."
+  },
+  "avatar": {
+    "change_photo": "تغيير الصورة الشخصية",
+    "invalid_type": "يرجى اختيار ملف صورة (PNG أو JPG أو WEBP أو GIF).",
+    "too_large": "الصورة كبيرة جداً. الحد الأقصى للحجم هو 5 ميجابايت.",
+    "uploading": "جارٍ رفع الصورة...",
+    "upload_success": "تم تحديث الصورة الشخصية بنجاح.",
+    "upload_failed": "تعذر رفع الصورة. يرجى المحاولة مرة أخرى.",
+    "not_authenticated": "يرجى تسجيل الدخول لتغيير صورتك."
   }
 }
