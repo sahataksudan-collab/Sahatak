@@ -5,6 +5,8 @@ backend/instance/
 backend/.env*
 backend/sahatak.db
 backend/static/uploads/audio/*
+backend/logs/
+backend/static/
 
 # Frontend
 frontend/node_modules/
