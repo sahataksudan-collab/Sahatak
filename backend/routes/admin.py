@@ -1784,17 +1784,9 @@ def update_system_settings():
 
         db.session.commit()
 
-        # Debug: Log what was saved
-        for key, value, data_type in updated_settings:
-            if key == 'maintenance_mode':
-                print(f"🔧 SAVED maintenance_mode = {value} (type: {type(value)}, data_type: {data_type})")
-
         # Invalidate settings cache after update
         from utils.settings_manager import SettingsManager
         SettingsManager.invalidate_cache()
-
-        # Debug: Verify cache was invalidated
-        print(f"🔧 Settings cache invalidated. Cache empty: {len(SettingsManager._cache) == 0}")
 
         # Log admin action
         log_user_action(
