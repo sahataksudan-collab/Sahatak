@@ -451,6 +451,62 @@ class EmailService:
             app_logger.error(f"Failed to send password reset email to {recipient_email}: {str(e)}")
             return False
 
+    def send_doctor_joined_video(
+        self,
+        recipient_email: str,
+        appointment_data: Dict[str, Any],
+        language: str = 'ar'
+    ) -> bool:
+        """
+        Send a "your doctor has joined the video consultation" email to the
+        patient. Visual sibling of appointment_confirmation (same base layout,
+        header, logo and detail-card styling — no new visual style).
+
+        Args:
+            recipient_email: Patient email address
+            appointment_data: Details (doctor_name, patient_name,
+                doctor_specialty, appointment_date(_readable),
+                appointment_time_readable, join_url)
+            language: Language preference ('ar' or 'en')
+
+        Returns:
+            bool: True if sent successfully, False otherwise
+        """
+        try:
+            if not self.is_configured():
+                app_logger.warning("Email service not configured, skipping email")
+                return False
+
+            doctor_name = appointment_data.get('doctor_name', '')
+            if language == 'ar':
+                subject = f'{doctor_name} انضم إلى استشارتك المرئية'
+            else:
+                subject = f'{doctor_name} has joined your video consultation'
+            template_name = f'email/{language}/doctor_joined_video.html'
+
+            template_data = {
+                **appointment_data,
+                'language': language,
+                'app_name': 'صحتك' if language == 'ar' else 'Sahatak',
+                'current_year': datetime.now().year
+            }
+
+            msg = Message(
+                subject=subject,
+                recipients=[recipient_email],
+                html=render_template(template_name,
+                    logo_url=_logo_url(), **template_data),
+                sender=current_app.config['MAIL_DEFAULT_SENDER']
+            )
+
+            self.mail.send(msg)
+            app_logger.info(f"Doctor-joined-video email sent to {recipient_email}")
+            return True
+
+        except Exception as e:
+            app_logger.error(f"Failed to send doctor-joined-video email to {recipient_email}: {str(e)}")
+            return False
+
     def send_custom_email(self, recipient_email: str, subject: str, body: str) -> bool:
         """Send a custom email with provided subject and body"""
         try:
@@ -515,3 +571,7 @@ def send_password_reset_email(recipient_email: str, user_data: Dict[str, Any], l
 def send_prescription_notification(recipient_email: str, prescription_data: Dict[str, Any], language: str = 'ar') -> bool:
     """Convenience function for sending prescription notification emails"""
     return email_service.send_prescription_notification(recipient_email, prescription_data, language)
+
+def send_doctor_joined_video_email(recipient_email: str, appointment_data: Dict[str, Any], language: str = 'ar') -> bool:
+    """Convenience function for the doctor-joined-video notification email"""
+    return email_service.send_doctor_joined_video(recipient_email, appointment_data, language)

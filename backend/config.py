@@ -117,6 +117,13 @@ class Config:
     JITSI_SESSION_BUFFER_MINUTES = int(os.getenv('JITSI_SESSION_BUFFER_MINUTES', 15))  # Minutes before appointment
     JITSI_SESSION_MAX_DURATION_HOURS = int(os.getenv('JITSI_SESSION_MAX_DURATION_HOURS', 2))  # Maximum session duration
 
+    # Public frontend base URL used for deep links inside emails/in-app
+    # notifications (e.g. "doctor joined the video call" → consultation page).
+    FRONTEND_BASE_URL = os.getenv(
+        'FRONTEND_BASE_URL',
+        'https://sahataksudan-collab.github.io/Sahatak/frontend'
+    )
+
 class DevelopmentConfig(Config):
     """Development configuration"""
     DEBUG = False

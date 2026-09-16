@@ -1105,6 +1105,24 @@ def join_video_session(appointment_id):
             details={'user_type': current_user.user_type}
         )
         
+        # ── "Doctor joined the video call" patient notification ─────────────
+        # The doctor's client (web dashboard/page) calls /video/join the moment
+        # it enters the Jitsi room — this is the backend-visible join event for
+        # BOTH surfaces. Idempotent: fires at most once per appointment
+        # (see notify_patient_doctor_joined). Never affects the join response.
+        if is_doctor and appointment.patient and appointment.patient.user:
+            try:
+                from services.notification_service import notify_patient_doctor_joined
+                notify_patient_doctor_joined(
+                    appointment=appointment,
+                    doctor_user=current_user,
+                    patient_user=appointment.patient.user,
+                )
+            except Exception as notify_error:
+                app_logger.error(
+                    f"Doctor-joined notification error (appointment {appointment_id}): {notify_error}"
+                )
+        
         # Format response
         participant_role = 'moderator' if is_doctor else 'participant'
         response = VideoConferenceService.format_session_response(

@@ -1,4 +1,4 @@
-from flask import Blueprint, request, current_app
+from flask import Blueprint, request, current_app, jsonify
 from flask_login import current_user
 from routes.auth import api_login_required
 from models import db, Patient, Doctor, User
@@ -271,3 +271,124 @@ def send_email(to_email, subject, body):
     except Exception as e:
         app_logger.error(f"Error sending email: {str(e)}")
         return False
+
+
+# ============================================================================
+# In-app notification read endpoints
+# ============================================================================
+# Server half of the existing client contract (sahatak-mobile
+# src/api/notifications.ts): GET /notifications returns a BARE JSON array of
+# NotificationItem-shaped objects, PUT /notifications/<id>/read and
+# PUT /notifications/read-all mark items read. Storage is the existing
+# NotificationQueue model (notification_type='in_app'); read state maps onto
+# the existing status enum: 'pending' = unread, 'sent' = read.
+
+def _relative_time_strings(created_at):
+    """Human-readable relative timestamp (EN/AR) for the mobile notification card."""
+    from datetime import datetime as _dt
+    delta_seconds = max(0, int((_dt.utcnow() - created_at).total_seconds()))
+    minutes = delta_seconds // 60
+    hours = delta_seconds // 3600
+    days = delta_seconds // 86400
+    if minutes < 1:
+        return ('Just now', 'الآن')
+    if minutes < 60:
+        return (f'{minutes} mins ago' if minutes > 1 else '1 min ago',
+                f'منذ {minutes} دقيقة' if minutes > 1 else 'منذ دقيقة')
+    if hours < 24:
+        return (f'{hours} hours ago' if hours > 1 else '1 hour ago',
+                f'منذ {hours} ساعة' if hours > 1 else 'منذ ساعة')
+    return (f'{days} days ago' if days > 1 else '1 day ago',
+            f'منذ {days} يوم' if days > 1 else 'منذ يوم')
+
+
+def _notification_to_mobile_item(n):
+    """Map a NotificationQueue in_app row to the mobile NotificationItem shape."""
+    data = n.template_data or {}
+    title_en = data.get('title_en') or n.title
+    title_ar = data.get('title_ar') or n.title
+    message_en = data.get('message_en') or n.message
+    message_ar = data.get('message_ar') or n.message
+    rel_en, rel_ar = _relative_time_strings(n.created_at)
+    item = {
+        'id': str(n.id),
+        'title': title_en,
+        'titleAr': title_ar,
+        'message': message_en,
+        'messageAr': message_ar,
+        'timestamp': rel_en,
+        'timestampAr': rel_ar,
+        'type': data.get('notif_type') or 'appointment',
+        'read': n.status == 'sent',
+    }
+    action_screen = data.get('action_screen')
+    if action_screen:
+        item['actionScreen'] = action_screen
+    return item
+
+
+@notifications_bp.route('', methods=['GET'])
+@api_login_required
+def list_in_app_notifications():
+    """List the current user's in-app notifications (bare array — mobile contract)."""
+    try:
+        from models import NotificationQueue
+        rows = NotificationQueue.query.filter_by(
+            recipient_type='user',
+            recipient_id=current_user.id,
+            notification_type='in_app',
+        ).order_by(NotificationQueue.created_at.desc()).limit(50).all()
+        return jsonify([_notification_to_mobile_item(n) for n in rows])
+    except Exception as e:
+        app_logger.error(f"Error listing in-app notifications: {str(e)}")
+        return jsonify([])
+
+
+@notifications_bp.route('/<int:notification_id>/read', methods=['PUT'])
+@api_login_required
+def mark_in_app_notification_read(notification_id):
+    """Mark one of the current user's in-app notifications as read."""
+    try:
+        from models import db, NotificationQueue
+        row = NotificationQueue.query.filter_by(
+            id=notification_id,
+            recipient_type='user',
+            recipient_id=current_user.id,
+            notification_type='in_app',
+        ).first()
+        if not row:
+            return error_response('Notification not found', 404)
+        if row.status != 'sent':
+            row.mark_as_sent()
+        else:
+            db.session.commit()
+        return success_response('Notification marked as read')
+    except Exception as e:
+        db.session.rollback()
+        app_logger.error(f"Error marking notification {notification_id} read: {str(e)}")
+        return error_response('Failed to mark notification as read', 500)
+
+
+@notifications_bp.route('/read-all', methods=['PUT'])
+@api_login_required
+def mark_all_in_app_notifications_read():
+    """Mark all of the current user's in-app notifications as read."""
+    try:
+        from models import db, NotificationQueue
+        from datetime import datetime as _dt
+        now = _dt.utcnow()
+        rows = NotificationQueue.query.filter_by(
+            recipient_type='user',
+            recipient_id=current_user.id,
+            notification_type='in_app',
+            status='pending',
+        ).all()
+        for row in rows:
+            row.status = 'sent'
+            row.sent_at = now
+        db.session.commit()
+        return success_response('All notifications marked as read')
+    except Exception as e:
+        db.session.rollback()
+        app_logger.error(f"Error marking all notifications read: {str(e)}")
+        return error_response('Failed to mark all notifications as read', 500)
