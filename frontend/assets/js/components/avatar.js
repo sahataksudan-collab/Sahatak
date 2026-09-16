@@ -212,21 +212,34 @@
         });
     }
 
-    /** Self-initializing hook: the user's own avatar uses id="profile-avatar". */
+    /** Bind the user's own avatar. Safe to call repeatedly. */
     function init() {
         const own = document.getElementById('profile-avatar');
-        if (own) {
+        if (own && own.dataset.avatarUploadBound !== 'true') {
             restore(own);
             bindUpload(own);
         }
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
+    // Dashboard pages normally contain the avatar in their initial markup, but
+    // dashboard/header renderers can replace it after this script has loaded.
+    // Keep the binding alive for that case as well as for deployments that
+    // inject the dashboard shell after DOMContentLoaded.
+    function observeAvatarReplacements() {
+        if (!window.MutationObserver || !document.documentElement) return;
+
+        const observer = new MutationObserver(() => init());
+        observer.observe(document.documentElement, { childList: true, subtree: true });
     }
 
+    // Bind immediately when the script is loaded near the end of the page,
+    // and keep the DOM-ready fallback for pages that load it earlier.
+    init();
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    }
+    observeAvatarReplacements();
+
     // Expose for other pages/scripts that render avatars dynamically
-    window.SahatakAvatar = { apply, restore, bindUpload };
+    window.SahatakAvatar = { apply, restore, bindUpload, init };
 })();
